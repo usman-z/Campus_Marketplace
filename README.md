@@ -9,6 +9,12 @@
 > Dev Patel,
 > Cristian Lorenzo
 
+## Tech Stack
+
+> AngularJS |
+> ExpressJS with NodeJS |
+> PostgreSQL
+
 
 ## Description
 
