@@ -1,0 +1,19 @@
+#logoImage {
+    img {
+        display: flex;
+        margin: auto;
+    }
+    margin-bottom: 5em;
+    margin-top: 5em;
+}
+#buttons {
+    margin-top: 1em;
+    button {
+        min-width: 6em;
+        font-size: large;
+        display: flex;
+        margin: auto;
+        text-align: center;
+        cursor: pointer;
+    }
+}

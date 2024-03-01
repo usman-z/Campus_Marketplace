@@ -1,0 +1,15 @@
+.star-rating {
+    width: fit-content;
+    margin: auto;
+    font-size: xx-large; /* Adjust as needed */
+
+  .star {
+    cursor: pointer;
+    color: #ddd; /* Empty star color */
+    transition: color 0.2s;
+  }
+
+  .star.filled {
+    color: #f7d32d; /* Filled star color */
+  }
+}
