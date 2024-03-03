@@ -1,19 +1,18 @@
-#logoImage {
-    img {
-        display: flex;
-        margin: auto;
+#main_div {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    #logoImage {
+        img {
+            display: flex;
+            margin: auto;
+        }
+        margin-bottom: 5em;
+        margin-top: 5em;
     }
-    margin-bottom: 5em;
-    margin-top: 5em;
-}
-#buttons {
-    margin-top: 1em;
-    button {
-        min-width: 6em;
-        font-size: large;
-        display: flex;
+    #signUpButton, #logInButton {
         margin: auto;
-        text-align: center;
-        cursor: pointer;
+        display: flex;
+        margin-top: 1.2em;
     }
 }

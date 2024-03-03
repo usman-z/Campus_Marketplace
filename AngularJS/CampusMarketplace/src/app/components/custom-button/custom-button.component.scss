@@ -1,0 +1,10 @@
+.customButton{
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: large;
+    &:hover {
+        box-shadow: 0px 0px 5px;
+    }
+}

@@ -10,6 +10,9 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
     CustomButtonComponent,
     StarRatingComponent,
     MainPageComponent,
-    MainPageComponent
+    MainPageComponent,
+    ProductPageComponent,
+    LoginPageComponent,
+    SignupPageComponent
   ],
   imports: [
     BrowserModule,
