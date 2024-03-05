@@ -8,13 +8,31 @@ import { Router } from '@angular/router';
 })
 export class MainPageComponent {
 
+  loggingIn: boolean = true;
+  isLoading: boolean = true
+
+  name: string = ''
+  email: string = ''
+  password: string = ''
+  role: string = ''
+
   constructor(private router: Router) {}
 
-  logIn() {
-    this.router.navigate(['/login']);
+  process() {
+    console.log(this.name, this.email, this.password, this.role);
   }
 
-  signUp() {
-    this.router.navigate(['/signup']);
+  onChange(str: string) {
+    if(str === 'loggingIn') {
+      this.loggingIn = true
+      this.email = ''
+      this.password = ''
+    }
+    else {
+      this.loggingIn = false
+      this.name = ''
+      this.email = ''
+      this.password = ''
+    }
   }
 }

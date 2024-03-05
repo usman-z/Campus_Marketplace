@@ -10,9 +10,44 @@
         margin-bottom: 5em;
         margin-top: 5em;
     }
-    #signUpButton, #logInButton {
-        margin: auto;
+    #signup_login {
+        border: 1px solid rebeccapurple;
         display: flex;
-        margin-top: 1.2em;
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        #buttons {
+            display: flex;
+            margin: auto;
+            margin-bottom: .5em;
+            button {
+                width: 5em;
+                font-size: medium;
+                border: none;
+            }
+            button.active {
+                color: #0000FF
+              }
+        }
+        #form {
+            display: flex;
+            margin: auto;
+            flex-direction: column;
+            border: 1px solid darkcyan;
+            padding: .8em;
+            #questionaire {
+                input {
+                    font-size: larger;
+                    margin-bottom: .5em;
+                }
+                label {
+                   
+                }
+                margin-bottom: 1em;
+            }
+            app-custom-button{
+                margin: auto;
+            }
+        }
     }
 }

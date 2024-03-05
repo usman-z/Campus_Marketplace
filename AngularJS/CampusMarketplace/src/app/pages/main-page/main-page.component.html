@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div id="main_div">
-        <div id="logoImage">
-            <img src="../../../assets/logo.png" alt="">
+<div id="main_div">
+    <div id="logoImage">
+        <img src="../../../assets/logo.png" alt="">
+    </div>
+    <div id="signup_login">
+        <div id="buttons">
+            <button (click)="onChange('loggingIn')" style="border-right: .2px solid black;" [class.active]="loggingIn">Log In</button>
+            <button (click)="onChange('signingUp')" [class.active]="!loggingIn">Sign Up</button>
         </div>
-        <div id="logInButton">
-            <app-custom-button (click)="logIn()" buttonName = "Log In"></app-custom-button>
-        </div>
-        <div id="signUpButton">
-            <app-custom-button (click)="signUp()" buttonName = "Sign Up"></app-custom-button>
+        <div id="form">
+            <div *ngIf="loggingIn" id="questionaire">
+                <form #userForm="ngForm">
+                    <div><input type="email" placeholder="Uncg Email" [(ngModel)]="email" name="email" required></div>
+                    <div><input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></div>
+                </form>
+              </div>
+              <div *ngIf="!loggingIn" id="questionaire">
+                <form #userForm="ngForm">
+                    <div><input type="name" placeholder="Full Name" style="width: 100%;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required></div>
+                    <div><input type="email" placeholder="Uncg Email" style="width: 100%;" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></div>
+                    <div><input type="password" placeholder="Password" style="width: 100%;" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></div>
+                    <div>
+                        <label><input type="radio" value="student" (change)="role = 'student'">Student</label>
+                        <label><input type="radio" value="faculty" style="margin-left: .65em;" (change)="role = 'faculty'">Faculty</label>
+                        <label><input type="radio" value="alumni" style="margin-left: .65em;" (change)="role = 'alumni'">Alumni</label>
+                    </div>
+                    <p>Upload a picture</p>
+                </form>
+              </div>
+              <app-custom-button type="submit" (click)="process()" buttonName="Submit"></app-custom-button>     
         </div>
     </div>
-</body>
-</html>
+</div>
