@@ -14,6 +14,8 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,6 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     CustomButtonComponent,
     StarRatingComponent,
     MainPageComponent,
-    MainPageComponent,
     ProductPageComponent,
     LoginPageComponent,
     SignupPageComponent
@@ -32,7 +33,8 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@
     <div id="logoImage">
         <img src="../../../assets/logo.png" alt="">
     </div>
+
     <div id="signup_login">
         <div id="buttons">
             <button (click)="onChange('loggingIn')" style="border-right: .2px solid black;" [class.active]="loggingIn">Log In</button>
@@ -9,25 +10,34 @@
         </div>
         <div id="form">
             <div *ngIf="loggingIn" id="questionaire">
-                <form #userForm="ngForm">
-                    <div><input type="email" placeholder="Uncg Email" [(ngModel)]="email" name="email" required></div>
-                    <div><input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></div>
-                </form>
+              <form (ngSubmit)="process()" #loginForm="ngForm">
+                <div><input type="email" placeholder="UNCG Email" [(ngModel)]="email" name="email" required></div>
+                <div><input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></div>
+                <app-custom-button type="submit" buttonName="Log In"></app-custom-button>
+              </form>
               </div>
+
               <div *ngIf="!loggingIn" id="questionaire">
-                <form #userForm="ngForm">
-                    <div><input type="name" placeholder="Full Name" style="width: 100%;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="email" placeholder="Uncg Email" style="width: 100%;" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></div>
+                <form (ngSubmit)="onSubmitRegister()" #userForm="ngForm">
+                    <div><input type="text" placeholder="First Name" style="width: 100%;" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required></div>
+                    <div><input type="text" placeholder="Last Name" style="width: 100%;" [(ngModel)]="last_name" [ngModelOptions]="{standalone: true}" required></div>
+                    <div><input type="email" placeholder="UNCG Email" style="width: 100%;" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></div>
                     <div><input type="password" placeholder="Password" style="width: 100%;" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></div>
-                    <div>
-                        <label><input type="radio" value="student" (change)="role = 'student'">Student</label>
-                        <label><input type="radio" value="faculty" style="margin-left: .65em;" (change)="role = 'faculty'">Faculty</label>
-                        <label><input type="radio" value="alumni" style="margin-left: .65em;" (change)="role = 'alumni'">Alumni</label>
-                    </div>
+
+                      <div style="display: flex; gap: 10px;">
+                        <label><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
+                        <label><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>
+                        <label><input type="radio" name="role" [(ngModel)]="role" value="Alumni" required>Alumni</label>
+                      </div>
+
                     <p>Upload a picture</p>
+                    <app-custom-button type="submit" buttonName="Submit"></app-custom-button>
                 </form>
               </div>
-              <app-custom-button type="submit" (click)="process()" buttonName="Submit"></app-custom-button>     
+
+          <div *ngIf="successMessage" class="success-message"> {{ successMessage }}
+          </div>
+
         </div>
     </div>
 </div>

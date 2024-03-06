@@ -2,9 +2,11 @@ import express from 'express'
 import pkg from 'pg';
 const { Client } = pkg;
 import nodemailer from 'nodemailer';
+import cors from 'cors';
 
 var app = express()
 
+app.use(cors());
 app.use(express.json())
 
 app.use((err, req, res, next) => {
@@ -18,11 +20,19 @@ app.listen(PORT, () => {
   })
 
 const client = new Client({
-    user: 'uzia',
-    host: 'localhost',
-    database: 'postgres',
-    password: '',
+    user: 'postgres',
+    host: '173.230.140.95',
+    database: 'testing',
+    password: 'devpatel',
     port: 5432,
+});
+
+const transporter = nodemailer.createTransport({
+       service: 'gmail',
+       auth: {
+         user: 'campus.marketplaces@gmail.com',
+         pass: 'oofk rdys wzvf ckqx'
+       }
 });
 
 app.get("/test", (req, res) => {
@@ -53,32 +63,66 @@ app.get("/all", async (req, res) => {
   }
 });
 
-app.post("/add", async (req, res) => {
-  const { first_name, last_name, username, password } = req.body;
+app.post("/register", async (req, res) => {
+  const { first_name, last_name, email, password, role } = req.body;
 
-  if (!first_name || !last_name || !username || !password) {
+  if (!first_name || !last_name || !email || !password || !role) {
     return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  const atIndex = email.indexOf('@'); // gets index of '@"
+  if(atIndex === -1 || email.substring(atIndex+1).toLowerCase() !== 'uncg.edu'){  // if no index of '@' OR if after '@' it doesn't end w 'uncg.edu'
+    return res.status(400).json({error: "Email is not UNCG email"});
   }
 
   try {
     await client.connect(); // Connect to the PostgreSQL database
 
+    const sql = 'SELECT * FROM users WHERE email= $1';
+    const user = await client.query(sql, [email]);
+    if(user.rows[0]){
+      return res.status(400).json({ error: "User already exists with the same email"})
+    }
+
     const query = `
-      INSERT INTO users (first_name, last_name, username, password)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO users (first_name, last_name, email, password, role)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
-    
-    const result = await client.query(query, [first_name, last_name, username, password]); // Execute the query
+
+    const result = await client.query(query, [first_name, last_name, email, password, role]); // Execute the query
+
+    const mailOptions = {
+      from: 'campus.marketplaces@gmail.com',
+      to: email,
+      subject: 'UNCG Marketplace Registration',
+      text: 'You have successfully registered for UNCG Marketplace'
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+     if (error) {
+         console.log('Error sending email:', error);
+
+     } else {
+         console.log('Email sent:', info.response);
+     }
+    });
 
     res.json(result.rows[0]);
+
   } catch (err) {
     console.error('Error adding user:', err);
     res.status(500).send('Error adding user');
   } finally {
     await client.end(); // Close the database connection
   }
+
 });
+
+
+
+
+
 
 
 // app.get('/email', (req, res) => {
