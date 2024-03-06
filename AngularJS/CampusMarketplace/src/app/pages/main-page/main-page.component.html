@@ -1,33 +1,65 @@
-<div id="main_div">
-    <div id="logoImage">
-        <img src="../../../assets/logo.png" alt="">
-    </div>
-    <div id="signup_login">
-        <div id="buttons">
-            <button (click)="onChange('loggingIn')" style="border-right: .2px solid black;" [class.active]="loggingIn">Log In</button>
-            <button (click)="onChange('signingUp')" [class.active]="!loggingIn">Sign Up</button>
-        </div>
-        <div id="form">
-            <div *ngIf="loggingIn" id="questionaire">
-                <form #userForm="ngForm">
-                    <div><input type="email" placeholder="Uncg Email" [(ngModel)]="email" name="email" required></div>
-                    <div><input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></div>
-                </form>
-              </div>
-              <div *ngIf="!loggingIn" id="questionaire">
-                <form #userForm="ngForm">
-                    <div><input type="name" placeholder="Full Name" style="width: 100%;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="email" placeholder="Uncg Email" style="width: 100%;" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="password" placeholder="Password" style="width: 100%;" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></div>
-                    <div>
-                        <label><input type="radio" value="student" (change)="role = 'student'">Student</label>
-                        <label><input type="radio" value="faculty" style="margin-left: .65em;" (change)="role = 'faculty'">Faculty</label>
-                        <label><input type="radio" value="alumni" style="margin-left: .65em;" (change)="role = 'alumni'">Alumni</label>
-                    </div>
-                    <p>Upload a picture</p>
-                </form>
-              </div>
-              <app-custom-button type="submit" (click)="process()" buttonName="Submit"></app-custom-button>     
-        </div>
-    </div>
-</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Webleb</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+</head> 
+<body>
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h1 class="mb-0 pb-3"><span>Log In </span><span class="ml-4">Sign Up</span></h1>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h1 class="mb-4 pb-3">Log In</h1>
+											<div class="form-group">
+												<input type="email" class="form-style" placeholder="Email">
+												<i class="input-icon uil uil-at"></i>
+											</div>	
+											<div class="form-group mt-2">
+												<input type="password" class="form-style" placeholder="Password">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<p class="btn mt-4">Login</p>
+				      					</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h2 class="mb-3 pb-3">Sign Up</h2>
+											<div class="form-group">
+												<input type="text" class="form-style" placeholder="Full Name">
+												<i class="input-icon uil uil-user"></i>
+											</div>	
+                      <div class="form-group mt-2">
+												<input type="email" class="form-style" placeholder="Email">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" class="form-style" placeholder="Password">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<p class="btn mt-4">Register</p>
+				      					</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>
+</body>
+</html>
