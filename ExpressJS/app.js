@@ -19,13 +19,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })
 
-const client = new Client({
-    user: 'postgres',
-    host: '173.230.140.95',
-    database: 'testing',
-    password: 'devpatel',
-    port: 5432,
-});
+// insert db connection here
 
 const transporter = nodemailer.createTransport({
        service: 'gmail',
