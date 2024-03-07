@@ -192,6 +192,13 @@ h6 {
   transition: all 200ms linear;
 }
 
+.role {
+  font-size: 15px;
+  font-weight: 400;
+  align-items: center;
+  color: $primary-color;
+}
+
 .btn {
   border-radius: 4px;
   height: 44px;

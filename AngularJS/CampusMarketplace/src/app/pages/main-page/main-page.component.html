@@ -15,7 +15,7 @@
               <div class="card-front">
                 <div class="center-wrap">
                   <div class="section text-center">
-                    <h1 class="mb-4 pb-3">Log In</h1>
+                    <h1 style="font-weight: 400;" class="mb-4 pb-3">Log In</h1>
                     <form (ngSubmit)="process()" #loginForm="ngForm">
                       <div class="form-group">
                         <input type="email" class="form-style" placeholder="UNCG Email" [(ngModel)]="email" name="email" required>
@@ -33,13 +33,13 @@
               <div class="card-back">
                 <div class="center-wrap">
                   <div class="section text-center">
-                    <h2 class="mb-3 pb-3">Sign Up</h2>
+                    <h2 style="font-weight: 400;" class="mb-3 pb-3">Sign Up</h2>
                     <form (ngSubmit)="onSubmitRegister()" #userForm="ngForm">
                       <div class="form-group">
                         <input type="text" class="form-style" placeholder="First Name" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required>
                         <i class="input-icon uil uil-user"></i>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group mt-2">
                         <input type="text" class="form-style" placeholder="Last Name" [(ngModel)]="last_name" [ngModelOptions]="{standalone: true}" required>
                         <i class="input-icon uil uil-user"></i>
                       </div>
@@ -51,10 +51,10 @@
                         <input type="password" class="form-style" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
                         <i class="input-icon uil uil-lock-alt"></i>
                       </div>
-                      <div class ="form-group mt-2">
-                        <label><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
-                        <label style="margin-left: 10px;"><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>
-                        <label style="margin-left: 10px;"><input type="radio" name="role" [(ngModel)]="role" value="Alumni" required>Alumni</label>
+                      <div class ="form-group mt-4">
+                        <label class="role"><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
+                        <label style="margin-left: 10px;" class="role"><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>
+                        <label style="margin-left: 10px;" class="role"><input type="radio" name="role" [(ngModel)]="role" value="Alumni" required>Alumni</label>
                       </div>
                       <button type="submit" class="btn mt-4">Register</button>
                     </form>
