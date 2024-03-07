@@ -65,7 +65,7 @@ app.get("/all", async (req, res) => {
     const result = await client.query(query); // Execute the query
 
     // Send the query result as JSON response
-    res.json(result.rows[0]);
+    res.json(result.rows[result.rows.length - 1]);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
