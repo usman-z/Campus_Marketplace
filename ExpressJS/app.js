@@ -19,6 +19,18 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })
 
+<<<<<<< HEAD
+=======
+// insert db connection here
+const client = new Client({
+  user: 'cristianlorenzo',
+  host: 'localhost',
+  database: 'postgres',
+  password: '',
+
+});
+
+>>>>>>> 69a5abc (added new .html and .scss)
 const transporter = nodemailer.createTransport({
        service: 'gmail',
        auth: {
@@ -54,12 +66,12 @@ app.get("/all", async (req, res) => {
     const result = await client.query(query); // Execute the query
 
     // Send the query result as JSON response
-    res.json(result.rows);
+    res.json(result.rows[0]);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
   } finally {
-    await client.end(); // Close the database connection
+     client.end(); // Close the database connection
   }
 });
 

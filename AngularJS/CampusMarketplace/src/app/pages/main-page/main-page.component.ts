@@ -54,18 +54,17 @@ export class MainPageComponent {
 
   }
 
-  onChange(str: string) {
-    if(str === 'loggingIn') {
-      this.loggingIn = true
-      this.email = ''
-      this.password = ''
-    }
-    else {
-      this.loggingIn = false
-      this.first_name = ''
-      this.last_name = ''
-      this.email = ''
-      this.password = ''
+  onChange(action: string) {
+    // Clear form fields based on the action
+    if (action === 'loggingIn') {
+      this.email = '';
+      this.password = '';
+    } else if (action === 'signingUp') {
+      this.first_name = '';
+      this.last_name = '';
+      this.email = '';
+      this.password = '';
+      this.role = '';
     }
   }
 

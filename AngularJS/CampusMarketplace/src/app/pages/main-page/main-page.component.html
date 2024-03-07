@@ -1,43 +1,80 @@
-<div id="main_div">
-    <div id="logoImage">
-        <img src="../../../assets/logo.png" alt="">
-    </div>
-
-    <div id="signup_login">
-        <div id="buttons">
-            <button (click)="onChange('loggingIn')" style="border-right: .2px solid black;" [class.active]="loggingIn">Log In</button>
-            <button (click)="onChange('signingUp')" [class.active]="!loggingIn">Sign Up</button>
-        </div>
-        <div id="form">
-            <div *ngIf="loggingIn" id="questionaire">
-              <form (ngSubmit)="process()" #loginForm="ngForm">
-                <div><input type="email" placeholder="UNCG Email" [(ngModel)]="email" name="email" required></div>
-                <div><input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></div>
-                <app-custom-button type="submit" buttonName="Log In"></app-custom-button>
-              </form>
-              </div>
-
-              <div *ngIf="!loggingIn" id="questionaire">
-                <form (ngSubmit)="onSubmitRegister()" #userForm="ngForm">
-                    <div><input type="text" placeholder="First Name" style="width: 100%;" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="text" placeholder="Last Name" style="width: 100%;" [(ngModel)]="last_name" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="email" placeholder="UNCG Email" style="width: 100%;" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required></div>
-                    <div><input type="password" placeholder="Password" style="width: 100%;" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required></div>
-
-                      <div style="display: flex; gap: 10px;">
-                        <label><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
-                        <label><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>
-                        <label><input type="radio" name="role" [(ngModel)]="role" value="Alumni" required>Alumni</label>
+<body>
+<div class="section">
+  <div class="container">
+    <div class="row full-height justify-content-center">
+      <div class="col-12 text-center align-self-center py-5">
+        <div class="section pb-5 pt-5 pt-sm-2 text-center">
+          <h1 class="mb-0 pb-3">
+            <span (click)="onChange('loggingIn')">Log In </span>
+            <span class="ml-4" (click)="onChange('signingUp')">Sign Up</span>
+          </h1>
+          <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+          <label for="reg-log"></label>
+          <div class="card-3d-wrap mx-auto">
+            <div class="card-3d-wrapper">
+              <div class="card-front">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h1 class="mb-4 pb-3">Log In</h1>
+                    <form (ngSubmit)="process()" #loginForm="ngForm">
+                      <div class="form-group">
+                        <input type="email" class="form-style" placeholder="UNCG Email" [(ngModel)]="email" name="email" required>
+                        <i class="input-icon uil uil-at"></i>
                       </div>
-
-                    <p>Upload a picture</p>
-                    <app-custom-button type="submit" buttonName="Submit"></app-custom-button>
-                </form>
+                      <div class="form-group mt-2">
+                        <input type="password" class="form-style" placeholder="Password" [(ngModel)]="password" name="password" required>
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <button type="submit" class="btn mt-4">Log In</button>
+                    </form>
+                  </div>
+                </div>
               </div>
+              <div class="card-back">
+                <div class="center-wrap">
+                  <div class="section text-center">
+                    <h2 class="mb-3 pb-3">Sign Up</h2>
+                    <form (ngSubmit)="onSubmitRegister()" #userForm="ngForm">
+                      <div class="form-group">
+                        <input type="text" class="form-style" placeholder="First Name" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required>
+                        <i class="input-icon uil uil-user"></i>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-style" placeholder="Last Name" [(ngModel)]="last_name" [ngModelOptions]="{standalone: true}" required>
+                        <i class="input-icon uil uil-user"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input type="email" class="form-style" placeholder="UNCG Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+                        <i class="input-icon uil uil-at"></i>
+                      </div>
+                      <div class="form-group mt-2">
+                        <input type="password" class="form-style" placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <div class ="form-group mt-2">
+                        <label><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
+                        <label style="margin-left: 10px;"><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>
+                        <label style="margin-left: 10px;"><input type="radio" name="role" [(ngModel)]="role" value="Alumni" required>Alumni</label>
+                      </div>
+                      <button type="submit" class="btn mt-4">Register</button>
+                    </form>
 
-          <div *ngIf="successMessage" class="success-message"> {{ successMessage }}
+                    <div *ngIf="successMessage" class="success-message"> {{ successMessage }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
         </div>
+      </div>
     </div>
+  </div>
 </div>
+</body>
+
+
+
+
+
+
+
