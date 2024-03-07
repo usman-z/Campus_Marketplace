@@ -17,20 +17,19 @@ app.use((err, req, res, next) => {
 const PORT = 8080
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
-  })
+});
 
-<<<<<<< HEAD
-=======
+
 // insert db connection here
 const client = new Client({
-  user: 'cristianlorenzo',
+  user: '',
   host: 'localhost',
-  database: 'postgres',
+  database: '',
   password: '',
 
 });
 
->>>>>>> 69a5abc (added new .html and .scss)
+
 const transporter = nodemailer.createTransport({
        service: 'gmail',
        auth: {
