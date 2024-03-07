@@ -20,12 +20,12 @@ app.listen(PORT, () => {
 });
 
 
-// insert db connection here
+// db connection
 const client = new Client({
-  user: '',
-  host: 'localhost',
-  database: '',
-  password: '',
+  host: '173.230.140.95',
+  user: 'postgres',
+  database: 'testing',
+  password: 'devpatel',
 
 });
 
