@@ -30,8 +30,14 @@ app.get("/test", (req, res) => {
   res.json(response);
 });
 
-// add db connection here
-
+app.get("/all", async (req, res) => {
+  const client = new Client({
+    user: 'postgres',
+    host: '173.230.140.95',
+    database: 'testing',
+    password: 'devpatel',
+    port: 5432
+  });
 try {
     await client.connect(); // Connect to the PostgreSQL database
     console.log('DB Connection Successful')
