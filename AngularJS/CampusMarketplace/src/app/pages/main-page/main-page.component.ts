@@ -23,21 +23,14 @@ export class MainPageComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  process() {
-    console.log(this.email, this.password);
-  }
-
-
-  onSubmitRegister(){
+  onRegister(){
     if((this.first_name && this.last_name && this.email && this.password && this.role) != ''){
       this.userService.registerUser(this.first_name,this.last_name, this.email, this.password, this.role).subscribe(
         response =>{
           this.successMessage = 'You have successfully registered! You can now log in. ';
           setTimeout(() => {
             this.successMessage ='';
-            this.router.navigate(['']).catch( error => {
-              console.error('Navigation error')
-            });
+            this.router.navigate(['']);
           }, 5000); // 3 secs it displays the message
         }, error => {
           console.error('Registration error:', error);
@@ -50,7 +43,7 @@ export class MainPageComponent {
     }
   }
 
-  onSubmitLogIn(){
+  onLogin(){
 
   }
 

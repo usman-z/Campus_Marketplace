@@ -23,8 +23,8 @@ export class UserService {
 
   };
 
-  LogInUser(email: string, password: string){
-    const url = 'http://localhost:8080/log-in';
+  LoginUser(email: string, password: string){
+    const url = 'http://localhost:8080/login';
     const request ={
       "email": email,
       "password": password

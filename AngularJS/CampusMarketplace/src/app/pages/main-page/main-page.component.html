@@ -16,7 +16,7 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h1 style="font-weight: 400;" class="mb-4 pb-3">Log In</h1>
-                    <form (ngSubmit)="process()" #loginForm="ngForm">
+                    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
                       <div class="form-group">
                         <input type="email" class="form-style" placeholder="UNCG Email" [(ngModel)]="email" name="email" required>
                         <i class="input-icon uil uil-at"></i>
@@ -34,7 +34,7 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h2 style="font-weight: 400;" class="mb-3 pb-3">Sign Up</h2>
-                    <form (ngSubmit)="onSubmitRegister()" #userForm="ngForm">
+                    <form (ngSubmit)="onRegister()" #userForm="ngForm">
                       <div class="form-group">
                         <input type="text" class="form-style" placeholder="First Name" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required>
                         <i class="input-icon uil uil-user"></i>

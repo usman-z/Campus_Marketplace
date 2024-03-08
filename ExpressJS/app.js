@@ -20,57 +20,31 @@ app.listen(PORT, () => {
 });
 
 
-// db connection
-const client = new Client({
+const dbConfig = {
   host: '173.230.140.95',
   user: 'postgres',
   database: 'testing',
   password: 'devpatel',
-
-});
-
+};
 
 const transporter = nodemailer.createTransport({
-       service: 'gmail',
-       auth: {
-         user: 'campus.marketplaces@gmail.com',
-         pass: 'oofk rdys wzvf ckqx'
-       }
-});
-
-app.get("/test", (req, res) => {
-  const response = {
-    'id': 1,
-    'first_name': 'Usman',
-    'last_name': 'Zia',
-    'age': 21
-  }
-
-  res.json(response);
+    service: 'gmail',
+    auth: {
+      user: 'campus.marketplaces@gmail.com',
+      pass: 'oofk rdys wzvf ckqx'
+    }
 });
 
 app.get("/all", async (req, res) => {
-  const client = new Client({
-    user: 'postgres',
-    host: '173.230.140.95',
-    database: 'testing',
-    password: 'devpatel',
-    port: 5432
-  });
-    
+  const client = new Client(dbConfig);
   try {
     await client.connect(); // Connect to the PostgreSQL database
+    const result = await client.query('SELECT * FROM users');
+    res.json(result.rows);
 
-    const query = 'SELECT * FROM users'; // Your SQL query
-    const result = await client.query(query); // Execute the query
-
-    // Send the query result as JSON response
-    res.json(result.rows[result.rows.length - 1]);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
-  } finally {
-     client.end(); // Close the database connection
   }
 });
 
@@ -86,6 +60,7 @@ app.post("/register", async (req, res) => {
     return res.status(400).json({error: "Email is not UNCG email"});
   }
 
+  const client = new Client(dbConfig);
   try {
     await client.connect(); // Connect to the PostgreSQL database
 
@@ -110,14 +85,14 @@ app.post("/register", async (req, res) => {
       text: 'You have successfully registered for UNCG Marketplace'
     }
 
-    transporter.sendMail(mailOptions, (error, info) => {
-     if (error) {
-         console.log('Error sending email:', error);
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //  if (error) {
+    //      console.log('Error sending email:', error);
 
-     } else {
-         console.log('Email sent:', info.response);
-     }
-    });
+    //  } else {
+    //      console.log('Email sent:', info.response);
+    //  }
+    // });
 
     res.json(result.rows[0]);
 
@@ -129,38 +104,3 @@ app.post("/register", async (req, res) => {
   }
 
 });
-
-
-
-
-
-
-
-// app.get('/email', (req, res) => {
-
-//   let mailOptions = {
-//       from: 'glookup340@gmail.com',
-//       to: 'usmanzia371@gmail.com',
-//       subject: 'Email using ExpressJS',
-//       text: 'This email is sent from localhost:8080 by ExpressJS using NodeJS'
-//   };
-
-// // Create a transporter object using SMTP transport
-// let transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: 'glookup340@gmail.com',
-//         pass: 'pdqnofpejzuapxrp'
-//     }
-// });
-
-// transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//         console.log('Error sending email:', error);
-//         res.status(500).send('Error sending email');
-//     } else {
-//         console.log('Email sent:', info.response);
-//         res.status(200).send('Email sent successfully');
-//     }
-// });
-// });
