@@ -1,0 +1,121 @@
+.mainContainer {
+    width: 50%;
+    margin: auto;
+    .buttons{
+        // border: 1px solid red;
+        display: flex;
+        align-items: flex-end;
+        justify-content:flex-end;
+        .logIn{
+            margin-left: .5em;   
+        }
+        
+        .signUp{
+            display: inline-flex;
+        }
+    }
+    
+    .mainContent{
+        // border: 1px solid lawngreen;
+        display: flex;
+        justify-content: center;
+        height: 85vh;
+        align-items: center;
+        .mainPage{
+            //border: 2px solid black;
+            width: 75vw;
+            height: 80vh;
+            padding: 2%;
+        
+            .topImage{
+                //border: 1px solid yellow;
+                height: 18vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 2em;
+                img{
+                    height: 7em;
+                    width: 8em;
+                }
+            }
+            
+            .searchDiv{
+                margin: 1em;
+                margin: auto;
+                width: 16.5em;
+                
+                .formDiv{
+                    width: 100%;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .search {
+                        border-radius: 10px;
+                        font-size: large;
+                        width: 80%;
+                        margin: 1%;
+                        display: inline-block;
+                    }
+                    .submitButton {
+                        display: inline-block;
+                        height: 2em;
+                        padding: 0;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+                .error-message {
+                    color: red;
+                    font-size: 16px;
+                    width: auto;
+                }
+            }
+            
+            .section{
+                height: 53vh;  
+                p{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0;
+                    padding: 0;
+                }
+                
+                .lineOne{
+                    margin-top: 2em;
+                    font-size: large;
+                }
+                
+                .lineTwo{
+                    margin-top: 1em;
+                    font-size: x-large;
+                    font-weight: bold;
+                    color: #FFB71B;
+                }
+                .lineThree{
+                    margin-top: 1em;
+                    margin-bottom: 2em;
+                    font-size: large;
+                    color: #0F2044;
+                }
+            }
+            
+            .bottomImage{
+                //border: 3px solid darkcyan;
+                height: 25vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            
+                img{
+                    width: 26em;
+                    height: 24vh;
+                }
+            }
+        }
+    }
+}

@@ -12,9 +12,8 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 @NgModule({
@@ -27,8 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     StarRatingComponent,
     MainPageComponent,
     ProductPageComponent,
-    LoginPageComponent,
-    SignupPageComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

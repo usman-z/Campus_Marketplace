@@ -27,6 +27,8 @@
                       </div>
                       <button type="submit" class="btn mt-4">Log In</button>
                     </form>
+                    <div *ngIf="successMessage" style="font-size: medium; color: white; margin-top: 1em;"> {{ successMessage }}</div>
+                    <div *ngIf="errorMessage" style="font-size: medium; color: red; margin-top: 1em;"> {{ errorMessage }}</div>
                   </div>
                 </div>
               </div>
@@ -34,7 +36,7 @@
                 <div class="center-wrap">
                   <div class="section text-center">
                     <h2 style="font-weight: 400;" class="mb-3 pb-3">Sign Up</h2>
-                    <form (ngSubmit)="onRegister()" #userForm="ngForm">
+                    <form (ngSubmit)="register()" #userForm="ngForm">
                       <div class="form-group">
                         <input type="text" class="form-style" placeholder="First Name" [(ngModel)]="first_name" [ngModelOptions]="{standalone: true}" required>
                         <i class="input-icon uil uil-user"></i>
@@ -58,8 +60,8 @@
                       </div>
                       <button type="submit" class="btn mt-4">Register</button>
                     </form>
-
-                    <div *ngIf="successMessage" class="success-message"> {{ successMessage }}</div>
+                    <div *ngIf="successMessage" style="font-size: medium; color: white;"> {{ successMessage }}</div>
+                    <div *ngIf="errorMessage" style="font-size: medium; color: red;"> {{ errorMessage }}</div>
                   </div>
                 </div>
               </div>

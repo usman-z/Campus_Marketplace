@@ -1,9 +1,9 @@
 import express from 'express'
 import pkg from 'pg';
-const { Client } = pkg;
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 
+const { Client } = pkg;
 var app = express()
 
 app.use(cors());
@@ -41,6 +41,25 @@ app.get("/all", async (req, res) => {
     await client.connect(); // Connect to the PostgreSQL database
     const result = await client.query('SELECT * FROM users');
     res.json(result.rows);
+
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password]);
+    if (result.rows.length > 0) {
+      res.json(result.rows);
+    }
+    else {
+      res.status(404).send('No such user');
+    }
 
   } catch (err) {
     console.error('Error executing query:', err);
