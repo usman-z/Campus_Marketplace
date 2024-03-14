@@ -35,11 +35,26 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+app.get("/any", async (req, res) => {
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    // const result = await client.query('SELECT * FROM Personnel');
+    // const result = await client.query('SELECT * FROM Message');
+    const result = await client.query('SELECT * FROM Listing');
+    res.json(result.rows);
+
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  }
+});
+
 app.get("/all", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect(); // Connect to the PostgreSQL database
-    const result = await client.query('SELECT * FROM users');
+    const result = await client.query('SELECT * FROM Personnel');
     res.json(result.rows);
 
   } catch (err) {
@@ -53,7 +68,7 @@ app.post("/login", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const result = await client.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password]);
+    const result = await client.query('SELECT * FROM Personnel WHERE email = $1 AND password = $2', [email, password]);
     if (result.rows.length > 0) {
       res.json(result.rows);
     }
@@ -83,14 +98,14 @@ app.post("/register", async (req, res) => {
   try {
     await client.connect(); // Connect to the PostgreSQL database
 
-    const sql = 'SELECT * FROM users WHERE email= $1';
+    const sql = 'SELECT * FROM Personnel WHERE email= $1';
     const user = await client.query(sql, [email]);
     if(user.rows[0]){
       return res.status(400).json({ error: "User already exists with the same email"})
     }
 
     const query = `
-      INSERT INTO users (first_name, last_name, email, password, role)
+      INSERT INTO Personnel (first_name, last_name, email, password, role)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
