@@ -1,0 +1,31 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
+on:
+  push:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs Angular and Express
+
+    - name: Restart services
+      uses: JimCronqvist/action-ssh@master
+      with:
+        hosts: ${{ secrets.HOST_CONNECTION_STRING }}
+        privateKey: ${{ secrets.PRIVATE_KEY }}
+        debug: true
+        command: |
+          cd /root/Campus_Marketplace_2 && git pull origin && sudo systemctl restart node-app && sudo systemctl restart ng-serve
+
+          
