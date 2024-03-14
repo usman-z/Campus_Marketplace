@@ -26,6 +26,6 @@ jobs:
         privateKey: ${{ secrets.PRIVATE_KEY }}
         debug: true
         command: |
-          cd /root/Campus_Marketplace_2 && git pull origin && sudo systemctl restart node-app && sudo systemctl restart ng-serve
+          cd /root/Campus_Marketplace && git pull origin && sudo systemctl restart node-app && sudo systemctl restart ng-serve
 
           
