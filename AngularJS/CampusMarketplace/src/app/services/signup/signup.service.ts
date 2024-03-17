@@ -9,7 +9,7 @@ export class SignupService {
   constructor(private http: HttpClient) { }
 
   createUser(first_name: string, last_name: string, email: string, password: string, role: string){
-    const url = 'http://localhost:8080/register';
+    const url = 'http://173.230.140.95:8080/register';
     const request = {
       "first_name": first_name,
       "last_name": last_name,
