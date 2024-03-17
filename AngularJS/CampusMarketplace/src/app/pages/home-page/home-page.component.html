@@ -1,34 +1,28 @@
 <div class="mainContainer">
+  <div class="header">
+    <div class="title">
+      <p>Marketplace</p>
+    </div>
     <div class="buttons">
-        <div class="signUp">
-            <app-custom-button class="signUpButton" buttonName="Inbox"></app-custom-button>
+        <div class="chat" (click)="chat()">
+            <img src="../../../assets/chat.png" alt="chat">
         </div>
-        <div class="logIn">
-            <app-custom-button (click)="logout()" class="logInButton" buttonName="Log Out"></app-custom-button>
+        <div class="profile" (click)="profile()">
+          <img src="../../../assets/profile.png" alt="profile">
         </div>
     </div>
-    <div class="mainContent">
-        <div class="mainPage">
-            <div class="topImage">
-              <img src="../../../assets/logo.png" alt="UNCG logo"/>
-            </div>
-            <div class="searchDiv">
-              <form class="formDiv" (submit)="search()">
-                <input class="search" type="text" placeholder="Search Marketplace." name="studentName">
-                <button type="submit" class="submitButton"><img src="../../../assets/search-icon.png" alt="" ></button>
-              </form>
-            </div>
-          
-            <div class="section">
-              <div class="information">
-                <p class="lineOne">An app for</p>
-                <p class="lineTwo">UNC Greensboro</p>
-                <p class="lineThree">Department of Computer Science</p>
-              </div>
-              <div class="bottomImage">
-                <img src="../../../assets/uncg.jpeg" alt="Image"/>
-              </div>
-            </div>  
-          </div>
+  </div>
+  <div class="body">
+      <div class="logo">
+          <img src="../../../assets/logo.png" alt="UNCG logo"/>
+      </div>
+      <div class="search">
+        <form class="formDiv" (submit)="search()">
+          <input class="search" type="text" placeholder="Search Marketplace..." [(ngModel)]="itemSearched"  name="itemSearched">
+        </form>
+      </div>
+      <div class="uncg_image">
+        <img src="../../../assets/uncg_building.jpeg" alt="UNCG building"/>
     </div>
+  </div>
 </div>
