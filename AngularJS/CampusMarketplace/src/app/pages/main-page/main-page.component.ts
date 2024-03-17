@@ -26,7 +26,8 @@ export class MainPageComponent {
 
   register(){
     if(this.first_name && this.last_name && this.email && this.password && this.role){
-      this.signUpService.createUser(this.first_name, this.last_name, this.email, this.password, this.role)
+      let full_name = this.first_name+' '+this.last_name
+      this.signUpService.createUser(full_name, this.email, this.password, this.role)
         .subscribe({
           next: (response) => {
             this.successMessage = 'Sign Up successful';
