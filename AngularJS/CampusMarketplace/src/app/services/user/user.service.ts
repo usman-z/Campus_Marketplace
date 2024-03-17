@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserInfo(userId: number){
-    const url = 'http://localhost:8080/info';
+    const url = 'http://173.230.140.95:8080/info';
     const request ={
       "userId": userId
     }
