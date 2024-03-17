@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  user = {} 
+  user = {}
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -17,11 +17,14 @@ export class HomePageComponent {
   }
 
   search() {
-    
+
   }
 
   logout() {
     this.router.navigate(['/']);
   }
 
+  userProfile() {
+
+  }
 }
