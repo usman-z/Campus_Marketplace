@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+$primary-color: #ffeba7;
+$secondary-color: #1f2029;
+$tertiary-color: #c4c3ca;
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+  background: $tertiary-color;
+}
+
+.title, .nav-links-right{
+  list-style: none;
+}
+
+.title li, .nav-links-right li{
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.title li{
+  font-weight: 500;
+  font-size: 20px;
+  display: inline-block;
+  padding: 0px 20px;
+}
+
+.title li a, .nav-links-right a{
+  color: #ffff;
+}
+
+.nav-links-right li{
+  font-weight: 500;
+  font-size: 16px;
+  display: inline-block;
+  padding: 0px 20px;
+}
+.nav-links-right li img {
+  max-width: 30px;
+  height: auto;
+  cursor: pointer;
+}
+
+.UNC{
+  text-shadow:
+    -1px -1px 0 #0f2044,
+    1px -1px 0 #0f2044,
+    -1px  1px 0 #0f2044,
+    1px  1px 0 #0f2044;
+}
+.g-text {
+  text-shadow:
+    -1px -1px 0 #0f2044,
+    1px -1px 0 #0f2044,
+    -1px  1px 0 #0f2044,
+    1px  1px 0 #0f2044;
+  color: #ffb71c;
+}
+
+//
+//.navbar{
+//  display:flex;
+//  align-items: center;
+//  justify-content: space-between;
+//  padding: 20px;
+//  margin: auto;
+//  background-color: #faf3;
+//
+//  .nav-title, .nav-links-right{
+//    list-style: none;
+//  }
+//
+//  .nav-links-right li{
+//    font-weight: 500;
+//    font-size: 16px;
+//    display: inline-block;
+//    padding: 0px 20px;
+//  }
+//
+//  .nav-links-right li img {
+//    max-width: 30px;
+//    height: auto;
+//    cursor: pointer;
+//  }
+//
+//  .nav li{
+//    font-weight: 500;
+//    font-size: 20px;
+//    display: inline-block;
+//    padding: 0px 20px;
+//  }
+//
+//  .nav li a{
+//    color: #ffff;
+//  }
+//}
+
+//.header {
+//  display: flex;
+//  flex-direction: row;
+//  justify-content: space-between;
+//  align-items: center;
+//  width: 100%;
+//  margin: auto;
+//  border-bottom: 1px solid black;
+//  .title {
+//    font-size: 30px;
+//  }
+//  .buttons{
+//    display: flex;
+//    .chat{
+//      display: flex;
+//      cursor: pointer;
+//      img {
+//        width: 3.7em;
+//      }
+//      &:hover {
+//        img {
+//          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+//        }
+//      }
+//    }
+//    .profile{
+//      margin-left: 1em;
+//      display: flex;
+//      cursor: pointer;
+//      img {
+//        width: 5em;
+//      }
+//      &:hover {
+//        img {
+//          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+//        }
+//      }
+//    }
+//  }
+//}
+
