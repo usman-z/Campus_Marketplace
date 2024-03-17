@@ -1,98 +1,75 @@
-.mainContainer {
-    width: 80%;
-    margin: auto;
-    margin-top: 8em;
-    display: flex;
-    flex-direction: column;
-    padding: 1%;
-    .header {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin: auto;
-        border-bottom: 1px solid black;
-        .title {
-            font-size: 30px;
-        }
-        .buttons{
-            display: flex;
-            .chat{   
-                display: flex;
-                cursor: pointer;
-                img {
-                    width: 3.7em;
-                }
-                &:hover {
-                    img {
-                        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-                    }
-                }
-            }
-            .profile{
-                margin-left: 1em;
-                display: flex;
-                cursor: pointer;
-                img {
-                    width: 5em;
-                }
-                &:hover {
-                    img {
-                        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-                    }
-                }
-            }
-        }
-    }
-    .body {
-        display: flex;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 5em;
-        .logo {
-            margin: auto;
-            width: 90%;
-            margin-bottom: 7em;
-            img {
-                margin: auto;
-                display: flex;
-            }
-        }
-        .search {
-            margin: 1em;
-            margin: auto;
-            width: 80%;
-            .formDiv{
-                width: 100%;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                .search {
-                    padding-left: 15px;
-                    border-radius: 10px;
-                    font-size: 20px;
-                    width: 100%;
-                    margin: 1%;
-                    display: inline-block;
-                }
-            }
-        }
-        .uncg_image {
-            margin: auto;
-            width: 90%;
-            margin-top: 4em;
-            img {
-                width: 100%;
-            }
-        }
-    }
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+$primary-color: #ffeba7;
+$secondary-color: #1f2029;
+$tertiary-color: #c4c3ca;
+
+
+
+body{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  color: $primary-color;
+  background-color: $secondary-color;
+  padding-top: 10px;
+  height: 100vh;
 }
 
-@media only screen and (min-width: 768px) {
-    .mainContainer {
-        width: 50%;
-    }
+.main-container{
+  text-align: center;
+
+  .welcome{
+    color: #ffff;
+  }
+
+  h1{
+    margin-top: 10px;
+    color: #ffb71b;
+    font-weight: 600;
+    text-shadow:
+      -3px -3px 0 #0f2044,
+      3px -3px 0 #0f2044,
+      -3px  3px 0 #0f2044,
+      3px  3px 0 #0f2044;
+  }
+
+  .logo{
+    max-width: 200px;
+    height: auto;
+
+  }
+
+  .search-bar{
+    color: black;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .search-bar button {
+    background-color: #ffb71c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  .campus-image img{
+    height: 250px;
+    width: 500px;
+  }
 }
+
+
+@media only screen and (min-width: 768px) {
+  .body {
+    width: 50%;
+  }
+}
+
