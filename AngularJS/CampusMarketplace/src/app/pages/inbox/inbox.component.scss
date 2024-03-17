@@ -1,0 +1,60 @@
+.inbox {
+    width: 80%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 7em;
+        .back-button {
+            display: flex;
+        }
+        .title {
+            vertical-align: middle;
+            display: flex;
+            font-size: 30px;
+        }
+        .empty {
+
+        }
+    }
+    .body {display: flex;
+        display: flex;
+        flex-direction: column;
+        .logo {
+            display: flex;
+            margin: auto;
+            margin-bottom: 7em;
+        }
+        .messages{
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            .loading {
+
+            }
+            .messageContacts {
+                width: 100%;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
+    .inbox {
+        width: 50%;
+        .body {
+            .messages{
+                .messageContacts {
+                    width: 70%;
+                    margin: auto;
+                }
+            }
+        }
+    }
+}

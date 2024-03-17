@@ -47,6 +47,8 @@ app.get("/any", async (req, res) => {
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
   }
 });
 
@@ -60,6 +62,8 @@ app.get("/all", async (req, res) => {
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
   }
 });
 
@@ -79,6 +83,8 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
   }
 });
 
@@ -137,4 +143,44 @@ app.post("/register", async (req, res) => {
     await client.end(); // Close the database connection
   }
 
+});
+
+app.post("/inbox", async (req, res) => {
+  const { userId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query('SELECT * FROM Message WHERE sender_id = $1 OR receiver_id = $2', [userId, userId]);
+    const filteredRows = result.rows.map(row => {
+      if (row.sender_id === userId) {
+        return { ...row, otherId: row.receiver_id, receiver_id: undefined, sender_id: undefined };
+      } else if (row.receiver_id === userId) {
+        return { ...row, otherId: row.sender_id, receiver_id: undefined, sender_id: undefined };
+      } else {
+          return row; // No match found, leave the row unchanged
+      }
+  });
+    res.json(filteredRows);
+
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
+app.post("/info", async (req, res) => {
+  const { userId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
 });

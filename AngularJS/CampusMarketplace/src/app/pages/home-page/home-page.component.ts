@@ -31,7 +31,12 @@ export class HomePageComponent {
   }
 
   chat() {
-    
+    const navigationExtras: NavigationExtras = {
+      state: {
+        user: this.user
+      }
+    };
+    this.router.navigate(['/inbox'], navigationExtras);
   }
 
   profile () {
