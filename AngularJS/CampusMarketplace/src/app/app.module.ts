@@ -14,6 +14,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     StarRatingComponent,
     MainPageComponent,
     ProductPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

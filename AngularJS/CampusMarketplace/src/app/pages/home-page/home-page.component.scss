@@ -1,121 +1,98 @@
 .mainContainer {
-    width: 50%;
+    width: 80%;
     margin: auto;
-    .buttons{
-        // border: 1px solid red;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
         display: flex;
-        align-items: flex-end;
-        justify-content:flex-end;
-        .logIn{
-            margin-left: .5em;   
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+        border-bottom: 1px solid black;
+        .title {
+            font-size: 30px;
         }
-        
-        .signUp{
-            display: inline-flex;
+        .buttons{
+            display: flex;
+            .chat{   
+                display: flex;
+                cursor: pointer;
+                img {
+                    width: 3.7em;
+                }
+                &:hover {
+                    img {
+                        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+                    }
+                }
+            }
+            .profile{
+                margin-left: 1em;
+                display: flex;
+                cursor: pointer;
+                img {
+                    width: 5em;
+                }
+                &:hover {
+                    img {
+                        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+                    }
+                }
+            }
         }
     }
-    
-    .mainContent{
-        // border: 1px solid lawngreen;
+    .body {
         display: flex;
-        justify-content: center;
-        height: 85vh;
-        align-items: center;
-        .mainPage{
-            //border: 2px solid black;
-            width: 75vw;
-            height: 80vh;
-            padding: 2%;
-        
-            .topImage{
-                //border: 1px solid yellow;
-                height: 18vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 2em;
-                img{
-                    height: 7em;
-                    width: 8em;
-                }
-            }
-            
-            .searchDiv{
-                margin: 1em;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 5em;
+        .logo {
+            margin: auto;
+            width: 90%;
+            margin-bottom: 7em;
+            img {
                 margin: auto;
-                width: 16.5em;
-                
-                .formDiv{
-                    width: 100%;
-                    padding: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    .search {
-                        border-radius: 10px;
-                        font-size: large;
-                        width: 80%;
-                        margin: 1%;
-                        display: inline-block;
-                    }
-                    .submitButton {
-                        display: inline-block;
-                        height: 2em;
-                        padding: 0;
-                        img {
-                            width: 100%;
-                            height: 100%;
-                        }
-                    }
-                }
-                .error-message {
-                    color: red;
-                    font-size: 16px;
-                    width: auto;
-                }
+                display: flex;
             }
-            
-            .section{
-                height: 53vh;  
-                p{
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0;
-                    padding: 0;
-                }
-                
-                .lineOne{
-                    margin-top: 2em;
-                    font-size: large;
-                }
-                
-                .lineTwo{
-                    margin-top: 1em;
-                    font-size: x-large;
-                    font-weight: bold;
-                    color: #FFB71B;
-                }
-                .lineThree{
-                    margin-top: 1em;
-                    margin-bottom: 2em;
-                    font-size: large;
-                    color: #0F2044;
-                }
-            }
-            
-            .bottomImage{
-                //border: 3px solid darkcyan;
-                height: 25vh;
+        }
+        .search {
+            margin: 1em;
+            margin: auto;
+            width: 80%;
+            .formDiv{
+                width: 100%;
+                padding: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-            
-                img{
-                    width: 26em;
-                    height: 24vh;
+                .search {
+                    padding-left: 15px;
+                    border-radius: 10px;
+                    font-size: 20px;
+                    width: 100%;
+                    margin: 1%;
+                    display: inline-block;
                 }
             }
         }
+        .uncg_image {
+            margin: auto;
+            width: 90%;
+            margin-top: 4em;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mainContainer {
+        width: 50%;
     }
 }
