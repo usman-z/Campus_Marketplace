@@ -15,6 +15,11 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { HttpClientModule } from '@angular/common/http';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { InboxComponent } from './pages/inbox/inbox.component';
+import { MessageComponent } from './components/message/message.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { SellComponent } from './pages/sell/sell.component';
 
 
 @NgModule({
@@ -28,7 +33,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
     MainPageComponent,
     ProductPageComponent,
     HomePageComponent,
-    ProfileComponent
+    ProfileComponent,
+    InboxComponent,
+    MessageComponent,
+    ChatComponent,
+    LoadingComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,81 @@
+.main {
+    width: 80%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 7em;
+        .back-button {
+            display: flex;
+        }
+        .title {
+            vertical-align: middle;
+            display: flex;
+            font-size: 30px;
+        }
+        .empty {
+
+        }
+    }
+    .body {
+        display: flex;
+        flex-direction: column;
+        .logo {
+            display: flex;
+            margin: auto;
+            margin-bottom: 7em;
+        }
+        .chat{
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            width: 85%;
+            margin: auto;
+            .info {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                img {
+                    width: 5em;
+                }
+                p{
+                    margin-top: .5em;
+                    margin-left: .6em;
+                    font-size: 16px;
+                }
+            }
+            .messages {
+                min-height: 10em;
+            }
+            .newMessage {
+                border: 1px solid black;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+                width: 90%;
+                margin: auto;
+                input {
+                    font-size: 15px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
+    .main {
+        width: 50%;
+        .body {
+            .chat{
+                width: 65%;
+                margin: auto;
+            }
+        }
+    }
+}

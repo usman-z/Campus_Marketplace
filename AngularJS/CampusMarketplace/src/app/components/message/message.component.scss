@@ -1,0 +1,22 @@
+.message {
+    padding: 1em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9); /* Adjust the values as needed */
+    margin: 1em;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    width: 90%;
+    .profile_image {
+        width: 25%;
+        img {
+            width: 5em;
+        }
+    }
+    .user_info {
+        width: 75%;
+        p {
+            font-size: 20px;
+        }
+    }
+}
