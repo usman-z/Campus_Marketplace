@@ -1,0 +1,27 @@
+<div class="mainContainer">
+    <div class="header">
+      <div class="title">
+        <p>Verify your Account</p>
+      </div>
+    </div>
+    <div class="body">
+        <div class="logo">
+            <img src="../../../assets/logo.png" alt="UNCG logo"/>
+        </div>
+        <div class="content">
+            <div class="question">
+                <p>Do you authorize and confirm the approval of this account?</p>
+            </div>
+            <div class="selection">
+                <label class="answer"><input type="radio" name="answer" [(ngModel)]="approved" value=true required>Yes</label>
+                <label class="answer"><input type="radio" name="answer" [(ngModel)]="approved" value=false required>No</label>
+            </div>
+            <div class="submit">
+                <app-custom-button (click)="submit()" buttonName="Submit"></app-custom-button>
+            </div>
+            <div class="message" *ngIf="message">
+                <p>{{ message }}</p>
+            </div>
+        </div>
+    </div>
+  </div>

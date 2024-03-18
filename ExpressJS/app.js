@@ -115,11 +115,13 @@ app.post("/register", async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6)
     `, [full_name, email, password, role, rating, total_ratings]);
 
+    const newUserId = await client.query(
+      `SELECT user_id FROM Personnel WHERE email = $1`,[email]);
     const mailOptions = {
       from: 'campus.marketplaces@gmail.com',
       to: email,
-      subject: 'UNCG Marketplace Registration Successful',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nYour registration has been successfully completed, and you are now ready to explore the vast array of opportunities available on our platform.\n\nBest regards,\nUNCG Marketplace Team"
+      subject: 'Action Required | Verify your Marketplace account',
+      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -182,15 +184,15 @@ app.post("/info", async (req, res) => {
   }
 });
 
-app.post("/update", async (req, res) => {
+app.post("/verify", async (req, res) =>  {
   const { userId } = req.body;
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    await client.query(
-      `UPDATE Personnel 
-       SET email = 'unknown'
-       WHERE user_id = $1`, [userId]);
+    await client.query(`
+      UPDATE Personnel
+      SET email_verified = true
+      WHERE user_id = $1`, [userId]);
     const result = await client.query('SELECT * FROM Personnel');
     res.json(result.rows);
   } catch (err) {
