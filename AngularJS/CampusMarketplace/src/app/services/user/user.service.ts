@@ -18,4 +18,15 @@ export class UserService {
     return this.http.post<PersonnelData>(url, request);
 
   };
+
+  rateUser(user_id: number, rating: number) {
+    const url = 'http://localhost:8080/rate';
+
+    const request = {
+      "studentId": user_id,
+      "rating": rating
+    };
+    
+    return this.http.post<PersonnelData>(url, request);
+  };
 }
