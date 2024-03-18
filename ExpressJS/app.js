@@ -202,3 +202,39 @@ app.post("/verify", async (req, res) =>  {
     await client.end();
   }
 });
+
+app.post("/rate", async (req, res) =>  {
+  const { userId, newRating } = req.body;
+    const client = new Client(dbConfig);
+
+    try {
+        await client.connect();
+
+        // Check if the user exists and retrieve current ratings
+        const userResult = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const existingUser = userResult.rows[0];
+        const prevRating = existingUser.rating;
+        const totalRatings = existingUser.total_ratings;
+        const updatedRating = (prevRating * totalRatings + newRating) / (totalRatings + 1);
+
+        // Update user rating in the database
+        await client.query(`
+            UPDATE Personnel
+            SET rating = $1, total_ratings = $2
+            WHERE user_id = $3
+        `, [updatedRating, totalRatings + 1, userId]);
+
+        // Fetch updated user data
+        const updatedUserResult = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
+        res.json(updatedUserResult.rows[0]);
+    } catch (err) {
+        console.error('Error executing query:', err);
+        res.status(500).send('Error executing query');
+    } finally {
+        await client.end();
+    }
+});
