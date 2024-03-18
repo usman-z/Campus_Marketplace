@@ -1,27 +1,28 @@
-<app-navbar></app-navbar>
-<body>
-<div class="main-container">
-  <h1 class="welcome">Welcome to</h1>
-  <img src="./assets/UNCG.svg" alt="UNCG Logo" class="logo">
-
-  <h1>MARKETPLACE</h1>
-
-  <div class="search-bar">
-    <form (submit)="search()">
-      <input type="text" placeholder="Search...">
-      <button type="button">Search</button>
-    </form>
+<div class="mainContainer">
+  <div class="header">
+    <div class="title">
+      <p>Marketplace</p>
+    </div>
+    <div class="buttons">
+        <div class="chat" (click)="chat()">
+            <img src="../../../assets/chat.png" alt="chat">
+        </div>
+        <div class="profile" (click)="profile()">
+          <img src="../../../assets/profile.png" alt="profile">
+        </div>
+    </div>
   </div>
-
-  <div class="information">
-    <p>An app for</p>
-    <p>UNC Greensboro</p>
-    <p>Department of Computer Science</p>
-  </div>
-
-  <div class="campus-image">
-    <img src="./assets/uncg_building.jpeg">
+  <div class="body">
+      <div class="logo">
+          <img src="../../../assets/logo.png" alt="UNCG logo"/>
+      </div>
+      <div class="search">
+        <form class="formDiv" (submit)="search()">
+          <input class="search" type="text" placeholder="Search Marketplace..." [(ngModel)]="itemSearched"  name="itemSearched">
+        </form>
+      </div>
+      <div class="uncg_image">
+        <img src="../../../assets/uncg_building.jpeg" alt="UNCG building"/>
+    </div>
   </div>
 </div>
-
-</body>

@@ -8,8 +8,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-
-  user = {}
+  user = {} 
   itemSearched: string = ''
 
   constructor(private router: Router, private route: ActivatedRoute) {}
