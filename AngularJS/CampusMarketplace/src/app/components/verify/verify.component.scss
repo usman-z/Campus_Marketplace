@@ -1,0 +1,79 @@
+.mainContainer {
+    width: 80%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: auto;
+        border-bottom: 1px solid black;
+        .title {
+            font-size: 30px;
+        }
+    }
+    .body {
+        display: flex;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 8em;
+        .logo {
+            margin: auto;
+            width: 90%;
+            margin-bottom: 10em;
+            img {
+                margin: auto;
+                display: flex;
+            }
+        }
+        .content {
+            margin: auto;
+            margin: 1em;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            .question {
+                display: flex;
+                margin: auto;
+                p {
+                    font-size: 18px;
+                    text-align: center;
+                }
+            }
+            .selection {
+                display: flex;
+                margin-top: 1em;
+                margin: auto;
+                margin-bottom: 3em;
+                label {
+                    margin-left: 1em;
+                    font-size: 20px;
+                }
+            }
+            .submit {
+                display: flex;
+                justify-content: center;
+            }
+            .message {
+                display: flex;
+                justify-content: center;
+                margin-top: 2em;
+                p {
+                    color: red;
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .mainContainer {
+        width: 50%;
+    }
+}
