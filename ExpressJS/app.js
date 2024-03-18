@@ -238,3 +238,43 @@ app.post("/rate", async (req, res) =>  {
         await client.end();
     }
 }); 
+
+// --------------------------------------------
+
+// app.get("/send", async (res) => {
+//   const mailOptions = {
+//     from: 'campus.marketplaces@gmail.com',
+//     to: 'u_zia@uncg.edu',
+//     subject: 'UNCG Marketplace debug',
+//     text: "UNCG Marketplace!"
+//   }
+//   transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//         console.log('Error sending email:', error);
+
+//     } else {
+//         console.log('Email sent:', info.response);
+//     }
+//   });
+//   res.status(200).send('Success');
+// });
+
+app.get("/send", (req, res) => {
+  const mailOptions = {
+    from: 'campus.marketplaces@gmail.com',
+    to: 'u_zia@uncg.edu',
+    subject: 'UNCG Marketplace debug',
+    text: "UNCG Marketplace!"
+  };
+
+  // Send mail
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error sending email:', error);
+      res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent:', info.response);
+      res.status(200).send('Success');
+    }
+  });
+});
