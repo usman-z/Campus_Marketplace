@@ -89,10 +89,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  const { full_name, email, password, role } = req.body;
-  let rating, total_ratings = 0;
+  const { first_name, last_name, email, password, role } = req.body;
 
-  if (!full_name || !email || !password || !role) {
+  if (!first_name || !last_name || !email || !password || !role) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -105,31 +104,35 @@ app.post("/register", async (req, res) => {
   try {
     await client.connect(); // Connect to the PostgreSQL database
 
-    const user = await client.query('SELECT * FROM Personnel WHERE email= $1', [email]);
+    const sql = 'SELECT * FROM Personnel WHERE email= $1';
+    const user = await client.query(sql, [email]);
     if(user.rows[0]){
       return res.status(400).json({ error: "User already exists with the same email"})
     }
 
-    const result = await client.query(`
-      INSERT INTO Personnel (full_name, email, password, role, rating, total_ratings)
-      VALUES ($1, $2, $3, $4, $5, $6)
-    `, [full_name, email, password, role, rating, total_ratings]);
+    const query = `
+      INSERT INTO Personnel (first_name, last_name, email, password, role)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    const result = await client.query(query, [first_name, last_name, email, password, role]); // Execute the query
 
     const mailOptions = {
       from: 'campus.marketplaces@gmail.com',
       to: email,
-      subject: 'UNCG Marketplace Registration Successful',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nYour registration has been successfully completed, and you are now ready to explore the vast array of opportunities available on our platform.\n\nBest regards,\nUNCG Marketplace Team"
+      subject: 'UNCG Marketplace Registration',
+      text: 'You have successfully registered for UNCG Marketplace'
     }
 
-    transporter.sendMail(mailOptions, (error, info) => {
-     if (error) {
-         console.log('Error sending email:', error);
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //  if (error) {
+    //      console.log('Error sending email:', error);
 
-     } else {
-         console.log('Email sent:', info.response);
-     }
-    });
+    //  } else {
+    //      console.log('Email sent:', info.response);
+    //  }
+    // });
 
     res.json(result.rows[0]);
 
@@ -174,25 +177,6 @@ app.post("/info", async (req, res) => {
     await client.connect();
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
     res.json(result.rows[0]);
-  } catch (err) {
-    console.error('Error executing query:', err);
-    res.status(500).send('Error executing query');
-  } finally {
-    await client.end();
-  }
-});
-
-app.post("/update", async (req, res) => {
-  const { userId } = req.body;
-  const client = new Client(dbConfig);
-  try {
-    await client.connect();
-    await client.query(
-      `UPDATE Personnel 
-       SET email = 'unknown'
-       WHERE user_id = $1`, [userId]);
-    const result = await client.query('SELECT * FROM Personnel');
-    res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
