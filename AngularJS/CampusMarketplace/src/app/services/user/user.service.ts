@@ -20,7 +20,7 @@ export class UserService {
   };
 
   rateUser(user_id: number, rating: number) {
-    const url = 'http://localhost:8080/rate';
+    const url = 'http://173.230.140.95:8080/rate';
 
     const request = {
       "studentId": user_id,
