@@ -41,7 +41,7 @@ app.get("/any", async (req, res) => {
     await client.connect();
     // const result = await client.query('SELECT * FROM Personnel');
     // const result = await client.query('SELECT * FROM Message');
-    const result = await client.query('SELECT * FROM Listing');
+    const result = await client.query('SELECT * FROM Listing'); 
     res.json(result.rows);
 
   } catch (err) {
