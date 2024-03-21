@@ -15,11 +15,12 @@ export class ProductPageComponent {
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Retrieve the user data passed through router state
-    const currentNavigation = this.router.getCurrentNavigation();
-    if (currentNavigation && currentNavigation.extras && currentNavigation.extras.state) {
-      this.user = currentNavigation.extras.state['user'];
+    if (history.state.user == undefined) {
+      this.router.navigate(['/']);
     }
+    this.user = history.state.user
+    console.log(this.user)
+  
 
     // Initialize your listing object, if necessary
     this.initListing();
