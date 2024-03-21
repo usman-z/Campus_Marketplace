@@ -1,3 +1,67 @@
 <div class="content">
     <app-custom-button class="addProduct" (click)="product()" buttonName="Add Product"></app-custom-button>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .user-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px; /* Increase the max-width value */
+      text-align: center;
+    }
+
+    .user-avatar {
+      width: 150px; /* Increase the width value */
+      height: 150px; /* Increase the height value */
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .user-info {
+      margin-bottom: 20px;
+      font-size: 18px; /* Increase the font-size value */
+    }
+
+    .user-info p {
+      margin: 5px 0;
+    }
+
+    .rating {
+      font-size: 36px; /* Increase the font-size value */
+      color: #ffc107;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="user-card">
+    <img class="user-avatar" src="profile_image_path" alt="User Avatar">
+    <div class="user-info">
+      <p><strong>Full Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> john.doe@example.com</p>
+      <p><strong>Role:</strong> Admin</p>
+      <p><strong>Rating:</strong> 4.5</p>
+      <p><strong>Total Ratings:</strong> 100</p>
+    </div>
+    <div class="rating">★★★★★</div>
+  </div>
+</body>
+</html>
