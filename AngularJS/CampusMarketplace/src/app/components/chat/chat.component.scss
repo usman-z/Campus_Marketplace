@@ -39,6 +39,7 @@
             flex-direction: column;
             width: 85%;
             margin: auto;
+            overflow-y: auto;
             .info {
                 display: flex;
                 flex-direction: row;
@@ -54,6 +55,10 @@
             }
             .messages {
                 min-height: 10em;
+                padding: 10px; 
+                p {
+                    margin: 5px 0;
+                }
             }
             .newMessage {
                 border: 1px solid black;

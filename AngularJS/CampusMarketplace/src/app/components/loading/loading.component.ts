@@ -6,11 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent {
-  isLoading: boolean = true;
-
-  ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
-  }
+  
 }

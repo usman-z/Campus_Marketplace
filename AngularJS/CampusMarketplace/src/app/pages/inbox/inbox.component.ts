@@ -12,6 +12,7 @@ import { InboxService } from 'src/app/services/inbox/inbox.service';
 export class InboxComponent {
   user?: UserData
   messages?: MessageData[]
+  load: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private inboxService: InboxService) {}
 
@@ -21,11 +22,11 @@ export class InboxComponent {
     }
     else {
       this.user = history.state.user;
-  
       if(this.user != null || this.user !=undefined) {
         this.inboxService.getInbox(this.user.user_id).subscribe({
           next: (response) => {
             this.messages = response;
+            this.load = false;
           }
         });
       }

@@ -14,7 +14,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Server failed')
   })
   
-const PORT = 8081
+const PORT = 8080
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
@@ -40,8 +40,8 @@ app.get("/any", async (req, res) => {
   try {
     await client.connect();
     // const result = await client.query('SELECT * FROM Personnel');
-    // const result = await client.query('SELECT * FROM Message');
-    const result = await client.query('SELECT * FROM Listing');
+    const result = await client.query('SELECT * FROM Message');
+    // const result = await client.query('SELECT * FROM Listing');
     res.json(result.rows);
 
   } catch (err) {
@@ -149,18 +149,12 @@ app.post("/inbox", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const result = await client.query('SELECT * FROM Message WHERE sender_id = $1 OR receiver_id = $2', [userId, userId]);
-    const filteredRows = result.rows.map(row => {
-      if (row.sender_id === userId) {
-        return { ...row, otherId: row.receiver_id, receiver_id: undefined, sender_id: undefined };
-      } else if (row.receiver_id === userId) {
-        return { ...row, otherId: row.sender_id, receiver_id: undefined, sender_id: undefined };
-      } else {
-          return row; // No match found, leave the row unchanged
-      }
-  });
-    res.json(filteredRows);
-
+  const result = await client.query(`
+  SELECT sender_id AS other_id FROM Message WHERE receiver_id = $1
+  UNION
+  SELECT receiver_id AS other_id FROM Message WHERE sender_id = $1
+`, [userId]);
+  res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
@@ -176,6 +170,42 @@ app.post("/info", async (req, res) => {
     await client.connect();
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
     res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
+app.post("/messages", async(req, res) => {
+  const { activeUser,otherUser } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query(`
+    SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
+    UNION
+    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1
+    `, [activeUser, otherUser]);
+    res.json(result.rows);
+
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
+app.post("/sendMessage", async(req, res) => {
+  const { sender_id, receiver_id, message } = req.body;
+  const client = new Client(dbConfig);
+  try { 
+    await client.connect();
+    await client.query('INSERT INTO Message(sender_id,receiver_id,message,message_time) VALUES($1,$2,$3,CURRENT_TIMESTAMP)', [sender_id, receiver_id, message]);
+    const result = await client.query('SELECT * FROM Message');
+    res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
