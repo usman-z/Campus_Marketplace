@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavigationExtras, Router } from '@angular/router';
+import { UserData } from 'src/app/models/user/user.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
 

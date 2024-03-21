@@ -308,3 +308,26 @@ app.get("/send", (req, res) => {
     }
   });
 });
+
+//add listing
+app.post('/addListing', async (req, res) => {
+  const { title, condition, price, description, seller_id, images_folder_path } = req.body;
+  const client = new Client(dbConfig);
+  try {
+      await client.connect();
+      const result = await client.query(`
+          INSERT INTO Listing (title, condition, price, description, seller_id, images_folder_path)
+          VALUES ($1, $2, $3, $4, $5, $6)
+          RETURNING listing_id`, 
+          [title, condition, price, description, seller_id, images_folder_path]);
+      
+      const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
+      res.send({ success: true, message: 'Product added successfully', listingId: listingId });
+  } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  } finally {
+      await client.end();
+  }
+});
+

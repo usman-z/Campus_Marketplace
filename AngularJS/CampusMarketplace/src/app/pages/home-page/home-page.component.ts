@@ -41,6 +41,7 @@ export class HomePageComponent {
   }
 
   profile () {
+    console.log(this.user)
     const navigationExtras: NavigationExtras = {
       state: {
         user: this.user

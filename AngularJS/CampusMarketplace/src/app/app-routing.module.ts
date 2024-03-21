@@ -8,6 +8,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { InboxComponent } from './pages/inbox/inbox.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SellComponent } from './pages/sell/sell.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'inbox', component: InboxComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'sell', component: SellComponent }
+  { path: 'sell', component: SellComponent },
+  { path: 'product', component: ProductPageComponent }
 ];
 
 @NgModule({
