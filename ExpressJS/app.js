@@ -262,7 +262,7 @@ app.post("/rate", async (req, res) =>  {
 app.get("/send", (req, res) => {
   const mailOptions = {
     from: 'campus.marketplaces@gmail.com',
-    to: 'u_zia@uncg.edu',
+    to: 'd_patel5@uncg.edu',
     subject: 'UNCG Marketplace debug',
     text: "UNCG Marketplace!"
   };
