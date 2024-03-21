@@ -9,18 +9,14 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent {
-  @Input() message_id: number = 0
-  @Input() message: string = '';
-  @Input() message_time: string = '';
-  @Input() other_id: number = 0;
-
-  @Input() activeUser: number = 0;
+  @Input() otherUserId: number = 0;
+  @Input() activeUserId: number = 0;
   otherUser?: UserData
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
-    this.userService.getUserInfo(this.other_id).subscribe({
+    this.userService.getUserInfo(this.otherUserId).subscribe({
       next: (response) => {
         this.otherUser = response;
       }
@@ -28,11 +24,8 @@ export class MessageComponent {
   }
 
   chat() {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        user: this.activeUser
-      }
-    };
-    this.router.navigate(['/chat'], navigationExtras);
+    this.router.navigate(['/chat'], {
+      queryParams: { userId: this.activeUserId, otherId: this.otherUserId  }
+    });
   }
 }

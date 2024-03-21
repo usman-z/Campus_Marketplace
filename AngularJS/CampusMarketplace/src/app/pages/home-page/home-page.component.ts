@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { UserData } from 'src/app/models/user/user.model';
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +9,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  user = {} 
+  user?: UserData 
   itemSearched: string = ''
 
   constructor(private router: Router, private route: ActivatedRoute) {}
