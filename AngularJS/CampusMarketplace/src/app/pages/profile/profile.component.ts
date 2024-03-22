@@ -32,4 +32,8 @@ export class ProfileComponent {
     this.router.navigate(['/product'], navigationExtras);
   }
 
+  logOut() {
+    this.router.navigate(['/']);
+  }
+
 }

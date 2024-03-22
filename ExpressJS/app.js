@@ -330,4 +330,3 @@ app.post('/addListing', async (req, res) => {
       await client.end();
   }
 });
-

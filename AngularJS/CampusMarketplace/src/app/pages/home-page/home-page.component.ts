@@ -23,8 +23,13 @@ export class HomePageComponent {
 
   search() {
     if (this.itemSearched.trim() !== '') {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          user: this.user
+        }
+      };
       this.router.navigate(['/listing'], {
-        queryParams: { search: this.itemSearched, loggedIn: '' }
+        queryParams: { search: this.itemSearched }
       }).catch(error => {
         console.error('Navigation error:', error);
       });
