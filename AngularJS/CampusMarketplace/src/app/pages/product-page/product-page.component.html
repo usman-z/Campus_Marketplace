@@ -1,1 +1,92 @@
-<p>product-page works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Listing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .listing-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="listing-card">
+    <form (ngSubmit)="addListing()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="listing.title" name="title" placeholder="Title" required>
+      </div>
+      <div class="form-group">
+        <label for="condition">Condition</label>
+        <input type="text" class="form-control" id="condition" [(ngModel)]="listing.condition" name="condition" placeholder="Condition" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" [(ngModel)]="listing.price" name="price" placeholder="Price" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="listing.description" name="description" placeholder="Description" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="filetag">Product Images</label>
+        <input type="file" id="filetag" multiple accept=".jpg,.jpeg,.png,.gif">
+        <img id="preview">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Listing</button>
+    </form>
+  </div>
+</body>
+</html>

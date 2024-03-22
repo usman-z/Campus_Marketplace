@@ -15,10 +15,11 @@
             <img src="../../../assets/logo.png" alt="UNCG logo"/>
         </div>
         <div class="messages">
-            <div class="loading"><app-loading></app-loading></div>
+            <app-loading *ngIf="load"></app-loading>
             <div class="messageContacts" *ngFor="let message of messages">
-                <app-message [activeUser]="user?.user_id || 0" [message_id]="message.message_id" [message]="message.message" [message_time]="message.message_time" [other_id]="message.otherId"></app-message>
+                <app-message [activeUserId]="user?.user_id || 0" [otherUserId]="message.other_id"></app-message>
             </div>
+            <div class="noMessages" *ngIf="messages?.length == 0"><p>No Messages</p></div>
         </div>
     </div>
   </div>

@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<div class="inbox">
+  <div class="header">
+      <div class="back-button">
+          <app-back-button></app-back-button>
+      </div>
+    <div class="title">
+      <p>Profile</p>
+    </div>
+    <div class="empty">
+
+    </div>
+  </div>
+  <div class="body">
+      <div class="logo">
+          <img src="../../../assets/profile.png" alt="profile image"/>
+      </div>
+      <div class="review">
+        <div class="top"><p>Usman Zia</p></div>
+        <div class="bottom">
+          <div class="bottomleft"><div class="rating">★★★★★</div></div>
+          <div class="bottomright"><p>4.3 (3 reviews)</p></div>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="buttonOne" (click)="product()"><app-custom-button buttonName="Add New Listing"></app-custom-button></div>
+        <div class="buttonTwo"><app-custom-button buttonName="View All Listings"></app-custom-button></div>
+        <div class="buttonThree" (click)="logOut()"><app-custom-button buttonName="Log Out"></app-custom-button></div>
+      </div>
+  </div>
+</div>

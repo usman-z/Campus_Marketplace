@@ -41,30 +41,30 @@
                 display: flex;
                 margin: auto;
                 p {
-                    font-size: 18px;
+                    font-size: 20px;
                     text-align: center;
                 }
             }
-            .selection {
+            .buttons {
                 display: flex;
-                margin-top: 1em;
                 margin: auto;
-                margin-bottom: 3em;
-                label {
-                    margin-left: 1em;
-                    font-size: 20px;
+
+                flex-direction: row;
+                .yesDiv {
+                    margin-top: 3em;
+                    display: flex;
                 }
-            }
-            .submit {
-                display: flex;
-                justify-content: center;
+                .noDiv {
+                    margin-top: 3em;
+                    margin-left: 2em;
+                }
             }
             .message {
                 display: flex;
                 justify-content: center;
                 margin-top: 2em;
                 p {
-                    color: red;
+                    color: black;
                     font-size: 18px;
                 }
             }

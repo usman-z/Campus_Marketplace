@@ -20,7 +20,8 @@
                 <p>Usman Zia</p>
             </div>
             <div class="messages">
-                
+                <app-loading *ngIf="load"></app-loading>
+                <p *ngFor="let msg of allMessages">{{ msg.message }}</p>
             </div>
             <div class="newMessage">
                 <input class="message" type="text" placeholder="Chat">

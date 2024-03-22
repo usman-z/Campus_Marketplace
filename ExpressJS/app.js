@@ -39,11 +39,9 @@ app.get("/any", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    // const result = await client.query('SELECT * FROM Personnel');
-    // const result = await client.query('SELECT * FROM Message');
-    const result = await client.query('SELECT * FROM Listing'); 
+    const result = await client.query('SELECT * FROM Message');
+    // const result = await client.query('SELECT * FROM Listing');
     res.json(result.rows);
-
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
@@ -98,7 +96,7 @@ app.post("/register", async (req, res) => {
 
   const atIndex = email.indexOf('@'); // gets index of '@"
   if(atIndex === -1 || email.substring(atIndex+1).toLowerCase() !== 'uncg.edu'){  // if no index of '@' OR if after '@' it doesn't end w 'uncg.edu'
-    return res.status(400).json({error: "Email is not UNCG email"});
+    return res.status(400).json({error: "You must use your UNCG email"});
   }
 
   const client = new Client(dbConfig);
@@ -115,13 +113,12 @@ app.post("/register", async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6)
     `, [full_name, email, password, role, rating, total_ratings]);
 
-    const newUserId = await client.query(
-      `SELECT user_id FROM Personnel WHERE email = $1`,[email]);
+    const newUserId = await client.query(`SELECT user_id FROM Personnel WHERE email = $1`,[email]);
     const mailOptions = {
       from: 'campus.marketplaces@gmail.com',
       to: email,
       subject: 'Action Required | Verify your Marketplace account',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
+      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://localhost:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -149,18 +146,12 @@ app.post("/inbox", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const result = await client.query('SELECT * FROM Message WHERE sender_id = $1 OR receiver_id = $2', [userId, userId]);
-    const filteredRows = result.rows.map(row => {
-      if (row.sender_id === userId) {
-        return { ...row, otherId: row.receiver_id, receiver_id: undefined, sender_id: undefined };
-      } else if (row.receiver_id === userId) {
-        return { ...row, otherId: row.sender_id, receiver_id: undefined, sender_id: undefined };
-      } else {
-          return row; // No match found, leave the row unchanged
-      }
-  });
-    res.json(filteredRows);
-
+  const result = await client.query(`
+  SELECT sender_id AS other_id FROM Message WHERE receiver_id = $1
+  UNION
+  SELECT receiver_id AS other_id FROM Message WHERE sender_id = $1
+`, [userId]);
+  res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
@@ -176,6 +167,42 @@ app.post("/info", async (req, res) => {
     await client.connect();
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
     res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
+app.post("/messages", async(req, res) => {
+  const { activeUser,otherUser } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query(`
+    SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
+    UNION
+    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1
+    `, [activeUser, otherUser]);
+    res.json(result.rows);
+
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
+app.post("/sendMessage", async(req, res) => {
+  const { sender_id, receiver_id, message } = req.body;
+  const client = new Client(dbConfig);
+  try { 
+    await client.connect();
+    await client.query('INSERT INTO Message(sender_id,receiver_id,message,message_time) VALUES($1,$2,$3,CURRENT_TIMESTAMP)', [sender_id, receiver_id, message]);
+    const result = await client.query('SELECT * FROM Message');
+    res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
@@ -239,26 +266,6 @@ app.post("/rate", async (req, res) =>  {
     }
 }); 
 
-// --------------------------------------------
-
-// app.get("/send", async (res) => {
-//   const mailOptions = {
-//     from: 'campus.marketplaces@gmail.com',
-//     to: 'u_zia@uncg.edu',
-//     subject: 'UNCG Marketplace debug',
-//     text: "UNCG Marketplace!"
-//   }
-//   transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//         console.log('Error sending email:', error);
-
-//     } else {
-//         console.log('Email sent:', info.response);
-//     }
-//   });
-//   res.status(200).send('Success');
-// });
-
 app.get("/send", (req, res) => {
   const mailOptions = {
     from: 'campus.marketplaces@gmail.com',
@@ -277,4 +284,41 @@ app.get("/send", (req, res) => {
       res.status(200).send('Success');
     }
   });
+});
+
+//add listing
+app.post('/addListing', async (req, res) => {
+  const { title, condition, price, description, seller_id, images_folder_path } = req.body;
+  const client = new Client(dbConfig);
+  try {
+      await client.connect();
+      const result = await client.query(`
+          INSERT INTO Listing (title, condition, price, description, seller_id, images_folder_path)
+          VALUES ($1, $2, $3, $4, $5, $6)
+          RETURNING listing_id`, 
+          [title, condition, price, description, seller_id, images_folder_path]);
+      
+      const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
+      res.send({ success: true, message: 'Product added successfully', listingId: listingId });
+  } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  } finally {
+      await client.end();
+  }
+});
+
+app.post('/removeUser', async (req, res) => {
+  const { userId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+      await client.connect();
+      const result = await client.query(`DELETE FROM Personnel WHERE user_id = $1`,[userId]);
+      res.json(result.rows);
+  } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  } finally {
+      await client.end();
+  }
 });

@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ListingData } from 'src/app/models/listing/listing.model';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 
 @Injectable({
@@ -29,4 +31,38 @@ export class UserService {
     
     return this.http.post<PersonnelData>(url, request);
   };
+
+  addListing(title: string, condition: string, price: number, description: string, seller_id: number, images_folder_path: string) {
+    const url = 'http://173.230.140.95:8080/addListing';
+
+    const request = {
+        "title":  title,
+        "condition":condition,
+        "price": price,
+        "description": description,
+        "seller_id": seller_id,
+        "images_folder_path": images_folder_path
+    };
+    
+    return this.http.post<ListingData>(url, request);
+  }
+
+  verifyUser(userToVerify: number) {
+    const url = 'http://173.230.140.95:8080/verify';
+
+    const request = {
+      "userId": userToVerify,
+    };
+    
+    return this.http.post(url, request);
+  }
+
+  deleteUser(userToDelete: number) {
+    const url = 'http://173.230.140.95:8080/removeUser';
+    const request = {
+      "userId": userToDelete,
+    };
+    
+    return this.http.post(url, request);
+  }
 }

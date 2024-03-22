@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { UserData } from 'src/app/models/user/user.model';
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +9,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 })
 export class HomePageComponent {
 
-  user = {} 
+  user?: UserData 
   itemSearched: string = ''
 
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -22,11 +23,15 @@ export class HomePageComponent {
 
   search() {
     if (this.itemSearched.trim() !== '') {
-      this.router.navigate(['/listing'], {
-        queryParams: { search: this.itemSearched, loggedIn: '' }
-      }).catch(error => {
-        console.error('Navigation error:', error);
-      });
+      const navigationExtras: NavigationExtras = {
+        state: {
+          user: this.user
+        },
+        queryParams: {
+          search: this.itemSearched.trim()
+        }
+      };
+      this.router.navigate(['/listing'], navigationExtras);
     }
   }
 
