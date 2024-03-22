@@ -33,7 +33,7 @@ export class UserService {
   };
 
   addListing(title: string, condition: string, price: number, description: string, seller_id: number, images_folder_path: string) {
-    const url = 'http://localhost:8080/addListing';
+    const url = 'http://173.230.140.95:8080/addListing';
 
     const request = {
         "title":  title,
@@ -45,5 +45,24 @@ export class UserService {
     };
     
     return this.http.post<ListingData>(url, request);
+  }
+
+  verifyUser(userToVerify: number) {
+    const url = 'http://173.230.140.95:8080/verify';
+
+    const request = {
+      "userId": userToVerify,
+    };
+    
+    return this.http.post(url, request);
+  }
+
+  deleteUser(userToDelete: number) {
+    const url = 'http://173.230.140.95:8080/removeUser';
+    const request = {
+      "userId": userToDelete,
+    };
+    
+    return this.http.post(url, request);
   }
 }

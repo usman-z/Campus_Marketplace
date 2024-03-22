@@ -12,16 +12,14 @@
             <div class="question">
                 <p>Do you authorize and confirm the approval of this account?</p>
             </div>
-            <div class="selection">
-                <label class="answer"><input type="radio" name="answer" [(ngModel)]="approved" value=true required>Yes</label>
-                <label class="answer"><input type="radio" name="answer" [(ngModel)]="approved" value=false required>No</label>
-            </div>
-            <div class="submit">
-                <app-custom-button (click)="submit()" buttonName="Submit"></app-custom-button>
+            <div class="buttons">
+                <div class="yesDiv"><button class="btn btn-success" style="font-size: 18px;" (click)="submit(true)">Yes</button></div>
+                <div class="noDiv"><button class="btn btn-danger" style="font-size: 18px;" (click)="submit(false)">No</button></div>
             </div>
             <div class="message" *ngIf="message">
                 <p>{{ message }}</p>
             </div>
+            <app-loading *ngIf="loading"></app-loading>
         </div>
     </div>
   </div>

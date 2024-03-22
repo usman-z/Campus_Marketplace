@@ -7,11 +7,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./listing-page.component.scss']
 })
 export class ListingPageComponent {
+
+  itemSearched: string = ''
   user = {} 
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-
+    if (history.state.user == undefined) {
+      this.router.navigate(['/']);
+    }
+    this.route.queryParams.subscribe(params => {
+      this.itemSearched = params['search'];
+    });
+    this.user = history.state.user
   }
 }

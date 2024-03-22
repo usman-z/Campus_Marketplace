@@ -10,7 +10,7 @@ export class InboxService {
   constructor(private http: HttpClient) { }
 
   getInbox(userId: number){
-    const url = 'http://localhost:8080/inbox';
+    const url = 'http://173.230.140.95:8080/inbox';
     const request ={
       "userId": userId
     }

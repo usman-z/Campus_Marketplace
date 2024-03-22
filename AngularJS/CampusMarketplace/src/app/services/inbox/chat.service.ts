@@ -10,7 +10,7 @@ export class ChatService {
   constructor(private http: HttpClient) { }
 
   getChat(activeUserId: number, otherUserId: number){
-    const url = 'http://localhost:8080/messages';
+    const url = 'http://173.230.140.95:8080/messages';
     const request ={
       "activeUser": activeUserId,
       "otherUser": otherUserId

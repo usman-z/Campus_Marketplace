@@ -42,6 +42,14 @@
             .messageContacts {
                 width: 100%;
             }
+            .noMessages {
+                display: flex;
+                justify-content: center;
+                p {
+                    color: gray;
+                    font-size: 20px;
+                }
+            }
         }
     }
 }

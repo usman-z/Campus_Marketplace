@@ -19,6 +19,7 @@
             <div class="messageContacts" *ngFor="let message of messages">
                 <app-message [activeUserId]="user?.user_id || 0" [otherUserId]="message.other_id"></app-message>
             </div>
+            <div class="noMessages" *ngIf="messages?.length == 0"><p>No Messages</p></div>
         </div>
     </div>
   </div>

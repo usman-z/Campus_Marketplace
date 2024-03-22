@@ -26,13 +26,12 @@ export class HomePageComponent {
       const navigationExtras: NavigationExtras = {
         state: {
           user: this.user
+        },
+        queryParams: {
+          search: this.itemSearched.trim()
         }
       };
-      this.router.navigate(['/listing'], {
-        queryParams: { search: this.itemSearched }
-      }).catch(error => {
-        console.error('Navigation error:', error);
-      });
+      this.router.navigate(['/listing'], navigationExtras);
     }
   }
 
@@ -46,7 +45,6 @@ export class HomePageComponent {
   }
 
   profile () {
-    console.log(this.user)
     const navigationExtras: NavigationExtras = {
       state: {
         user: this.user
