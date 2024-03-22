@@ -20,6 +20,7 @@ import { MessageComponent } from './components/message/message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { SellComponent } from './pages/sell/sell.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SellComponent } from './pages/sell/sell.component';
     MessageComponent,
     ChatComponent,
     LoadingComponent,
-    SellComponent
+    SellComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class VerifyComponent {
 
+  loading: boolean = false
   userId: number = 0
   user?: UserData
   approved: boolean = false
@@ -32,16 +33,20 @@ export class VerifyComponent {
     });
   }
 
-  submit() {
-    if(this.approved == true) {
+  submit(approved: boolean) {
+    this.loading = true
+    if(approved) {
       this.userService.verifyUser(this.userId).subscribe();
+      this.loading = false
       this.message = "Approval Successful!"
     }
     else {
-      this.message = "Approval failed!"
+      this.userService.deleteUser(this.userId).subscribe();
+      this.loading = false
+      this.message = "Approval Denied!"
     }
     setTimeout(() => {
       this.router.navigate(['/']);
-    }, 2300);
+    }, 1600);
   }
 }

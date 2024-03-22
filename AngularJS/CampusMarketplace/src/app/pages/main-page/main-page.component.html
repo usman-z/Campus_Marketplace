@@ -27,6 +27,7 @@
                         </div>
                         <button type="submit" class="btn mt-4">Log In</button>
                       </form>
+                      <app-loading *ngIf="loading"></app-loading>
                       <div *ngIf="successMessage" style="font-size: medium; color: white; margin-top: 1em;"> {{ successMessage }}</div>
                       <div *ngIf="errorMessage" style="font-size: medium; color: red; margin-top: 1em;"> {{ errorMessage }}</div>
                     </div>
@@ -60,6 +61,7 @@
                         </div>
                         <button type="submit" class="btn mt-4">Register</button>
                       </form>
+                      <app-loading *ngIf="loading"></app-loading>
                       <div *ngIf="successMessage" style="font-size: medium; color: white;"> {{ successMessage }}</div>
                       <div *ngIf="errorMessage" style="font-size: medium; color: red;"> {{ errorMessage }}</div>
                     </div>

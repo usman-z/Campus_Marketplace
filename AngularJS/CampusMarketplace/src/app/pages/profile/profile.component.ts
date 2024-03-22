@@ -19,7 +19,6 @@ export class ProfileComponent {
       this.router.navigate(['/']);
     }
     this.user = history.state.user
-    console.log(this.user)
   }
 
   product () {
@@ -28,7 +27,6 @@ export class ProfileComponent {
         user: this.user
       }
     };
-    console.log(history.state.user[0])
     this.router.navigate(['/product'], navigationExtras);
   }
 

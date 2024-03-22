@@ -7,4 +7,5 @@ export interface PersonnelData {
     rating: number
     total_ratings: number
     profile_image_path: string
+    email_verified: boolean
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavigationExtras, Router } from '@angular/router';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 import { UserData } from 'src/app/models/user/user.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
@@ -12,8 +13,9 @@ import { SignupService } from 'src/app/services/signup/signup.service';
 })
 export class MainPageComponent {
 
-  loggingIn: boolean = true;
+  loading: boolean = false;
   isLoading: boolean = true
+  userLoggingIn?: PersonnelData[]
 
   first_name: string = ''
   last_name: string = ''
@@ -26,24 +28,28 @@ export class MainPageComponent {
   constructor(private router: Router, private loginService: LoginService, private signUpService: SignupService) {}
 
   register(){
+    this.loading = true
     if(this.first_name && this.last_name && this.email && this.password && this.role){
       let full_name = this.first_name+' '+this.last_name
       this.signUpService.createUser(full_name, this.email, this.password, this.role)
         .subscribe({
           next: (response) => {
-            this.successMessage = 'Sign Up successful';
+            this.loading = false
+            this.successMessage = 'Please check Email and Verify';
             setTimeout(() => {
               this.successMessage ='';
             }, 4000);
           },
           error: (error) => {
-            this.errorMessage = 'Sign Up failed';
+            this.loading = false
+            this.errorMessage = error.error.error;
             setTimeout(() => {
               this.errorMessage ='';
             }, 4000);
           }
         });
     } else {
+      this.loading = false
       this.errorMessage = 'All information is required!';
       setTimeout(() => {
         this.errorMessage ='';
@@ -52,30 +58,43 @@ export class MainPageComponent {
   }
 
   onLogin(){
+    this.loading = true
     if(this.email && this.password){
       this.loginService.login(this.email, this.password)
         .subscribe({
           next: (response) => {
-            this.successMessage = 'Log In successful';
-            const navigationExtras: NavigationExtras = {
-              state: {
-                user: response
-              }
-            };
-            // Redirect to main page component with user information
-            this.router.navigate(['/home'], navigationExtras);
-            setTimeout(() => {
-              this.successMessage ='';
-            }, 4000);
+            this.loading = false
+            this.userLoggingIn = response
+            if (this.userLoggingIn[0].email_verified) {
+              this.successMessage = 'Log In successful';
+              const navigationExtras: NavigationExtras = {
+                state: {
+                  user: response
+                }
+              };
+              // Redirect to main page component with user information
+              this.router.navigate(['/home'], navigationExtras);
+              setTimeout(() => {
+                this.successMessage ='';
+              }, 4000);
+            }
+            else {
+              this.errorMessage = 'User not verified';
+              setTimeout(() => {
+                this.errorMessage ='';
+              }, 4000);
+            }
           },
           error: (error) => {
-            this.errorMessage = 'Log In failed';
+            this.loading = false
+            this.errorMessage = 'No such user found!';
             setTimeout(() => {
               this.errorMessage ='';
             }, 4000);
           }
         });
     } else {
+      this.loading = false
       this.errorMessage = 'All information is required!';
       setTimeout(() => {
         this.errorMessage ='';

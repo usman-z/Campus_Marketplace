@@ -9,6 +9,7 @@ import { InboxComponent } from './pages/inbox/inbox.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SellComponent } from './pages/sell/sell.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'inbox', component: InboxComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'sell', component: SellComponent },
-  { path: 'product', component: ProductPageComponent }
+  { path: 'product', component: ProductPageComponent },
+  { path: 'verify', component: VerifyComponent }
 ];
 
 @NgModule({
