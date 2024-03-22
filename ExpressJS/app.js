@@ -2,6 +2,24 @@ import express from 'express'
 import pkg from 'pg';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
+import multer from 'multer';
+
+/**
+ * Functions for where to store file image and renaming file.
+ * Video guide: https://www.youtube.com/watch?v=i8yxx6V9UdM.
+ * Null is for error messages.
+ * Haven't figured out how to implement it for backend.
+ * @type {Multer}
+ */
+const storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, './assets/profile_images');
+  },
+  filename: function (req, file, cb){
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage })
 
 const { Client } = pkg;
 var app = express()
@@ -88,7 +106,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", upload.single('profile_img'), async (req, res) => {
   const { full_name, email, password, role } = req.body;
   let rating, total_ratings = 0;
 
@@ -117,6 +135,7 @@ app.post("/register", async (req, res) => {
 
     const newUserId = await client.query(
       `SELECT user_id FROM Personnel WHERE email = $1`,[email]);
+
     const mailOptions = {
       from: 'campus.marketplaces@gmail.com',
       to: email,

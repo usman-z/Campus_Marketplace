@@ -15,20 +15,19 @@ export class MainPageComponent {
   loggingIn: boolean = true;
   isLoading: boolean = true
 
-  first_name: string = ''
-  last_name: string = ''
+  full_name: string = ''
   email: string = ''
   password: string = ''
   role: string = ''
+  profile_img: File | null = null;
   errorMessage: string = ''
   successMessage: string = '';
 
   constructor(private router: Router, private loginService: LoginService, private signUpService: SignupService) {}
 
   register(){
-    if(this.first_name && this.last_name && this.email && this.password && this.role){
-      let full_name = this.first_name+' '+this.last_name
-      this.signUpService.createUser(full_name, this.email, this.password, this.role)
+    if(this.full_name && this.email && this.password && this.role && this.profile_img){
+      this.signUpService.createUser(this.full_name, this.email, this.password, this.role, this.profile_img)
         .subscribe({
           next: (response) => {
             this.successMessage = 'Sign Up successful';
@@ -89,8 +88,7 @@ export class MainPageComponent {
       this.email = '';
       this.password = '';
     } else if (action === 'signingUp') {
-      this.first_name = '';
-      this.last_name = '';
+      this.full_name = '';
       this.email = '';
       this.password = '';
       this.role = '';
