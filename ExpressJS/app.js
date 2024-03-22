@@ -39,11 +39,9 @@ app.get("/any", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    // const result = await client.query('SELECT * FROM Personnel');
     const result = await client.query('SELECT * FROM Message');
     // const result = await client.query('SELECT * FROM Listing');
     res.json(result.rows);
-
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
@@ -271,7 +269,7 @@ app.post("/rate", async (req, res) =>  {
 app.get("/send", (req, res) => {
   const mailOptions = {
     from: 'campus.marketplaces@gmail.com',
-    to: 'u_zia@uncg.edu',
+    to: 'd_patel5@uncg.edu',
     subject: 'UNCG Marketplace debug',
     text: "UNCG Marketplace!"
   };
