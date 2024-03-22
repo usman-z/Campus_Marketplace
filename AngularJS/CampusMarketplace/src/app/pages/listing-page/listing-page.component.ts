@@ -12,9 +12,6 @@ export class ListingPageComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if (history.state.user == undefined) {
-      this.router.navigate(['/']);
-    }
-    this.user = history.state.user[0]
+
   }
 }
