@@ -3,17 +3,19 @@ import pkg from 'pg';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import multer from 'multer';
+import * as fs from "fs";
+import * as path from "path";
 
 /**
- * Functions for where to store file image and renaming file.
- * Video guide: https://www.youtube.com/watch?v=i8yxx6V9UdM.
- * Null is for error messages.
- * Haven't figured out how to implement it for backend.
+ * Functions for image destination and filename
+ * Initially I keep the file name as it comes but then in '/register' it renames it
+ * Video guide: https://www.youtube.com/watch?v=-Hvmj8yXfyU&list=LL&index=1
+ * Null is for error messages
  * @type {Multer}
  */
 const storage = multer.diskStorage({
   destination: function (req, file, cb){
-    cb(null, './assets/profile_images');
+    cb(null, '/assets/profile_images');
   },
   filename: function (req, file, cb){
     cb(null, file.originalname);
@@ -39,10 +41,10 @@ app.listen(PORT, () => {
 
 
 const dbConfig = {
-  host: '173.230.140.95',
-  user: 'postgres',
-  database: 'testing',
-  password: 'devpatel',
+  host: '127.0.0.1',
+  user: 'cristianlorenzo',
+  database: 'test',
+  password: 'Riley.14'
 };
 
 const transporter = nodemailer.createTransport({
@@ -106,6 +108,11 @@ app.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * upload.single('profile_img'), the const upload gets called.
+ * 'profile_img' needs to be the same as how you named the variable in the register()
+ * in main-page.component.ts for the image.
+ */
 app.post("/register", upload.single('profile_img'), async (req, res) => {
   const { full_name, email, password, role } = req.body;
   let rating, total_ratings = 0;
@@ -133,8 +140,22 @@ app.post("/register", upload.single('profile_img'), async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6)
     `, [full_name, email, password, role, rating, total_ratings]);
 
-    const newUserId = await client.query(
-      `SELECT user_id FROM Personnel WHERE email = $1`,[email]);
+    const newUserId = await client.query('SELECT user_id FROM personnel WHERE email = $1', [email]);
+    const userId = newUserId.rows[0].user_id;
+    console.log(userId);
+
+    // gets the file extension ie: .jpeg, .png, etc
+    const fileExtension = path.extname(req.file.originalname);
+    const oldFilePath = req.file.path;
+    const newFilePath = `/assets/profile_images/${userId}_profileImg${fileExtension}`;
+    fs.renameSync(oldFilePath, newFilePath); // renaming the file in '/assets/profile_images/
+
+    await client.query(`
+      UPDATE Personnel
+      SET profile_image_path = $1
+      WHERE user_id = $2
+    `, [newFilePath, userId]);
+
 
     const mailOptions = {
       from: 'campus.marketplaces@gmail.com',
@@ -143,14 +164,14 @@ app.post("/register", upload.single('profile_img'), async (req, res) => {
       text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
     }
 
-    transporter.sendMail(mailOptions, (error, info) => {
-     if (error) {
-         console.log('Error sending email:', error);
-
-     } else {
-         console.log('Email sent:', info.response);
-     }
-    });
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //  if (error) {
+    //      console.log('Error sending email:', error);
+    //
+    //  } else {
+    //      console.log('Email sent:', info.response);
+    //  }
+    // });
 
     res.json(result.rows[0]);
 

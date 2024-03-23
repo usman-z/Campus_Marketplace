@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { NavigationExtras, Router } from '@angular/router';
-import { UserData } from 'src/app/models/user/user.model';
-import { LoginService } from 'src/app/services/login/login.service';
-import { SignupService } from 'src/app/services/signup/signup.service';
+import {NavigationExtras, Router} from '@angular/router';
+import {LoginService} from 'src/app/services/login/login.service';
+import {SignupService} from 'src/app/services/signup/signup.service';
 
 @Component({
   selector: 'app-main-page',
@@ -24,6 +23,15 @@ export class MainPageComponent {
   successMessage: string = '';
 
   constructor(private router: Router, private loginService: LoginService, private signUpService: SignupService) {}
+
+  /**
+   * When you bind a file input to [(ngModel)], it doesn't work as expected.
+   * You need to handle file inputs differently because they are not bound directly to the model like other inputs.
+   * @param event
+   */
+  onFileSelected(event: any) {
+    this.profile_img = event.target.files[0];
+  }
 
   register(){
     if(this.full_name && this.email && this.password && this.role && this.profile_img){
