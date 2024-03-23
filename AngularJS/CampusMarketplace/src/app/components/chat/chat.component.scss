@@ -55,19 +55,55 @@
             }
             .messages {
                 min-height: 10em;
+                max-height: 20em; // Adjust the maximum height as needed
                 padding: 10px; 
+                overflow-y: auto; // Add scrollbar when content exceeds container height
+                
                 p {
                     margin: 5px 0;
+                    font-size: 15px;
+                    &.iReceived {
+                        display: flex;
+                        justify-content: start;
+                        background-color: #999999;
+                        width: fit-content;
+                        color: white; 
+                        border-radius: 20px;
+                        padding: 3px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                    &.iSent {
+                        display: flex;
+                        justify-content: end;
+                        background-color: #1F8AFF;
+                        color: white; 
+                        border-radius: 20px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
                 }
             }
             .newMessage {
-                border: 1px solid black;
+                display: flex;
+                flex-direction: row;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-                width: 90%;
+                width: 100%;
+                align-items: center;
                 margin: auto;
-                input {
-                    font-size: 15px;
-                    width: 100%;
+                .chatbox {
+                    width: 90%;
+                    input {
+                        font-size: 15px;
+                        width: 100%;
+                    }
+                }
+                .send {
+                    cursor: pointer;
+                    width: 10%;
+                    img {
+                        width: 2.5em;
+                    }
                 }
             }
         }

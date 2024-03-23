@@ -118,7 +118,7 @@ app.post("/register", async (req, res) => {
       from: 'campus.marketplaces@gmail.com',
       to: email,
       subject: 'Action Required | Verify your Marketplace account',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://localhost:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
+      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
