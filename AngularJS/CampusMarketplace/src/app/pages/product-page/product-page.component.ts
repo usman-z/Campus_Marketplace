@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { UserData } from 'src/app/models/user/user.model';
+import { Router } from '@angular/router';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
+import { ImageUploadService } from 'src/app/services/images/image-upload.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -9,46 +10,37 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent {
-  public listing: any = {}; // Holds the form data
-  public user: any
+  user?: PersonnelData
 
-  constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
+  productTitle: string = "";
+  productCondition: string = "";
+  productPrice: number = 0;
+  productDescription: string = "";
+  selectedImages: File[] = [];
+
+  constructor(private router: Router, private imageUploadService: ImageUploadService) {}
 
   ngOnInit(): void {
     if (history.state.user == undefined) {
       this.router.navigate(['/']);
     }
     this.user = history.state.user
-    console.log(this.user)
-  
-
-    // Initialize your listing object, if necessary
-    this.initListing();
   }
 
-  initListing() {
-    if (!this.user) {
-      console.warn('User data is not available');
-      return;
-    }
-    this.listing = {
-      title: '',
-      condition: '',
-      price: null,
-      description: '',
-      images_folder_path: '',
-      seller_id: this.user.user_id
-    };
-  }
-
-  addListing(): void {
-    this.UserService.addListing( this.listing.title, this.listing.condition, this.listing.price, this.listing.description, this.listing.seller_id, this.listing.images_folder_path ).subscribe({
-      next: (response: any) => {
-        console.log('Listing added successfully', response);
-      },
-      error: (error: any) => {
-        console.error('Error adding listing', error);
+  onFileSelected(event: any) {
+    const files: FileList = event.target.files;
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedImages.push(files[i]);
       }
-    });
+    }
+  }
+
+  addProduct() {
+    console.log("Title:", this.productTitle);
+    console.log("Condition:", this.productCondition);
+    console.log("Price:", this.productPrice);
+    console.log("Description:", this.productDescription);
+    console.log("Selected Images:", this.selectedImages);
   }
 }

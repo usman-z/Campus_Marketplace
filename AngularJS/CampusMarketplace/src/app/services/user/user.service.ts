@@ -65,4 +65,23 @@ export class UserService {
     
     return this.http.post(url, request);
   }
+
+  searchListings(searchTerm: string) {
+    const url = 'http://localhost:8080/search';
+    const request = {
+        "searchTerm": searchTerm
+    };
+    
+    return this.http.post<ListingData[]>(url, request); 
+  }
+
+  getListing(listingId: number) {
+    const url = 'http://localhost:8080/getListing';
+    const request = {
+        "id": listingId
+    };
+    
+    return this.http.post<ListingData[]>(url, request); 
+  }
+
 }

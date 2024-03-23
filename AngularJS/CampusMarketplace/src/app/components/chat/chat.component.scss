@@ -11,7 +11,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 7em;
+        margin-bottom: 4.5em;
         .back-button {
             display: flex;
         }
@@ -30,7 +30,7 @@
         .logo {
             display: flex;
             margin: auto;
-            margin-bottom: 7em;
+            margin-bottom: 5.5em;
         }
         .chat{
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
@@ -44,30 +44,83 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                border-bottom: 1px solid black;
                 img {
                     width: 5em;
                 }
                 p{
                     margin-top: .5em;
                     margin-left: .6em;
-                    font-size: 16px;
+                    font-size: 20px;
                 }
             }
             .messages {
                 min-height: 10em;
+                max-height: 20em; // Adjust the maximum height as needed
                 padding: 10px; 
+                overflow-y: auto; // Add scrollbar when content exceeds container height
+                
                 p {
                     margin: 5px 0;
+                    font-size: 15px;
+                    &.iReceived {
+                        display: flex;
+                        justify-content: start;
+                        background-color: #999999;
+                        width: fit-content;
+                        color: white; 
+                        border-radius: 20px;
+                        padding: 3px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                    &.iSent {
+                        display: flex;
+                        justify-content: end;
+                        background-color: #1F8AFF;
+                        color: white; 
+                        border-radius: 20px;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+                }
+                .timeStamp {
+                    text-align: center;
+                    font-size: 11px;
+                    color: gray;
                 }
             }
             .newMessage {
+                display: flex;
+                flex-direction: row;
                 border: 1px solid black;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-                width: 90%;
-                margin: auto;
-                input {
-                    font-size: 15px;
-                    width: 100%;
+                width: 100%;
+                align-items: center;
+                margin: none;
+                padding: none;
+                .chatbox {
+                    border: none;
+                    width: 92%;
+                    margin: none;
+                    padding: none;
+                    input {
+                        border: none;
+                        font-size: 15px;
+                        width: 100%;
+                        padding-left: 10px;
+                    }
+                }
+                .send {
+                    margin: none;
+                    cursor: pointer;
+                    border-left: 1px solid black;
+                    width: 8%;
+                    height: 100%;
+                    img {
+                        margin: none;
+                        width: 2.9em;
+                        height: 100%;
+                    }
                 }
             }
         }

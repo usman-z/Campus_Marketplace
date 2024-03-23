@@ -15,10 +15,10 @@
           <img src="../../../assets/profile.png" alt="profile image"/>
       </div>
       <div class="review">
-        <div class="top"><p>Usman Zia</p></div>
+        <div class="top"><p>{{ user?.full_name }}</p></div>
         <div class="bottom">
-          <div class="bottomleft"><div class="rating">★★★★★</div></div>
-          <div class="bottomright"><p>4.3 (3 reviews)</p></div>
+          <div class="bottomtop"><div class="rating">★★★★★</div></div>
+          <div class="bottombottom"><p><strong>{{ user?.rating?.toFixed(1) }}</strong> ({{ user?.total_ratings || 0 }} reviews)</p></div>
         </div>
       </div>
       <div class="buttons">
