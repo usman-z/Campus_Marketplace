@@ -1,4 +1,71 @@
-.card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.listings {
+  width: 80%;
+  margin: auto;
+  margin-top: 8em;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  .header {
+      border-bottom: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7em;
+      .back-button {
+          display: flex;
+      }
+      .title {
+          vertical-align: middle;
+          display: flex;
+          font-size: 30px;
+      }
+      .empty {
+
+      }
   }
+  .body {
+      display: flex;
+      flex-direction: column;
+      .logo {
+          display: flex;
+          margin: auto;
+          margin-bottom: 10em;
+      }
+      .results{
+          display: flex;
+          padding: 1em;
+          flex-direction: row;
+          align-self: center;
+          p {
+            color: gray;
+            font-size: 30px;
+            text-align: center;
+          }
+          div {
+            app-listing {
+                margin-left: 10em;
+                display: flex;
+            }
+          }
+      }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .listings {
+      width: 80%;
+      .body {
+          .results{ 
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            div {
+                app-listing {
+                    margin-bottom: 5em;
+                    margin-left: 0;
+                }
+              }
+          }
+      }
+  }
+}

@@ -22,6 +22,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { SellComponent } from './pages/sell/sell.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ResultComponent } from './pages/result/result.component';
+import { ListingComponent } from './components/listing/listing.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ResultComponent } from './pages/result/result.component';
     LoadingComponent,
     SellComponent,
     VerifyComponent,
-    ResultComponent
+    ResultComponent,
+    ListingComponent
   ],
   imports: [
     BrowserModule,
