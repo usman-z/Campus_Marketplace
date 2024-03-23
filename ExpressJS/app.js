@@ -322,3 +322,38 @@ app.post('/removeUser', async (req, res) => {
       await client.end();
   }
 });
+
+app.post('/search', async (req, res) => {
+  const {searchTerm} = req.body;
+  const client = new Client(dbConfig);
+  try {
+      await client.connect();
+      const results = await client.query("SELECT * FROM listing WHERE title ILIKE $1", [`%${searchTerm}%`]);
+      res.json(results.rows);
+  } catch (err) {
+    console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  }finally {
+    await client.end();
+}
+});
+
+app.post('/getListing', async (req, res) => {
+  const { id } = req.body;
+  const client = new Client(dbConfig);
+
+  try {
+      await client.connect();
+      const result = await client.query("SELECT * FROM listing WHERE listing_id = $1", [id]);
+      if (result.rows.length > 0) {
+          res.json(result.rows[0]); 
+      } else {
+          res.status(404).send('Listing not found');
+      }
+  } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  } finally {
+      await client.end();
+  }
+});

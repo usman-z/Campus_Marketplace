@@ -1,0 +1,13 @@
+<div class="col-sm-4" *ngFor="let listing of listings">
+    <div class="card" (click)="goToListingDetail(listing.listing_id)">
+      <div class="card-body">
+        <h5 class="card-title">{{ listing.title }}</h5>
+        <p class="card-text">{{ listing.description }}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price: {{ listing.price | currency }}</li>
+          <li class="list-group-item">Condition: {{ listing.condition }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+

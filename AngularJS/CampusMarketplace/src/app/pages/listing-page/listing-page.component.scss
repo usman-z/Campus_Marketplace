@@ -37,3 +37,13 @@
         }
     }
 }
+.seller-info {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .seller-info:hover {
+    background-color: #f0f0f0;
+  }

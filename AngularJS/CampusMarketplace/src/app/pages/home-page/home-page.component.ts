@@ -31,7 +31,7 @@ export class HomePageComponent {
           search: this.itemSearched.trim()
         }
       };
-      this.router.navigate(['/listing'], navigationExtras);
+      this.router.navigate(['/result'], navigationExtras);
     }
   }
 

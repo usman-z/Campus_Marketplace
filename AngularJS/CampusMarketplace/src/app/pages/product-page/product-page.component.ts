@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent {
-  public listing: any = {}; // Holds the form data
+  public listing: any = {};
   public user: any
 
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
