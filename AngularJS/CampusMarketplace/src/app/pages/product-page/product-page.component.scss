@@ -1,0 +1,89 @@
+.productPage {
+    width: 50%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 7em;
+        .back-button {
+            display: flex;
+        }
+        .title {
+            vertical-align: middle;
+            display: flex;
+            font-size: 30px;
+        }
+        .empty {
+
+        }
+    }
+    .body {
+        display: flex;
+        flex-direction: column;
+        .logo {
+            display: flex;
+            margin: auto;
+            margin-bottom: 7em;
+        }
+        .product{
+            width: 80%;
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            margin: auto;
+
+            .productTitle,
+            .productCondition,
+            .productPrice,
+            .productDescription,
+            .productPictures {
+                font-size: 17px;
+                display: flex;
+                align-items: center; /* Vertically center elements */
+                margin-bottom: 1em; /* Add some space between inputs */
+                
+                label {
+                    margin-right: 1em;
+                    width: 100px; /* Fixed width for labels */
+                }
+
+                input {
+                    flex: 1; /* Take up remaining space */
+                    padding-left: 10px;
+                    box-sizing: border-box; /* Include padding in width calculation */
+                }
+            }
+
+            .productPrice {
+                input {
+                    width: 55%;
+                }
+            }
+
+            .productPictures {
+                margin-bottom: 2em;
+            }
+
+            .submitProduct {
+                margin: auto;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .productPage {
+        width: 80%;
+        .body {
+            .product{
+                width: 100%;
+            }
+        }
+    }
+}

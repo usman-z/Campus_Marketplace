@@ -13,6 +13,8 @@ export class ResultComponent {
   listings?: ListingData[] 
   listing: any = {};
   user: any
+  load: boolean = true
+  itemSearched: string = ''
 
 
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
@@ -22,15 +24,14 @@ export class ResultComponent {
       this.router.navigate(['/']);
     }
     this.user = history.state.user
-    console.log(this.user)
 
     this.route.queryParams.subscribe(params => {
       const searchTerm = params['search'];
-      console.log(searchTerm)
+      this.itemSearched = searchTerm
 
       this.UserService.searchListings(searchTerm).subscribe({
         next: (response) => { 
-          console.log(response)
+          this.load = false;
           this.listings = response;
         }
     })
