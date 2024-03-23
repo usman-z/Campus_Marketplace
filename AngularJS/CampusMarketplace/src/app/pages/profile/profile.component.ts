@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 import { UserData } from 'src/app/models/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ProfileComponent {
 
-  user = {} 
+  user?: PersonnelData 
 
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
 
