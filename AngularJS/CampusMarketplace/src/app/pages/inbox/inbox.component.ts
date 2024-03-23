@@ -23,13 +23,30 @@ export class InboxComponent {
     else {
       this.user = history.state.user;
       if(this.user != null || this.user !=undefined) {
-        this.inboxService.getInbox(this.user.user_id).subscribe({
-          next: (response) => {
-            this.messages = response;
-            this.load = false;
+        let user_id: number = this.user.user_id
+        this.inboxService.getInbox(user_id).subscribe({
+          next: (response: MessageData[]) => {
+                this.messages = response;
+                this.load = false;
           }
         });
+  
+        setInterval(() => {
+          this.loadInbox(user_id);
+        }, 100);
       }
     }
+  }
+
+  loadInbox(user_id: number) {
+    this.inboxService.getInbox(user_id).subscribe({
+      next: (response: MessageData[]) => {
+        if (this.messages) {
+          if (response.length > this.messages.length) {
+            this.messages = response;
+          }
+        }
+      }
+    });
   }
 }

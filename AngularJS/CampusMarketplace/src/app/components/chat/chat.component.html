@@ -17,15 +17,16 @@
         <div class="chat">
             <div class="info">
                 <img src="../../../assets/profile.png" alt="">
-                <p>{{ otherUser?.full_name }}</p>
+                <p><strong>{{ otherUser?.full_name }}</strong></p>
             </div>
-            <div class="messages">
+            <div class="messages" id="messagesContainer">
                 <app-loading *ngIf="load"></app-loading>
                 <p *ngFor="let msg of allMessages" [ngClass]="{'iSent': msg.sender_id === activeUser?.user_id, 'iReceived': msg.receiver_id === activeUser?.user_id}">{{ msg.message }}</p>
+                <p class="timeStamp">Sent: {{ lastTime }}</p>
             </div>
             <div class="newMessage">
                 <div class="chatbox">
-                    <input class="message" [(ngModel)]="newMessage" type="text" placeholder="Chat">
+                    <input class="message" [(ngModel)]="newMessage" type="text" placeholder="Chat" (keyup.enter)="sendMessage()">
                 </div>
                 <div class="send" (click)="sendMessage()"><img src="../../../assets/arrow.png" alt=""></div>
             </div>
