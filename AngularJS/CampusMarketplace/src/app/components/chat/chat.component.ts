@@ -15,6 +15,7 @@ export class ChatComponent {
 
   allMessages?: ChatData[]
   load: boolean = true
+  lastTime: string = ''
 
   activeUser?: PersonnelData
   otherUser?: PersonnelData
@@ -27,12 +28,12 @@ export class ChatComponent {
       const activeUserId = params['userId'];
       const otherUserId = params['otherId'];
 
-      this.chatService.getChat(activeUserId,otherUserId).subscribe({
-        next: (response) => {
-          this.load = false;
-          this.allMessages = response;
-        }
-      })
+      this.loadMessages(activeUserId, otherUserId);
+      this.load = false;
+
+      setInterval(() => {
+        this.loadMessages(activeUserId, otherUserId);
+      }, 100);
 
       this.userService.getUserInfo(activeUserId).subscribe({
         next: (response) => {
@@ -48,12 +49,56 @@ export class ChatComponent {
     });
   }
 
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      const messagesContainer = document.getElementById('messagesContainer');
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    }, 200);
+  }
+
   sendMessage() {
     if (this.activeUser && this.otherUser) {
       this.messageService.sendMessage(this.activeUser.user_id, this.otherUser.user_id, this.newMessage).subscribe(() => {
         this.newMessage = '';
       });
     }
+  }
 
+  formatTimeStamp(timestamp: string): string {
+    const date = new Date(timestamp);
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: 'America/New_York', // Set the timezone to EST
+      hour12: true, // Use 12-hour format (AM/PM)
+      month: '2-digit', // Display month as two digits (MM)
+      day: '2-digit', // Display day as two digits (DD)
+      year: 'numeric', // Display year in full (YYYY)
+      hour: '2-digit', // Display hour as two digits (HH)
+      minute: '2-digit' // Display minute as two digits (MM)
+    };
+    
+    const timeString = date.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
+    const dateString = date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+  
+    return `${timeString}, ${dateString}`;
+  }
+
+  loadMessages(activeUserId: number, otherUserId: number): void {
+    this.chatService.getChat(activeUserId, otherUserId).subscribe({
+      next: (response) => {
+        this.allMessages = response;
+        if (this.allMessages.length > 0) {
+          this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching messages:', error);
+      }
+    });
   }
 }
