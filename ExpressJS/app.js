@@ -116,7 +116,7 @@ app.post("/register", async (req, res) => {
 
     const newUserId = await client.query(`SELECT user_id FROM Personnel WHERE email = $1`,[email]);
     const mailOptions = {
-      from: 'campus.marketplaces@gmail.com',
+      from: process.env.EMAIL_AUTH_USER,
       to: email,
       subject: 'Action Required | Verify your Marketplace account',
       text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
@@ -269,7 +269,7 @@ app.post("/rate", async (req, res) =>  {
 
 app.get("/send", (req, res) => {
   const mailOptions = {
-    from: 'campus.marketplaces@gmail.com',
+    from: process.env.EMAIL_AUTH_USER,
     to: 'd_patel5@uncg.edu',
     subject: 'UNCG Marketplace debug',
     text: "UNCG Marketplace!"
