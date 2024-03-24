@@ -22,12 +22,13 @@
                   <p class="listing-condition">{{ listing.condition }}</p>
               </div>
           </div>
-          <div *ngIf="seller" class="seller-details" (click)="goToSellerProfile(seller.userId)">
+          <div *ngIf="seller" class="seller-details" > <!--(click)="goToSellerProfile(seller.userId)"-->
               <div class="seller-profile">
                   <img src="../../../assets/seller-profile.png" alt="Seller Profile"> <!-- Update image path -->
                   <p class="seller-name">{{ seller.full_name }}</p>
                   <p class="seller-rating">{{ seller.rating }}/5 ({{ seller.reviewCount }} Reviews)</p>
-                  <button class="send-message">Send Message</button>
+                  <button class="send-message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is this available?')">Send Message</button>
+                  
               </div>
           </div>
       </div>
