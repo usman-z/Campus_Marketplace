@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/models/user/user.model';
 import { ListingData } from 'src/app/models/listing/listing.model';
+import { ChatData } from 'src/app/models/messages/chat.model';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
+import { ChatService } from 'src/app/services/inbox/chat.service';
+import { MessageService } from 'src/app/services/inbox/message.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
