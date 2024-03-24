@@ -1,11 +1,11 @@
 .listings {
-  width: 80%;
-  margin: auto;
-  margin-top: 8em;
-  display: flex;
-  flex-direction: column;
-  padding: 1%;
-  .header {
+    width: 80%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
       border-bottom: 1px solid black;
       display: flex;
       flex-direction: row;
@@ -21,10 +21,10 @@
           font-size: 30px;
       }
       .empty {
-
+  
       }
-  }
-  .body {
+    }
+    .body {
       display: flex;
       flex-direction: column;
       .logo {
@@ -32,40 +32,46 @@
           margin: auto;
           margin-bottom: 10em;
       }
-      .results{
+      .results {
           display: flex;
+          flex-wrap: wrap; 
+          justify-content: space-around;  
+          align-items: flex-start; 
           padding: 1em;
-          flex-direction: row;
-          align-self: center;
-          p {
-            color: gray;
-            font-size: 30px;
-            text-align: center;
-          }
-          div {
-            app-listing {
-                margin-left: 10em;
-                display: flex;
-            }
-          }
-      }
-  }
-}
-@media only screen and (max-width: 768px) {
-  .listings {
-      width: 80%;
-      .body {
-          .results{ 
-            display: flex;
-            padding: 1em;
-            flex-direction: column;
-            div {
-                app-listing {
-                    margin-bottom: 5em;
-                    margin-left: 0;
-                }
+          max-width: 1200px; 
+          margin: auto;
+  
+          .allListings {
+              flex: 0 1 30%; 
+              margin: 10px;
+              .card {
+                  width: 100%; 
+                  cursor: pointer; 
               }
           }
+  
+          p {
+              color: gray;
+              font-size: 30px;
+              text-align: center;
+              width: 100%; 
+          }
       }
+    }
   }
-}
+  
+  @media only screen and (max-width: 768px) {
+    .listings {
+      .body {
+        .results { 
+          flex-direction: column; 
+          .allListings {
+              flex-basis: 100%; 
+              margin-left: 0;
+              margin-bottom: 2em; 
+          }
+        }
+      }
+    }
+  }
+  

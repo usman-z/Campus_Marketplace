@@ -2,10 +2,11 @@ import express from 'express'
 import pkg from 'pg';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 const { Client } = pkg;
 var app = express()
-
+dotenv.config();
 app.use(cors());
 app.use(express.json())
 
@@ -14,24 +15,24 @@ app.use((err, req, res, next) => {
     res.status(500).send('Server failed')
   })
   
-const PORT = 8080
+const PORT = process.env.POSTGRESQL_PORT
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
 
 
 const dbConfig = {
-  host: '173.230.140.95',
-  user: 'postgres',
-  database: 'testing',
-  password: 'devpatel',
+  host: process.env.POSTGRESQL_HOST,
+  user: process.env.POSTGRESQL_USER,
+  database: process.env.POSTGRESQL_DATABASE,
+  password: process.env.POSTGRESQL_PASSWORD,
 };
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: process.env.EMAIL_SERVICE,
     auth: {
-      user: 'campus.marketplaces@gmail.com',
-      pass: 'oofk rdys wzvf ckqx'
+      user: process.env.EMAIL_AUTH_USER,
+      pass: process.env.EMAIL_AUTH_PASSWORD
     }
 });
 
@@ -39,8 +40,8 @@ app.get("/any", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const result = await client.query('SELECT * FROM Message');
-    // const result = await client.query('SELECT * FROM Listing');
+    // const result = await client.query('SELECT * FROM Message');
+    const result = await client.query('SELECT * FROM Listing');
     res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
@@ -115,7 +116,7 @@ app.post("/register", async (req, res) => {
 
     const newUserId = await client.query(`SELECT user_id FROM Personnel WHERE email = $1`,[email]);
     const mailOptions = {
-      from: 'campus.marketplaces@gmail.com',
+      from: process.env.EMAIL_AUTH_USER,
       to: email,
       subject: 'Action Required | Verify your Marketplace account',
       text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
@@ -268,7 +269,7 @@ app.post("/rate", async (req, res) =>  {
 
 app.get("/send", (req, res) => {
   const mailOptions = {
-    from: 'campus.marketplaces@gmail.com',
+    from: process.env.EMAIL_AUTH_USER,
     to: 'd_patel5@uncg.edu',
     subject: 'UNCG Marketplace debug',
     text: "UNCG Marketplace!"

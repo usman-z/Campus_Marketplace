@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { UserData } from 'src/app/models/user/user.model';
 import { ListingData } from 'src/app/models/listing/listing.model';
+import { ChatData } from 'src/app/models/messages/chat.model';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
+import { ChatService } from 'src/app/services/inbox/chat.service';
+import { MessageService } from 'src/app/services/inbox/message.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -16,7 +20,7 @@ export class ListingPageComponent {
   seller: any
 
 
-  constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
+  constructor(private router: Router, private MessageService: MessageService, private UserService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     if (history.state.user == undefined) {
@@ -44,7 +48,27 @@ export class ListingPageComponent {
 
   }
 
+  
   goToSellerProfile(sellerId: number): void {
     this.router.navigate(['/profile', sellerId]);
   }
+  
+
+  sendMessage(sender_id: number, receiver_id: number, message: string): void {
+    this.MessageService.sendMessage(sender_id, receiver_id, message).subscribe({
+        next: (response) => {
+            console.log('Message sent:', response);
+        },
+        error: (error) => {
+            console.error('Error sending message:', error);
+        }
+    });
+    const navigationExtras: NavigationExtras = {
+      state: {
+        user: this.user
+      }
+    };
+    this.router.navigate(['/inbox'], navigationExtras);
+  }
+
 }

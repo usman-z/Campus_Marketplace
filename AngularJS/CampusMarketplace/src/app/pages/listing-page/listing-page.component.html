@@ -1,16 +1,36 @@
-<div *ngIf="listing" class="listing-detail">
-  <img *ngIf="listing.images_folder_path" [src]="listing.images_folder_path" alt="Listing Image">
-  <h2>{{ listing.title }}</h2>
-  <p>{{ listing.description }}</p>
-  <ul>
-    <li>Price: {{ listing.price | currency }}</li>
-    <li>Condition: {{ listing.condition }}</li>
-  </ul>
-</div>
-
-<div *ngIf="seller" class="seller-info" (click)="goToSellerProfile(seller.userId)">
-  <h3>{{ seller.full_name }}</h3>
-  <p>Rating: {{ seller.rating }}/5</p>
-  <p>{{ seller.reviewCount }} Reviews</p>
-  <!-- Include other seller details as desired -->
+<div class="container">
+  <div class="header">
+      <div class="back-button">
+          <app-back-button></app-back-button>
+      </div>
+      <div class="empty"></div>
+  </div>
+  <div class="body">
+      <div class="logo">
+          <img src="../../../assets/logo.png" alt="UNCG logo"/>
+      </div>
+      
+      <!-- Listing and Seller Details -->
+      <div class="listing-container">
+          <div *ngIf="listing" class="listing-details">
+              <div class="listing-image">
+                  <img *ngIf="listing.images_folder_path" [src]="listing.images_folder_path" alt="Listing Image">
+              </div>
+              <div class="listing-info">
+                  <h2>{{ listing.title }}</h2>
+                  <p class="listing-price">{{ listing.price | currency }}</p>
+                  <p class="listing-condition">{{ listing.condition }}</p>
+              </div>
+          </div>
+          <div *ngIf="seller" class="seller-details" > <!--(click)="goToSellerProfile(seller.userId)"-->
+              <div class="seller-profile">
+                  <img src="../../../assets/seller-profile.png" alt="Seller Profile"> <!-- Update image path -->
+                  <p class="seller-name">{{ seller.full_name }}</p>
+                  <p class="seller-rating">{{ seller.rating }}/5 ({{ seller.reviewCount }} Reviews)</p>
+                  <button class="send-message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is this available?')">Send Message</button>
+                  
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
