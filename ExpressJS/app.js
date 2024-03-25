@@ -290,16 +290,25 @@ app.get("/send", (req, res) => {
   });
 });
 
-//add listing
-app.post('/addListing', async (req, res) => {
-    const { title, condition, price, description, seller_id, images } = req.body;
-    console.log('title:', title);
-    console.log('condition:', condition);
-    console.log('price:', price);
-    console.log('description:', description);
-    console.log('seller_id:', seller_id);
-    console.log('images:', images); // having issues passing in the images
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const sellerImagePath = path.join('assets/listing-pictures', req.body.seller_id);
+        if (!fs.existsSync(sellerImagePath)) {
+            fs.mkdirSync(sellerImagePath, { recursive: true });
+        }
+        cb(null, sellerImagePath);
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
 
+const upload = multer({ storage: storage });
+
+//add listing
+app.post('/addListing', upload.array('images'), async (req, res) => {
+    const { title, condition, price, description, seller_id } = req.body;
+    const images =  req.files;
     const client = new Client(dbConfig);
     try {
         await client.connect();
@@ -312,31 +321,16 @@ app.post('/addListing', async (req, res) => {
         const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
 
         // Determine the path for the images folder
-        const sellerImagePath = path.join('listingImages', seller_id.toString());
-        const listingImagePath = path.join(sellerImagePath, listingId.toString());
+        const listingImagePath = path.join('assets/listing-pictures', seller_id.toString(), listingId.toString());
 
-        // Create necessary directories if they don't exist
-        if (!fs.existsSync(sellerImagePath)) {
-            fs.mkdirSync(sellerImagePath, { recursive: true });
-        }
-
+        // Create necessary directories if they don't exist: listingId directory
         if (!fs.existsSync(listingImagePath)) {
             fs.mkdirSync(listingImagePath, { recursive: true });
         }
 
-        console.log('sellerImagePath:', sellerImagePath);
-        console.log('listingImagePath:', listingImagePath);
-
-        // Save each image to the directory
         images.forEach((image) => {
-            const destinationPath = path.join(listingImagePath, image.name);
-            fs.writeFile(destinationPath, image.data, (err) => {
-                if (err) {
-                    console.error(`Error saving image ${image.name}: ${err}`);
-                } else {
-                    console.log(`Image ${image.name} saved successfully`);
-                }
-            });
+            const destinationPath = path.join(listingImagePath, image.filename);
+            fs.renameSync(image.path, destinationPath);
         });
 
         // Update the listing in the database with the path to the images folder
@@ -354,7 +348,6 @@ app.post('/addListing', async (req, res) => {
         await client.end();
     }
 });
-
 
 app.post('/removeUser', async (req, res) => {
   const { userId } = req.body;
@@ -422,3 +415,4 @@ app.post('/uploadProfilePicture', uploadProfileImages.single('image'), (req, res
   console.log(req.body.image)
   res.status(201).send('Success');
 });
+

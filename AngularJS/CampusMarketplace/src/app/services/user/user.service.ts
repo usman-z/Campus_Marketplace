@@ -33,20 +33,19 @@ export class UserService {
   };
 
   addListing(title: string, condition: string, price: number, description: string, seller_id: number, images: File[]) {
-    const url = 'http://173.230.140.95:8080/addListing';
+    const url = 'http://localhost:8080/addListing';
 
-    const request = {
-        "title":  title,
-        "condition":condition,
-        "price": price,
-        "description": description,
-        "seller_id": seller_id,
-        "images": images
-    };
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('condition', condition);
+    formData.append('price', String(price));
+    formData.append('description', description);
+    formData.append('seller_id', String(seller_id));
+    for(let img of images){
+      formData.append('images', img);
+    }
 
-    console.log(request);
-
-    return this.http.post<ListingData>(url, request);
+    return this.http.post<any>(url, formData);
   }
 
   verifyUser(userToVerify: number) {
