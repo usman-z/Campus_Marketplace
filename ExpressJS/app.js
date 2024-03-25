@@ -3,6 +3,7 @@ import pkg from 'pg';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
 
 const { Client } = pkg;
 var app = express()
@@ -357,4 +358,44 @@ app.post('/getListing', async (req, res) => {
   } finally {
       await client.end();
   }
+});
+
+/*
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './pics')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+app.post('/single', upload.single('image'), (req, res) => {
+  console.log(req.file);
+  res.send("Single File Upload Successful");
+});
+*/
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './pics');
+  },
+  filename: function (req, file, cb) {
+    console.log(req.body.userId)
+    // Assuming userId is passed in the request body as userId
+    const userId = req.body.userId || 'unknown'; // Default to 'unknown' if userId is not available
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileName = `${userId}-${uniqueSuffix}-${file.originalname}`;
+    cb(null, fileName);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/single', upload.single('image'), (req, res) => {
+  console.log(req.body.userId);
+  console.log(req.file);
+  res.send("Single File Upload Successful");
 });
