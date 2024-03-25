@@ -246,7 +246,7 @@ app.post("/rate", async (req, res) =>  {
         }
 
         const existingUser = userResult.rows[0];
-        const prevRating = existingUser.rating;
+        const prevRating = existingUser.rating || 0; 
         const totalRatings = existingUser.total_ratings;
         const updatedRating = (prevRating * totalRatings + newRating) / (totalRatings + 1);
 

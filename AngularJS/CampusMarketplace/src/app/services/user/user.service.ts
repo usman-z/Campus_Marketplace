@@ -25,8 +25,8 @@ export class UserService {
     const url = 'http://173.230.140.95:8080/rate';
 
     const request = {
-      "studentId": user_id,
-      "rating": rating
+      "userId": user_id,
+      "newRating": rating
     };
     
     return this.http.post<PersonnelData>(url, request);

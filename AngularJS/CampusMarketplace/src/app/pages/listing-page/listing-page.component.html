@@ -20,13 +20,15 @@
                   <h2>{{ listing.title }}</h2>
                   <p class="listing-price">{{ listing.price | currency }}</p>
                   <p class="listing-condition">{{ listing.condition }}</p>
+                  <p class="listing-description">{{ listing.description }}</p>
               </div>
           </div>
           <div *ngIf="seller" class="seller-details" > <!--(click)="goToSellerProfile(seller.userId)"-->
               <div class="seller-profile">
                   <img src="../../../assets/seller-profile.png" alt="Seller Profile"> <!-- Update image path -->
-                  <p class="seller-name">{{ seller.full_name }}</p>
-                  <p class="seller-rating">{{ seller.rating }}/5 ({{ seller.reviewCount }} Reviews)</p>
+                  <button class="seller-name" (click)="goToSellerProfile(seller.user_id)">{{ seller.full_name }}</button>
+                  <!--<p class="seller-name">{{ seller.full_name }}</p>-->
+                  <p class="seller-rating">{{ seller.rating ? (seller.rating | number: '1.1-1') : 'No rating yet' }}/5 ({{ seller.reviewCount }} Reviews)</p>
                   <button class="send-message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is this available?')">Send Message</button>
                   
               </div>

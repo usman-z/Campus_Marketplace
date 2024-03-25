@@ -1,0 +1,28 @@
+<div class="inbox">
+    <div class="header">
+        <div class="back-button">
+            <app-back-button></app-back-button>
+        </div>
+      <div class="title">
+        <p>Seller Profile</p>
+      </div>
+      <div class="empty">
+  
+      </div>
+    </div>
+    <div class="body">
+        <div class="logo">
+            <img src="../../../assets/profile.png" alt="profile image"/>
+        </div>
+        <div class="review">
+          <div class="top"><p>{{ seller?.full_name }}</p></div>
+          <div class="bottom">
+            <div class="bottomtop"><div class="rating">★★★★★</div></div>
+            <div class="bottombottom"><p><strong>{{ seller?.rating?.toFixed(1) }}</strong> ({{ seller?.total_ratings || 0 }} reviews)</p></div>
+          </div>
+        </div>
+        <div class="buttons">
+          <div class="buttonOne" (click)="goToRate(seller.user_id)"><app-custom-button buttonName="Rate Seller"></app-custom-button></div>
+        </div>
+    </div>
+  </div>
