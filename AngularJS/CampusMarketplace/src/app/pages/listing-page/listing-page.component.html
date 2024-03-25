@@ -26,7 +26,7 @@
                     <img src="../../../assets/profile.png" alt="">
                 </div>
                 <div class="right">
-                    <div class="top"  (click)="goToSellerProfile(seller.user_id)"><p><strong>{{ seller.full_name }}</strong></p></div>
+                    <div class="top"  style="cursor: pointer;" (click)="goToSellerProfile(seller.user_id)"><p><strong>{{ seller.full_name }}</strong></p></div>
                     <div class="bottom"><p>Rated: {{ seller.rating | number: '1.0-1' }} / 5<br><span style="color: gray;">Based on {{ seller.total_ratings }} reviews</span></p></div>
                 </div>
             </div>
