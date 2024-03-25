@@ -34,20 +34,19 @@
       }
       .results {
           display: flex;
-          flex-wrap: wrap; 
-          justify-content: space-around;  
           align-items: flex-start; 
           padding: 1em;
-          max-width: 1200px; 
+          width: 100%; 
           margin: auto;
   
           .allListings {
-              flex: 0 1 30%; 
-              margin: 10px;
-              .card {
-                  width: 100%; 
-                  cursor: pointer; 
-              }
+            display: flex;
+            width: fit-content;
+            margin-right: 10em;
+            app-listing {
+              display: flex;
+              cursor: pointer; 
+            }
           }
   
           p {
@@ -66,9 +65,8 @@
         .results { 
           flex-direction: column; 
           .allListings {
-              flex-basis: 100%; 
-              margin-left: 0;
-              margin-bottom: 2em; 
+            margin: auto; 
+            margin-bottom: 5em;
           }
         }
       }
