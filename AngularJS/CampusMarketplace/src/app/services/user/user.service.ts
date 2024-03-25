@@ -69,7 +69,7 @@ export class UserService {
   }
 
   searchListings(searchTerm: string) {
-    const url = 'http://localhost:8080/search';
+    const url = 'http://173.230.140.95:8080/search';
     const request = {
         "searchTerm": searchTerm
     };
@@ -78,7 +78,7 @@ export class UserService {
   }
 
   getListing(listingId: number) {
-    const url = 'http://localhost:8080/getListing';
+    const url = 'http://173.230.140.95:8080/getListing';
     const request = {
         "id": listingId
     };

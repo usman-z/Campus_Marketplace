@@ -18,7 +18,7 @@ export class ListingPageComponent {
   listing: any = {};
   user: any
   seller: any
-
+  load: boolean = true
 
   constructor(private router: Router, private MessageService: MessageService, private UserService: UserService, private route: ActivatedRoute) {}
 

@@ -100,7 +100,7 @@
                 padding: none;
                 .chatbox {
                     border: none;
-                    width: 92%;
+                    width: 89%;
                     margin: none;
                     padding: none;
                     input {
@@ -111,13 +111,14 @@
                     }
                 }
                 .send {
-                    margin: none;
+                    margin: auto;
                     cursor: pointer;
                     border-left: 1px solid black;
-                    width: 8%;
+                    width: 11%;
                     height: 100%;
                     img {
-                        margin: none;
+                        display: flex;
+                        margin: auto;
                         width: 2.9em;
                         height: 100%;
                     }

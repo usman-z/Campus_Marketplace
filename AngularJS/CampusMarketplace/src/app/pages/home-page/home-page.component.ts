@@ -12,6 +12,8 @@ export class HomePageComponent {
   user?: UserData 
   itemSearched: string = ''
 
+  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -19,6 +21,16 @@ export class HomePageComponent {
       this.router.navigate(['/']);
     }
     this.user = history.state.user[0]
+
+    this.slides[0] = {
+      src: '../../assets/uncg_building.jpeg',
+    };
+    this.slides[1] = {
+      src: '../../assets/uncg_img3.jpeg',
+    }
+    this.slides[2] = {
+      src: '../../assets/uncg_img4.jpeg'
+    }
   }
 
   search() {

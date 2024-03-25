@@ -1,83 +1,225 @@
-.container {
+.listing {
+    width: 80%;
+    margin: auto;
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
     .header {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 20px;
-        background: #f8f8f8; // Example background color
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-        .back-button {
-            cursor: pointer;
-        }
-
-        .empty {
-            // This can remain empty if it's just used to balance the flex space
-        }
+      border-bottom: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7em;
+      .back-button {
+          display: flex;
+      }
+      .title {
+          vertical-align: middle;
+          display: flex;
+          font-size: 30px;
+      }
+      .empty {
+  
+      }
     }
-
     .body {
         display: flex;
         flex-direction: column;
-        align-items: center;
-
-        .logo img {
-            margin-top: 20px;
-            height: 60px; // Adjust based on your logo's size
-        }
-
-        .listing-container {
+        width: 50%;
+        margin: auto;
+        .logo {
+            border: 1px solid black;
             display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            width: 80%; // Adjust based on your design
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-            .listing-details {
+            margin: auto;
+            margin-bottom: 7em;
+            img {
+                width: 90%;
+                margin: auto;
+            }
+        }
+        .info {
+            border-top: 1px solid black;
+            display: flex;
+            flex-direction: row;
+            font-size: 18px;
+            .infoleft {
+                border: 1px solid black;
                 display: flex;
                 flex-direction: column;
-                align-items: start;
-
-                .listing-image img {
-                    width: 100%;
-                    max-width: 300px;
-                    height: auto;
-                    margin-bottom: 15px;
+                width: 50%;
+                padding: 1em;
+                img {
+                    width: 5em;
                 }
+                .itemCondition {
 
-                .listing-info {
-                    h2 { margin: 0; }
-                    .listing-price { font-size: 24px; }
-                    .listing-condition { font-size: 18px; }
+                }
+                .itemPrice {
+
+                }
+                .itemDescription {
+
                 }
             }
-
-            .seller-details {
+            .inforight {
+                border: 1px solid black;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                width: 50%;
+                .inforighttop {
+                    p {
+                        text-align: center;
+                    }
+                }
+                .inforightbottom {
+                    display: flex;
+                    flex-direction: row;
+                    .left {
+                        margin: auto;
+                        display: flex;
+                        img {
+                            width: 5em;
+                            margin: auto;
+                        }
+                    }
+                    .right {
+                        width: 70%;
+                        display: flex;
+                        flex-direction: column;
+                        .top {
+                            p {
+                                text-align: center;
+                                font-size: 22px;
+                            }
+                        }
+                        .bottom {
+                            display: flex;
+                            justify-content: center;
+                            p {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .messageButton {
+            display: flex;
+            justify-content: center;
+            margin-top: 5em;
+
+            button {
+                font-size: 20px;
+                border-radius: 20px;
                 cursor: pointer;
-
-                .seller-profile {
-                    text-align: center;
-                    img { border-radius: 50%; width: 80px; height: 80px; object-fit: cover; margin-bottom: 10px; }
-                    .seller-name { font-weight: bold; }
-                    .seller-rating { margin-bottom: 15px; }
-                    .send-message { /* Button styling */ }
-                }
             }
         }
     }
-}
-
-@media only screen and (max-width: 768px) {
-    .container .body .listing-container {
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .listing {
+        width: 90%;
+        margin: auto;
+        margin-top: 8em;
+        display: flex;
         flex-direction: column;
+        padding: 1%;
 
-        .seller-details { 
-            margin-top: 20px;
-            align-items: center;
+        .body {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: auto;
+            .logo {
+                border: 1px solid black;
+                display: flex;
+                margin: auto;
+                margin-bottom: 4em;
+                img {
+                    width: 70%;
+                    margin: auto;
+                }
+            }
+            .info {
+                border: none;
+                display: flex;
+                flex-direction: column;
+                font-size: 18px;
+                .infoleft {
+                    border: none;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    height: fit-content;
+                    margin-bottom: 2em;
+                    img {
+                        width: 5em;
+                    }
+                    .itemCondition {
+    
+                    }
+                    .itemPrice {
+    
+                    }
+                    .itemDescription {
+    
+                    }
+                }
+                .inforight {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    .inforighttop {
+                        border-bottom: 1px solid black;
+                        p {
+                            text-align: center;
+                        }
+                    }
+                    .inforightbottom {
+                        display: flex;
+                        flex-direction: row;
+                        .left {
+                            width: 30%;
+                            img {
+                                width: 4em;
+                                margin: auto;
+                            }
+                        }
+                        .right {
+                            width: 70%;
+                            display: flex;
+                            flex-direction: column;
+                            border-left: 1px solid black;
+                            .top {
+                                p {
+                                    font-size: 22px;
+                                }
+                            }
+                            .bottom {
+                                display: flex;
+                                justify-content: center;
+                            }
+                        }
+                    }
+                }
+            }
+            .messageButton {
+                display: flex;
+                justify-content: center;
+                margin-top: 5em;
+    
+                button {
+                    font-size: 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+            }
         }
-    }
-}
+      }
+  }
+  

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { CarouselModule } from '@coreui/angular';
 
 import { ReviewPageComponent } from './pages/review-page/review-page.component';
 import { ListingPageComponent } from './pages/listing-page/listing-page.component';
@@ -52,7 +53,8 @@ import { SellerProfileComponent } from './pages/seller-profile/seller-profile.co
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
