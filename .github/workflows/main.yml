@@ -27,5 +27,3 @@ jobs:
         debug: true
         command: |
           cd /root/Campus_Marketplace && git pull https://awesomedev1738:${{ secrets.HOST_PAT }}@github.com/usman-z/Campus_Marketplace.git && sudo systemctl restart node-app && sudo systemctl restart ng-serve
-
-          
