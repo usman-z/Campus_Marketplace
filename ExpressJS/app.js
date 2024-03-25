@@ -307,47 +307,57 @@ const upload = multer({ storage: storage });
  
 //add listing
 app.post('/addListing', upload.array('images'), async (req, res) => {
-    const { title, condition, price, description, seller_id } = req.body;
-    const images =  req.files;
-    const client = new Client(dbConfig);
-    try {
-        await client.connect();
-        const result = await client.query(`
+  const { title, condition, price, description, seller_id } = req.body;
+  const images = req.files; // Assuming 'images' is the name of the form field for the files
+  const client = new Client(dbConfig);
+  try {
+      await client.connect();
+      const insertResult = await client.query(`
           INSERT INTO Listing (title, condition, price, description, seller_id)
           VALUES ($1, $2, $3, $4, $5)
           RETURNING listing_id`,
-            [title, condition, price, description, seller_id]);
+          [title, condition, price, description, seller_id]);
 
-        const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
+      const listingId = insertResult.rows[0].listing_id;
 
-        // Determine the path for the images folder
-        const listingImagePath = path.join('assets/listing-pictures', seller_id.toString(), listingId.toString());
+      // Assuming images are uploaded and 'images' is not empty
+      if (images && images.length > 0) {
+          // Create the directory path for the listing's images
+          const listingImagePath = path.join('assets/listing-pictures', seller_id.toString(), listingId.toString());
 
-        // Create necessary directories if they don't exist: listingId directory
-        if (!fs.existsSync(listingImagePath)) {
-            fs.mkdirSync(listingImagePath, { recursive: true });
-        }
+          // Ensure the directory exists
+          if (!fs.existsSync(listingImagePath)) {
+              fs.mkdirSync(listingImagePath, { recursive: true });
+          }
 
-        images.forEach((image) => {
-            const destinationPath = path.join(listingImagePath, image.filename);
-            fs.renameSync(image.path, destinationPath);
-        });
+          // Process each image
+          let firstImageFileName = ''; // Store the first image's file name
+          images.forEach((image, index) => {
+              const destinationPath = path.join(listingImagePath, image.filename);
+              fs.renameSync(image.path, destinationPath);
+              if (index === 0) firstImageFileName = image.filename; // Capture the first image's name
+          });
 
-        // Update the listing in the database with the path to the images folder
-        await client.query(`
-            UPDATE Listing 
-            SET images_folder = $1 
-            WHERE listing_id = $2`,
-            [listingImagePath, listingId]);
+          // Construct the path to be saved in the database, including the first image's file name
+          const imagePathToSave = path.join(listingImagePath, firstImageFileName);
 
-        res.send({ success: true, message: 'Product added successfully', listingId: listingId });
-    } catch (err) {
-        console.error('Error executing query:', err);
-        res.status(500).send('Error executing query');
-    } finally {
-        await client.end();
-    }
+          // Update the listing in the database with the path to the first image
+          await client.query(`
+              UPDATE Listing
+              SET images_folder = $1
+              WHERE listing_id = $2`,
+              [imagePathToSave, listingId]);
+      }
+
+      res.send({ success: true, message: 'Product added successfully', listingId: listingId });
+  } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Error executing query');
+  } finally {
+      await client.end();
+  }
 });
+
 
 app.post('/removeUser', async (req, res) => {
   const { userId } = req.body;
@@ -415,4 +425,6 @@ app.post('/uploadProfilePicture', uploadProfileImages.single('image'), (req, res
   console.log(req.body.image)
   res.status(201).send('Success');
 });
+
+app.use('/assets', express.static('assets'));
 

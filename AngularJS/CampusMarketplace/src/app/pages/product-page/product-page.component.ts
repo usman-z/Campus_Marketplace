@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 import { ImageUploadService } from 'src/app/services/images/image-upload.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -42,7 +42,13 @@ export class ProductPageComponent {
 
       this.userService.addListing(this.productTitle, this.productCondition, this.productPrice, this.productDescription, this.user?.user_id, this.selectedImages)
         .subscribe(()=>{
-          this.router.navigate(['/profile']);
+          const navigationExtras: NavigationExtras = {
+            state: {
+                user: this.user
+            }
+          };
+          console.log(this.user);
+          this.router.navigate(['/profile'], navigationExtras);
         });
     }else{
       this.errorMessage = 'All information is needed';
