@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import * as path from "path";
+import * as fs from "fs";
 
 const { Client } = pkg;
 var app = express()
@@ -296,7 +298,7 @@ app.post('/addListing', async (req, res) => {
     console.log('price:', price);
     console.log('description:', description);
     console.log('seller_id:', seller_id);
-    console.log('images:', images);
+    console.log('images:', images); // having issues passing in the images
 
     const client = new Client(dbConfig);
     try {
@@ -326,7 +328,6 @@ app.post('/addListing', async (req, res) => {
         console.log('listingImagePath:', listingImagePath);
 
         // Save each image to the directory
-        // having issues passing images
         images.forEach((image) => {
             const destinationPath = path.join(listingImagePath, image.name);
             fs.writeFile(destinationPath, image.data, (err) => {

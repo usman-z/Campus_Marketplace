@@ -33,7 +33,7 @@ export class UserService {
   };
 
   addListing(title: string, condition: string, price: number, description: string, seller_id: number, images: File[]) {
-    const url = 'http://localhost:8080/addListing';
+    const url = 'http://173.230.140.95:8080/addListing';
 
     const request = {
         "title":  title,
@@ -43,6 +43,8 @@ export class UserService {
         "seller_id": seller_id,
         "images": images
     };
+
+    console.log(request);
 
     return this.http.post<ListingData>(url, request);
   }

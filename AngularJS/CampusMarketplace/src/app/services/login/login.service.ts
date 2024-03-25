@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string){
-    const url = 'http://localhost:8080/login';
+    const url = 'http://173.230.140.95:8080/login';
     const request ={
       "email": email,
       "password": password
