@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 import { UserData } from 'src/app/models/user/user.model';
+import { ImageUploadService } from 'src/app/services/images/image-upload.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-main-page',
@@ -16,6 +18,7 @@ export class MainPageComponent {
   loading: boolean = false;
   isLoading: boolean = true
   userLoggingIn?: PersonnelData[]
+  profilePicture?: File;
 
   first_name: string = ''
   last_name: string = ''
@@ -25,7 +28,7 @@ export class MainPageComponent {
   errorMessage: string = ''
   successMessage: string = '';
 
-  constructor(private router: Router, private loginService: LoginService, private signUpService: SignupService) {}
+  constructor(private router: Router, private loginService: LoginService, private imageUploadService: ImageUploadService, private signUpService: SignupService) {}
 
   register(){
     this.loading = true
@@ -39,6 +42,20 @@ export class MainPageComponent {
             setTimeout(() => {
               this.successMessage ='';
             }, 4000);
+            
+            let user: PersonnelData = response
+            if (this.profilePicture) {
+              console.log(this.profilePicture)
+              this.imageUploadService.uploadProfilePicture(this.profilePicture, user.user_id)
+              .subscribe({
+                next: (response) => {
+                  console.log('call success')
+                },
+                error: (error) => {
+                  // Handle error response if needed
+                }
+              });
+            }
           },
           error: (error) => {
             this.loading = false

@@ -65,7 +65,7 @@
                     font-size: 15px;
                     &.iReceived {
                         display: flex;
-                        justify-content: start;
+                        justify-content: flex-start;
                         background-color: #999999;
                         width: fit-content;
                         color: white; 
@@ -76,7 +76,7 @@
                     }
                     &.iSent {
                         display: flex;
-                        justify-content: end;
+                        justify-content: flex-end;
                         background-color: #1F8AFF;
                         color: white; 
                         border-radius: 20px;

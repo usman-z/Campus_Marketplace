@@ -112,7 +112,7 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ error: "User already exists with the same email"})
     }
 
-    const result = await client.query(`
+    await client.query(`
       INSERT INTO Personnel (full_name, email, password, role, rating, total_ratings)
       VALUES ($1, $2, $3, $4, $5, $6)
     `, [full_name, email, password, role, rating, total_ratings]);
@@ -134,8 +134,8 @@ app.post("/register", async (req, res) => {
      }
     });
 
+    const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [newUserId.rows[0].user_id]);
     res.json(result.rows[0]);
-
   } catch (err) {
     console.error('Error adding user:', err);
     res.status(500).send('Error adding user');
@@ -406,42 +406,19 @@ app.post('/getListing', async (req, res) => {
   }
 });
 
-/*
-const storage = multer.diskStorage({
+const storageProfileImages = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './pics')
+    cb(null, './assets/profile-pictures');
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.originalname);
-  }
-});
-const upload = multer({ storage: storage });
-
-app.post('/single', upload.single('image'), (req, res) => {
-  console.log(req.file);
-  res.send("Single File Upload Successful");
-});
-*/
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './pics');
-  },
-  filename: function (req, file, cb) {
-    console.log(req.body.userId)
-    // Assuming userId is passed in the request body as userId
-    const userId = req.body.userId || 'unknown'; // Default to 'unknown' if userId is not available
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const fileName = `${userId}-${uniqueSuffix}-${file.originalname}`;
+    const fileName = `${file.originalname}`;
     cb(null, fileName);
   }
 });
 
-const upload = multer({ storage: storage });
+const uploadProfileImages = multer({ storage: storageProfileImages });
 
-app.post('/single', upload.single('image'), (req, res) => {
-  console.log(req.body.userId);
-  console.log(req.file);
-  res.send("Single File Upload Successful");
+app.post('/uploadProfilePicture', uploadProfileImages.single('image'), (req, res) => {
+  console.log(req.body.image)
+  res.status(201).send('Success');
 });
