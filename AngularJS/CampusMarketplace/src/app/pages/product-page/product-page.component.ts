@@ -17,8 +17,9 @@ export class ProductPageComponent {
   productPrice: number = 0;
   productDescription: string = "";
   selectedImages: File[] = [];
+  errorMessage: string = '';
 
-  constructor(private router: Router, private imageUploadService: ImageUploadService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     if (history.state.user == undefined) {
@@ -37,10 +38,17 @@ export class ProductPageComponent {
   }
 
   addProduct() {
-    console.log("Title:", this.productTitle);
-    console.log("Condition:", this.productCondition);
-    console.log("Price:", this.productPrice);
-    console.log("Description:", this.productDescription);
-    console.log("Selected Images:", this.selectedImages);
+    if(this.productTitle && this.productCondition && this.productPrice && this.productDescription && this.user?.user_id && this.selectedImages){
+
+      this.userService.addListing(this.productTitle, this.productCondition, this.productPrice, this.productDescription, this.user?.user_id, this.selectedImages)
+        .subscribe(()=>{
+          this.router.navigate(['/profile']);
+        });
+    }else{
+      this.errorMessage = 'All information is needed';
+      setTimeout(()=>{
+        this.errorMessage ='';
+      }, 4000);
+    }
   }
 }

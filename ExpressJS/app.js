@@ -290,25 +290,70 @@ app.get("/send", (req, res) => {
 
 //add listing
 app.post('/addListing', async (req, res) => {
-  const { title, condition, price, description, seller_id, images_folder_path } = req.body;
-  const client = new Client(dbConfig);
-  try {
-      await client.connect();
-      const result = await client.query(`
-          INSERT INTO Listing (title, condition, price, description, seller_id, images_folder_path)
-          VALUES ($1, $2, $3, $4, $5, $6)
-          RETURNING listing_id`, 
-          [title, condition, price, description, seller_id, images_folder_path]);
-      
-      const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
-      res.send({ success: true, message: 'Product added successfully', listingId: listingId });
-  } catch (err) {
-      console.error('Error executing query:', err);
-      res.status(500).send('Error executing query');
-  } finally {
-      await client.end();
-  }
+    const { title, condition, price, description, seller_id, images } = req.body;
+    console.log('title:', title);
+    console.log('condition:', condition);
+    console.log('price:', price);
+    console.log('description:', description);
+    console.log('seller_id:', seller_id);
+    console.log('images:', images);
+
+    const client = new Client(dbConfig);
+    try {
+        await client.connect();
+        const result = await client.query(`
+          INSERT INTO Listing (title, condition, price, description, seller_id)
+          VALUES ($1, $2, $3, $4, $5)
+          RETURNING listing_id`,
+            [title, condition, price, description, seller_id]);
+
+        const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
+
+        // Determine the path for the images folder
+        const sellerImagePath = path.join('listingImages', seller_id.toString());
+        const listingImagePath = path.join(sellerImagePath, listingId.toString());
+
+        // Create necessary directories if they don't exist
+        if (!fs.existsSync(sellerImagePath)) {
+            fs.mkdirSync(sellerImagePath, { recursive: true });
+        }
+
+        if (!fs.existsSync(listingImagePath)) {
+            fs.mkdirSync(listingImagePath, { recursive: true });
+        }
+
+        console.log('sellerImagePath:', sellerImagePath);
+        console.log('listingImagePath:', listingImagePath);
+
+        // Save each image to the directory
+        // having issues passing images
+        images.forEach((image) => {
+            const destinationPath = path.join(listingImagePath, image.name);
+            fs.writeFile(destinationPath, image.data, (err) => {
+                if (err) {
+                    console.error(`Error saving image ${image.name}: ${err}`);
+                } else {
+                    console.log(`Image ${image.name} saved successfully`);
+                }
+            });
+        });
+
+        // Update the listing in the database with the path to the images folder
+        await client.query(`
+            UPDATE Listing 
+            SET images_folder = $1 
+            WHERE listing_id = $2`,
+            [listingImagePath, listingId]);
+
+        res.send({ success: true, message: 'Product added successfully', listingId: listingId });
+    } catch (err) {
+        console.error('Error executing query:', err);
+        res.status(500).send('Error executing query');
+    } finally {
+        await client.end();
+    }
 });
+
 
 app.post('/removeUser', async (req, res) => {
   const { userId } = req.body;

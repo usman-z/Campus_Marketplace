@@ -28,12 +28,12 @@ export class UserService {
       "userId": user_id,
       "newRating": rating
     };
-    
+
     return this.http.post<PersonnelData>(url, request);
   };
 
-  addListing(title: string, condition: string, price: number, description: string, seller_id: number, images_folder_path: string) {
-    const url = 'http://173.230.140.95:8080/addListing';
+  addListing(title: string, condition: string, price: number, description: string, seller_id: number, images: File[]) {
+    const url = 'http://localhost:8080/addListing';
 
     const request = {
         "title":  title,
@@ -41,9 +41,9 @@ export class UserService {
         "price": price,
         "description": description,
         "seller_id": seller_id,
-        "images_folder_path": images_folder_path
+        "images": images
     };
-    
+
     return this.http.post<ListingData>(url, request);
   }
 
@@ -53,7 +53,7 @@ export class UserService {
     const request = {
       "userId": userToVerify,
     };
-    
+
     return this.http.post(url, request);
   }
 
@@ -62,7 +62,7 @@ export class UserService {
     const request = {
       "userId": userToDelete,
     };
-    
+
     return this.http.post(url, request);
   }
 
@@ -71,8 +71,8 @@ export class UserService {
     const request = {
         "searchTerm": searchTerm
     };
-    
-    return this.http.post<ListingData[]>(url, request); 
+
+    return this.http.post<ListingData[]>(url, request);
   }
 
   getListing(listingId: number) {
@@ -80,8 +80,8 @@ export class UserService {
     const request = {
         "id": listingId
     };
-    
-    return this.http.post<ListingData[]>(url, request); 
+
+    return this.http.post<ListingData[]>(url, request);
   }
 
 }
