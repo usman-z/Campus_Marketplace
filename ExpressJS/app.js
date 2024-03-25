@@ -304,7 +304,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
+ 
 //add listing
 app.post('/addListing', upload.array('images'), async (req, res) => {
     const { title, condition, price, description, seller_id } = req.body;
