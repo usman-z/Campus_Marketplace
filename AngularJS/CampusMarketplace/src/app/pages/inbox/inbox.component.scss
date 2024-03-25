@@ -1,7 +1,6 @@
 .inbox {
     width: 80%;
     margin: auto;
-    margin-top: 8em;
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -11,7 +10,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 7em;
+        margin-bottom: 3em;
         .back-button {
             display: flex;
         }
@@ -24,13 +23,13 @@
 
         }
     }
-    .body {display: flex;
+    .body {
         display: flex;
         flex-direction: column;
         .logo {
             display: flex;
             margin: auto;
-            margin-bottom: 7em;
+            margin-bottom: 5em;
         }
         .messages{
             display: flex;
@@ -40,7 +39,8 @@
 
             }
             .messageContacts {
-                width: 100%;
+                width: 90%;
+                margin: auto;
             }
             .noMessages {
                 display: flex;
@@ -59,7 +59,7 @@
         .body {
             .messages{
                 .messageContacts {
-                    width: 70%;
+                    width: 50%;
                     margin: auto;
                 }
             }
