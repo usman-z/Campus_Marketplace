@@ -9,7 +9,7 @@ export class ImageUploadService {
   constructor(private http: HttpClient) { }
 
   uploadProfilePicture(file: File, userId: number) {
-    const url = 'http://localhost:8080/uploadProfilePicture';
+    const url = 'http://173.230.140.95:8080/uploadProfilePicture';
 
     console.log(file)
 
