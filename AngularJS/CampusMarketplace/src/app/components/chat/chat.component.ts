@@ -59,12 +59,13 @@ export class ChatComponent {
       if (messagesContainer) {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }
-    }, 500);
+    }, 200);
   }
 
   sendMessage() {
     if (this.activeUser && this.otherUser) {
       this.messageService.sendMessage(this.activeUser.user_id, this.otherUser.user_id, this.newMessage).subscribe(() => {
+        this.scrollToBottom();
         this.newMessage = '';
       });
     }
@@ -95,6 +96,7 @@ export class ChatComponent {
           if (this.allMessages) {
             if (response.length > this.allMessages.length) {
               this.allMessages = response;
+              this.scrollToBottom();
             }
             if (this.allMessages.length > 0) {
               this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
@@ -110,6 +112,7 @@ export class ChatComponent {
       this.chatService.getChat(activeUserId, otherUserId).subscribe({
         next: (response) => {
           this.allMessages = response;
+          this.scrollToBottom();
           if (this.allMessages.length > 0) {
             this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
           }
