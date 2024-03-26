@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent {
-  listings?: ListingData[] 
+  listings?: any[] 
   listing: any = {};
   user: any
   load: boolean = true

@@ -13,6 +13,7 @@ export class ListingComponent {
   @Input() description: string = ''
   @Input() seller_id: number = 0
   @Input() images_folder_path: string = ''
+  
 
   constructor() {}
 
