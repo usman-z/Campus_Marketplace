@@ -43,8 +43,8 @@ app.get("/any", async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    // const result = await client.query('SELECT * FROM Message');
-    const result = await client.query('SELECT * FROM Listing');
+    const result = await client.query('SELECT * FROM Message');
+    // const result = await client.query('SELECT * FROM Listing');
     res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
