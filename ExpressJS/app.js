@@ -185,9 +185,9 @@ app.post("/messages", async(req, res) => {
   try {
     await client.connect();
     const result = await client.query(`
-    SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
+    (SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
     UNION
-    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1
+    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1) ORDER BY message_time;
     `, [activeUser, otherUser]);
     res.json(result.rows);
 
