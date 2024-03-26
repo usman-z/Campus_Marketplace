@@ -3,6 +3,9 @@ import pkg from 'pg';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import * as path from "path";
+import * as fs from "fs";
 
 const { Client } = pkg;
 var app = express()
@@ -109,7 +112,7 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ error: "User already exists with the same email"})
     }
 
-    const result = await client.query(`
+    await client.query(`
       INSERT INTO Personnel (full_name, email, password, role, rating, total_ratings)
       VALUES ($1, $2, $3, $4, $5, $6)
     `, [full_name, email, password, role, rating, total_ratings]);
@@ -131,8 +134,8 @@ app.post("/register", async (req, res) => {
      }
     });
 
+    const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [newUserId.rows[0].user_id]);
     res.json(result.rows[0]);
-
   } catch (err) {
     console.error('Error adding user:', err);
     res.status(500).send('Error adding user');
@@ -182,9 +185,9 @@ app.post("/messages", async(req, res) => {
   try {
     await client.connect();
     const result = await client.query(`
-    SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
+    (SELECT * FROM Message WHERE sender_id = $1 AND receiver_id = $2
     UNION
-    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1
+    SELECT * FROM Message WHERE sender_id = $2 AND receiver_id = $1) ORDER BY message_time;
     `, [activeUser, otherUser]);
     res.json(result.rows);
 
@@ -245,7 +248,7 @@ app.post("/rate", async (req, res) =>  {
         }
 
         const existingUser = userResult.rows[0];
-        const prevRating = existingUser.rating;
+        const prevRating = existingUser.rating || 0; 
         const totalRatings = existingUser.total_ratings;
         const updatedRating = (prevRating * totalRatings + newRating) / (totalRatings + 1);
 
@@ -287,19 +290,65 @@ app.get("/send", (req, res) => {
   });
 });
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const sellerImagePath = path.join('assets/listing-pictures', req.body.seller_id);
+        if (!fs.existsSync(sellerImagePath)) {
+            fs.mkdirSync(sellerImagePath, { recursive: true });
+        }
+        cb(null, sellerImagePath);
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+ 
 //add listing
-app.post('/addListing', async (req, res) => {
-  const { title, condition, price, description, seller_id, images_folder_path } = req.body;
+app.post('/addListing', upload.array('images'), async (req, res) => {
+  const { title, condition, price, description, seller_id } = req.body;
+  const images = req.files; // Assuming 'images' is the name of the form field for the files
   const client = new Client(dbConfig);
   try {
       await client.connect();
-      const result = await client.query(`
-          INSERT INTO Listing (title, condition, price, description, seller_id, images_folder_path)
-          VALUES ($1, $2, $3, $4, $5, $6)
-          RETURNING listing_id`, 
-          [title, condition, price, description, seller_id, images_folder_path]);
-      
-      const listingId = result.rows[0].listing_id; // Assuming 'listing_id' is returned
+      const insertResult = await client.query(`
+          INSERT INTO Listing (title, condition, price, description, seller_id)
+          VALUES ($1, $2, $3, $4, $5)
+          RETURNING listing_id`,
+          [title, condition, price, description, seller_id]);
+
+      const listingId = insertResult.rows[0].listing_id;
+
+      // Assuming images are uploaded and 'images' is not empty
+      if (images && images.length > 0) {
+          // Create the directory path for the listing's images
+          const listingImagePath = path.join('assets/listing-pictures', seller_id.toString(), listingId.toString());
+
+          // Ensure the directory exists
+          if (!fs.existsSync(listingImagePath)) {
+              fs.mkdirSync(listingImagePath, { recursive: true });
+          }
+
+          // Process each image
+          let firstImageFileName = ''; // Store the first image's file name
+          images.forEach((image, index) => {
+              const destinationPath = path.join(listingImagePath, image.filename);
+              fs.renameSync(image.path, destinationPath);
+              if (index === 0) firstImageFileName = image.filename; // Capture the first image's name
+          });
+
+          // Construct the path to be saved in the database, including the first image's file name
+          const imagePathToSave = path.join(listingImagePath, firstImageFileName);
+
+          // Update the listing in the database with the path to the first image
+          await client.query(`
+              UPDATE Listing
+              SET images_folder = $1
+              WHERE listing_id = $2`,
+              [imagePathToSave, listingId]);
+      }
+
       res.send({ success: true, message: 'Product added successfully', listingId: listingId });
   } catch (err) {
       console.error('Error executing query:', err);
@@ -308,6 +357,7 @@ app.post('/addListing', async (req, res) => {
       await client.end();
   }
 });
+
 
 app.post('/removeUser', async (req, res) => {
   const { userId } = req.body;
@@ -358,3 +408,23 @@ app.post('/getListing', async (req, res) => {
       await client.end();
   }
 });
+
+const storageProfileImages = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './assets/profile-pictures');
+  },
+  filename: function (req, file, cb) {
+    const fileName = `${file.originalname}`;
+    cb(null, fileName);
+  }
+});
+
+const uploadProfileImages = multer({ storage: storageProfileImages });
+
+app.post('/uploadProfilePicture', uploadProfileImages.single('image'), (req, res) => {
+  console.log(req.body.image)
+  res.status(201).send('Success');
+});
+
+app.use('/assets', express.static('assets'));
+

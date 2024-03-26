@@ -25,26 +25,27 @@ export class UserService {
     const url = 'http://173.230.140.95:8080/rate';
 
     const request = {
-      "studentId": user_id,
-      "rating": rating
+      "userId": user_id,
+      "newRating": rating
     };
-    
+
     return this.http.post<PersonnelData>(url, request);
   };
 
-  addListing(title: string, condition: string, price: number, description: string, seller_id: number, images_folder_path: string) {
+  addListing(title: string, condition: string, price: number, description: string, seller_id: number, images: File[]) {
     const url = 'http://173.230.140.95:8080/addListing';
 
-    const request = {
-        "title":  title,
-        "condition":condition,
-        "price": price,
-        "description": description,
-        "seller_id": seller_id,
-        "images_folder_path": images_folder_path
-    };
-    
-    return this.http.post<ListingData>(url, request);
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('condition', condition);
+    formData.append('price', String(price));
+    formData.append('description', description);
+    formData.append('seller_id', String(seller_id));
+    for(let img of images){
+      formData.append('images', img);
+    }
+
+    return this.http.post<any>(url, formData);
   }
 
   verifyUser(userToVerify: number) {
@@ -53,7 +54,7 @@ export class UserService {
     const request = {
       "userId": userToVerify,
     };
-    
+
     return this.http.post(url, request);
   }
 
@@ -62,26 +63,26 @@ export class UserService {
     const request = {
       "userId": userToDelete,
     };
-    
+
     return this.http.post(url, request);
   }
 
   searchListings(searchTerm: string) {
-    const url = 'http://localhost:8080/search';
+    const url = 'http://173.230.140.95:8080/search';
     const request = {
         "searchTerm": searchTerm
     };
-    
-    return this.http.post<ListingData[]>(url, request); 
+
+    return this.http.post<ListingData[]>(url, request);
   }
 
   getListing(listingId: number) {
-    const url = 'http://localhost:8080/getListing';
+    const url = 'http://173.230.140.95:8080/getListing';
     const request = {
         "id": listingId
     };
-    
-    return this.http.post<ListingData[]>(url, request); 
+
+    return this.http.post<ListingData[]>(url, request);
   }
 
 }

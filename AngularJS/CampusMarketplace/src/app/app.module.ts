@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { CarouselModule } from '@coreui/angular';
 
 import { ReviewPageComponent } from './pages/review-page/review-page.component';
 import { ListingPageComponent } from './pages/listing-page/listing-page.component';
@@ -23,6 +24,7 @@ import { SellComponent } from './pages/sell/sell.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
+import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 
 
 @NgModule({
@@ -44,13 +46,15 @@ import { ListingComponent } from './components/listing/listing.component';
     SellComponent,
     VerifyComponent,
     ResultComponent,
-    ListingComponent
+    ListingComponent,
+    SellerProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

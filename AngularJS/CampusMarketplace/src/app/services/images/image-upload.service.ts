@@ -1,13 +1,24 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploadService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  saveImages(): void {
+  uploadProfilePicture(file: File, userId: number) {
+    const url = 'http://173.230.140.95:8080/uploadProfilePicture';
 
+    console.log(file)
+
+    const formData = new FormData();
+    // const renamedFile = new File([file], `${userId}_${file.name}`);
+    // formData.append('image', renamedFile);
+
+    formData.append('image', file);
+
+    return this.http.post(url, formData);
   }
 }

@@ -33,7 +33,7 @@ export class ChatComponent {
 
       setInterval(() => {
         this.loadMessages(activeUserId, otherUserId);
-      }, 100);
+      }, 500);
 
       this.userService.getUserInfo(activeUserId).subscribe({
         next: (response) => {
@@ -65,6 +65,7 @@ export class ChatComponent {
   sendMessage() {
     if (this.activeUser && this.otherUser) {
       this.messageService.sendMessage(this.activeUser.user_id, this.otherUser.user_id, this.newMessage).subscribe(() => {
+        this.scrollToBottom();
         this.newMessage = '';
       });
     }
@@ -89,16 +90,37 @@ export class ChatComponent {
   }
 
   loadMessages(activeUserId: number, otherUserId: number): void {
-    this.chatService.getChat(activeUserId, otherUserId).subscribe({
-      next: (response) => {
-        this.allMessages = response;
-        if (this.allMessages.length > 0) {
-          this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
+    if (this.allMessages) {
+      this.chatService.getChat(activeUserId, otherUserId).subscribe({
+        next: (response) => {
+          if (this.allMessages) {
+            if (response.length > this.allMessages.length) {
+              this.allMessages = response;
+              this.scrollToBottom();
+            }
+            if (this.allMessages.length > 0) {
+              this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
+            }
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching messages:', error);
         }
-      },
-      error: (error) => {
-        console.error('Error fetching messages:', error);
-      }
-    });
+      });
+    }
+    else {
+      this.chatService.getChat(activeUserId, otherUserId).subscribe({
+        next: (response) => {
+          this.allMessages = response;
+          this.scrollToBottom();
+          if (this.allMessages.length > 0) {
+            this.lastTime = this.formatTimeStamp(this.allMessages[this.allMessages.length - 1].message_time);
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching messages:', error);
+        }
+      });
+    }
   }
 }

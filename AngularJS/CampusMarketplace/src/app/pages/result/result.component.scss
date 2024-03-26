@@ -1,7 +1,7 @@
 .listings {
-    width: 80%;
+    width: 50%;
     margin: auto;
-    margin-top: 8em;
+    margin-top: 4em;
     display: flex;
     flex-direction: column;
     padding: 1%;
@@ -11,7 +11,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 7em;
+      margin-bottom: 4em;
       .back-button {
           display: flex;
       }
@@ -30,24 +30,23 @@
       .logo {
           display: flex;
           margin: auto;
-          margin-bottom: 10em;
+          margin-bottom: 7em;
       }
       .results {
           display: flex;
-          flex-wrap: wrap; 
-          justify-content: space-around;  
           align-items: flex-start; 
           padding: 1em;
-          max-width: 1200px; 
+          width: 100%; 
           margin: auto;
   
           .allListings {
-              flex: 0 1 30%; 
-              margin: 10px;
-              .card {
-                  width: 100%; 
-                  cursor: pointer; 
-              }
+            display: flex;
+            width: fit-content;
+            margin-right: 10em;
+            app-listing {
+              display: flex;
+              cursor: pointer; 
+            }
           }
   
           p {
@@ -62,16 +61,66 @@
   
   @media only screen and (max-width: 768px) {
     .listings {
-      .body {
-        .results { 
-          flex-direction: column; 
-          .allListings {
-              flex-basis: 100%; 
-              margin-left: 0;
-              margin-bottom: 2em; 
+        width: 80%;
+        margin: auto;
+        margin-top: 8em;
+        display: flex;
+        flex-direction: column;
+        padding: 1%;
+        .header {
+          border-bottom: 1px solid black;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 7em;
+          .back-button {
+              display: flex;
+          }
+          .title {
+              vertical-align: middle;
+              display: flex;
+              font-size: 30px;
+          }
+          .empty {
+      
+          }
+        }
+        .body {
+          display: flex;
+          flex-direction: column;
+          .logo {
+              display: flex;
+              margin: auto;
+              margin-bottom: 10em;
+          }
+          .results {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start; 
+              padding: 1em;
+              width: 100%; 
+              margin: auto;
+      
+              .allListings {
+                display: flex;
+                width: fit-content;
+                margin: auto;
+                margin-bottom: 10em;
+                app-listing {
+                  display: flex;
+                  cursor: pointer; 
+                }
+              }
+      
+              p {
+                  color: gray;
+                  font-size: 30px;
+                  text-align: center;
+                  width: 100%; 
+              }
           }
         }
       }
-    }
   }
   

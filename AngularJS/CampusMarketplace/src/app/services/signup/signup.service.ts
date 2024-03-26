@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SignupService {
       "role": role
     };
 
-    return this.http.post(url, request);
+    return this.http.post<PersonnelData>(url, request);
 
   };
 }

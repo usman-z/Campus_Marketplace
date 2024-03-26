@@ -1,36 +1,40 @@
-<div class="container">
-  <div class="header">
+<div class="listing">
+    <div class="header">
       <div class="back-button">
-          <app-back-button></app-back-button>
+        <app-back-button></app-back-button>
+      </div>
+      <div class="title">
+        <p><strong>{{ listing.title }}</strong></p>
       </div>
       <div class="empty"></div>
-  </div>
-  <div class="body">
+    </div>
+    <div class="body" *ngIf="!seller || !listing"><app-loading></app-loading></div>
+    <div class="body" *ngIf="seller && listing">
       <div class="logo">
-          <img src="../../../assets/logo.png" alt="UNCG logo"/>
+        <img [src]="'http://localhost:8080/' + listing.images_folder" alt="UNCG logo"/>
       </div>
-      
-      <!-- Listing and Seller Details -->
-      <div class="listing-container">
-          <div *ngIf="listing" class="listing-details">
-              <div class="listing-image">
-                  <img *ngIf="listing.images_folder_path" [src]="listing.images_folder_path" alt="Listing Image">
-              </div>
-              <div class="listing-info">
-                  <h2>{{ listing.title }}</h2>
-                  <p class="listing-price">{{ listing.price | currency }}</p>
-                  <p class="listing-condition">{{ listing.condition }}</p>
-              </div>
-          </div>
-          <div *ngIf="seller" class="seller-details" > <!--(click)="goToSellerProfile(seller.userId)"-->
-              <div class="seller-profile">
-                  <img src="../../../assets/seller-profile.png" alt="Seller Profile"> <!-- Update image path -->
-                  <p class="seller-name">{{ seller.full_name }}</p>
-                  <p class="seller-rating">{{ seller.rating }}/5 ({{ seller.reviewCount }} Reviews)</p>
-                  <button class="send-message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is this available?')">Send Message</button>
-                  
-              </div>
-          </div>
+      <div class="info">
+        <div class="infoleft">
+            <div class="itemCondition"><p>Condition: <strong>{{ listing.condition }}</strong></p></div>
+            <div class="itemPrice"><p>Price: <strong>${{ listing.price }}</strong></p></div>
+            <div class="itemDescription"><p>Description: <strong>{{ listing.description }}</strong></p></div>
+        </div>
+        <div class="inforight">
+            <div class="inforighttop"><p>Seller Details</p></div>
+            <div class="inforightbottom">
+                <div class="left">
+                    <img src="../../../assets/profile.png" alt="">
+                </div>
+                <div class="right">
+                    <div class="top"  style="cursor: pointer;" (click)="goToSellerProfile(seller.user_id)"><p><strong>{{ seller.full_name }}</strong></p></div>
+                    <div class="bottom"><p>Rated: {{ seller.rating | number: '1.0-1' }} / 5<br><span style="color: gray;">Based on {{ seller.total_ratings }} reviews</span></p></div>
+                </div>
+            </div>
+        </div>
       </div>
+      <div class="messageButton">
+        <button class="message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is this available?')">Send Message</button>
+      </div>
+    </div>
   </div>
-</div>
+  

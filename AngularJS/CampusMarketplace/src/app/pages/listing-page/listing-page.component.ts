@@ -18,7 +18,7 @@ export class ListingPageComponent {
   listing: any = {};
   user: any
   seller: any
-
+  load: boolean = true
 
   constructor(private router: Router, private MessageService: MessageService, private UserService: UserService, private route: ActivatedRoute) {}
 
@@ -50,7 +50,13 @@ export class ListingPageComponent {
 
   
   goToSellerProfile(sellerId: number): void {
-    this.router.navigate(['/profile', sellerId]);
+    const navigationExtras: NavigationExtras = {
+      state: {
+          user: this.user
+      }
+    };
+    console.log(this.user);
+    this.router.navigate(['/sellerProfile', sellerId], navigationExtras);
   }
   
 

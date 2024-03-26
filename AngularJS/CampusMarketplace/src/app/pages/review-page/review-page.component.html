@@ -1,8 +1,8 @@
 <div class="content">
     <div class="backButton"><app-back-button></app-back-button></div>
     <div class="rate">
-        <p>How would you rate your collaboration with (seller goes here)</p>
-        <app-star-rating></app-star-rating>
+        <p>How would you rate your experience with {{ userBeingRated?.full_name }}</p>
+        <app-star-rating [(rating)]="userRating"></app-star-rating>
     </div>
-    <div class="collaborate">
+    <button (click)="submitRating()">Submit</button>
 </div>

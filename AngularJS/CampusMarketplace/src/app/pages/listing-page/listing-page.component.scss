@@ -1,83 +1,244 @@
-.container {
+.listing {
+    width: 50%;
+    margin: auto;
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
     .header {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 20px;
-        background: #f8f8f8; // Example background color
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-        .back-button {
-            cursor: pointer;
-        }
-
-        .empty {
-            // This can remain empty if it's just used to balance the flex space
-        }
+      border-bottom: 1px solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5em;
+      .back-button {
+          display: flex;
+      }
+      .title {
+          vertical-align: middle;
+          display: flex;
+          font-size: 30px;
+      }
+      .empty {
+  
+      }
     }
-
     .body {
         display: flex;
         flex-direction: column;
-        align-items: center;
-
-        .logo img {
-            margin-top: 20px;
-            height: 60px; // Adjust based on your logo's size
-        }
-
-        .listing-container {
+        width: 80%;
+        margin: auto;
+        .logo {
+            border: 1px solid black;
             display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            width: 80%; // Adjust based on your design
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-            .listing-details {
+            margin: auto;
+            margin-bottom: 1em;
+            width: 40em;
+            img {
+                width: 80%;
+                margin: auto;
+            }
+        }
+        .info {
+            display: flex;
+            flex-direction: row;
+            font-size: 18px;
+            .infoleft {
+                border: 1px solid black;
                 display: flex;
                 flex-direction: column;
-                align-items: start;
-
-                .listing-image img {
-                    width: 100%;
-                    max-width: 300px;
-                    height: auto;
-                    margin-bottom: 15px;
+                width: 50%;
+                padding: 1em;
+                img {
+                    width: 5em;
                 }
+                .itemCondition {
 
-                .listing-info {
-                    h2 { margin: 0; }
-                    .listing-price { font-size: 24px; }
-                    .listing-condition { font-size: 18px; }
+                }
+                .itemPrice {
+
+                }
+                .itemDescription {
+
                 }
             }
-
-            .seller-details {
+            .inforight {
+                border: 1px solid black;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                width: 50%;
+                .inforighttop {
+                    p {
+                        text-align: center;
+                    }
+                }
+                .inforightbottom {
+                    display: flex;
+                    flex-direction: row;
+                    .left {
+                        margin: auto;
+                        display: flex;
+                        img {
+                            width: 5em;
+                            margin: auto;
+                        }
+                    }
+                    .right {
+                        width: 70%;
+                        display: flex;
+                        flex-direction: column;
+                        .top {
+                            p {
+                                text-align: center;
+                                font-size: 22px;
+                            }
+                        }
+                        .bottom {
+                            display: flex;
+                            justify-content: center;
+                            p {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .messageButton {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+
+            button {
+                font-size: 20px;
+                border-radius: 20px;
                 cursor: pointer;
-
-                .seller-profile {
-                    text-align: center;
-                    img { border-radius: 50%; width: 80px; height: 80px; object-fit: cover; margin-bottom: 10px; }
-                    .seller-name { font-weight: bold; }
-                    .seller-rating { margin-bottom: 15px; }
-                    .send-message { /* Button styling */ }
-                }
             }
         }
     }
-}
-
-@media only screen and (max-width: 768px) {
-    .container .body .listing-container {
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .listing {
+        width: 80%;
+        margin: auto;
+        margin-top: 4em;
+        display: flex;
         flex-direction: column;
-
-        .seller-details { 
-            margin-top: 20px;
-            align-items: center;
+        padding: 1%;
+        .header {
+          border-bottom: 1px solid black;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 3em;
+          .back-button {
+              display: flex;
+          }
+          .title {
+              vertical-align: middle;
+              display: flex;
+              font-size: 30px;
+          }
+          .empty {
+      
+          }
         }
-    }
-}
+        .body {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: auto;
+            .logo {
+                border: 1px solid black;
+                display: flex;
+                margin: auto;
+                margin-bottom: 1em;
+                img {
+                    width: 100%;
+                    margin: auto;
+                }
+            }
+            .info {
+                display: flex;
+                flex-direction: column;
+                font-size: 18px;
+                .infoleft {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    padding: 1em;
+                    margin-bottom: 1em;
+                    img {
+                        width: 5em;
+                    }
+                    .itemCondition {
+    
+                    }
+                    .itemPrice {
+    
+                    }
+                    .itemDescription {
+    
+                    }
+                }
+                .inforight {
+                    border: 1px solid black;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    .inforighttop {
+                        p {
+                            text-align: center;
+                        }
+                    }
+                    .inforightbottom {
+                        display: flex;
+                        flex-direction: row;
+                        .left {
+                            margin: auto;
+                            display: flex;
+                            img {
+                                width: 5em;
+                                margin: auto;
+                            }
+                        }
+                        .right {
+                            width: 70%;
+                            display: flex;
+                            flex-direction: column;
+                            .top {
+                                p {
+                                    text-align: center;
+                                    font-size: 22px;
+                                }
+                            }
+                            .bottom {
+                                display: flex;
+                                justify-content: center;
+                                p {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .messageButton {
+                display: flex;
+                justify-content: center;
+                margin-top: 2em;
+    
+                button {
+                    font-size: 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+      }
+  }
+  

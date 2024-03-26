@@ -12,10 +12,11 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { VerifyComponent } from './components/verify/verify.component';
 import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
+import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'review', component: ReviewPageComponent },
+  { path: 'review/:id', component: ReviewPageComponent },
   { path: 'listing/:id', component: ListingPageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'profile', component: ProfileComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'product', component: ProductPageComponent },
   { path: 'verify', component: VerifyComponent },
   { path: 'result', component: ResultComponent },
-  { path: 'listing', component: ListingComponent }
+  { path: 'listing', component: ListingComponent },
+  { path: 'sellerProfile/:id', component: SellerProfileComponent }
 ];
 
 @NgModule({
