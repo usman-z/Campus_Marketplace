@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserInfo(userId: number){
-    const url = 'https://uncgmarketplace.com/info';
+    const url = 'https://uncgmarketplace.com:4443/info';
     const request ={
       "userId": userId
     }
@@ -22,7 +22,7 @@ export class UserService {
   };
 
   rateUser(user_id: number, rating: number) {
-    const url = 'https://uncgmarketplace.com/rate';
+    const url = 'https://uncgmarketplace.com:4443/rate';
 
     const request = {
       "userId": user_id,
@@ -33,7 +33,7 @@ export class UserService {
   };
 
   addListing(title: string, condition: string, price: number, description: string, seller_id: number, images: File[]) {
-    const url = 'https://uncgmarketplace.com/addListing';
+    const url = 'https://uncgmarketplace.com:4443/addListing';
 
     const formData = new FormData();
     formData.append('title', title);
@@ -49,7 +49,7 @@ export class UserService {
   }
 
   verifyUser(userToVerify: number) {
-    const url = 'https://uncgmarketplace.com/verify';
+    const url = 'https://uncgmarketplace.com:4443/verify';
 
     const request = {
       "userId": userToVerify,
@@ -59,7 +59,7 @@ export class UserService {
   }
 
   deleteUser(userToDelete: number) {
-    const url = 'https://uncgmarketplace.com/removeUser';
+    const url = 'https://uncgmarketplace.com:4443/removeUser';
     const request = {
       "userId": userToDelete,
     };
@@ -68,7 +68,7 @@ export class UserService {
   }
 
   searchListings(searchTerm: string) {
-    const url = 'https://uncgmarketplace.com/search';
+    const url = 'https://uncgmarketplace.com:4443/search';
     const request = {
         "searchTerm": searchTerm
     };
@@ -77,7 +77,7 @@ export class UserService {
   }
 
   getListing(listingId: number) {
-    const url = 'https://uncgmarketplace.com/getListing';
+    const url = 'https://uncgmarketplace.com:4443/getListing';
     const request = {
         "id": listingId
     };

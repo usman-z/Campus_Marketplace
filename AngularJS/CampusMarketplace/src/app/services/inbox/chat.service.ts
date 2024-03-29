@@ -10,7 +10,7 @@ export class ChatService {
   constructor(private http: HttpClient) { }
 
   getChat(activeUserId: number, otherUserId: number){
-    const url = 'https://uncgmarketplace.com/messages';
+    const url = 'https://uncgmarketplace.com:4443/messages';
     const request ={
       "activeUser": activeUserId,
       "otherUser": otherUserId

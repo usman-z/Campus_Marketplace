@@ -9,7 +9,7 @@ export class MessageService {
   constructor(private http: HttpClient) { }
 
   sendMessage(sender_id: number, receiver_id: number, message: string){
-    const url = 'https://uncgmarketplace.com/sendMessage';
+    const url = 'https://uncgmarketplace.com:4443/sendMessage';
     const request ={
       "sender_id": sender_id,
       "receiver_id": receiver_id,

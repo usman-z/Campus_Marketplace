@@ -10,7 +10,7 @@ export class InboxService {
   constructor(private http: HttpClient) { }
 
   getInbox(userId: number){
-    const url = 'https://uncgmarketplace.com/inbox';
+    const url = 'https://uncgmarketplace.com:4443/inbox';
     const request ={
       "userId": userId
     }

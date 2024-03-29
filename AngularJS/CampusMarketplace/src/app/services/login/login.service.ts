@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string){
-    const url = 'https://uncgmarketplace.com/login';
+    const url = 'https://uncgmarketplace.com:4443/login';
     const request ={
       "email": email,
       "password": password

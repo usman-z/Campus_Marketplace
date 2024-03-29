@@ -9,7 +9,7 @@ export class ImageUploadService {
   constructor(private http: HttpClient) { }
 
   uploadProfilePicture(file: File, userId: number) {
-    const url = 'https://uncgmarketplace.com/uploadProfilePicture';
+    const url = 'https://uncgmarketplace.com:4443/uploadProfilePicture';
 
     console.log(file)
 

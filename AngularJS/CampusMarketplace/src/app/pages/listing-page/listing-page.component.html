@@ -11,7 +11,7 @@
     <div class="body" *ngIf="!seller || !listing"><app-loading></app-loading></div>
     <div class="body" *ngIf="seller && listing">
       <div class="logo">
-        <img [src]="'https://uncgmarketplace.com/' + listing.images_folder" alt="UNCG logo"/>
+        <img [src]="'https://uncgmarketplace.com:4443/' + listing.images_folder" alt="UNCG logo"/>
       </div>
       <div class="info">
         <div class="infoleft">
