@@ -10,7 +10,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string){
-    const url = 'http://173.230.140.95:8080/login';
+    const url = 'https://uncgmarketplace.com/login';
     const request ={
       "email": email,
       "password": password
