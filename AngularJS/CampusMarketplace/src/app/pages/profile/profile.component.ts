@@ -74,5 +74,16 @@ export class ProfileComponent {
       }
     );
   }
+
+  viewListings(): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+          user: this.user
+      }
+    };
+    console.log(this.user);
+    this.router.navigate(['/sellerListings'], navigationExtras);
+  }
+
   
 }

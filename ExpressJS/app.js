@@ -469,3 +469,18 @@ app.post('/uploadProfilePicture', uploadProfileImages.single('image'), (req, res
 
 app.use('/assets', express.static('assets'));
 
+app.post('/getUserListings', async (req, res) => {
+  const { userId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const results = await client.query("SELECT * FROM listing WHERE seller_id = $1", [userId]);
+    res.json(results.rows);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+ });
+ 
