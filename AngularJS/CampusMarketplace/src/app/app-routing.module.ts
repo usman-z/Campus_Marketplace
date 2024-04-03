@@ -13,6 +13,8 @@ import { VerifyComponent } from './components/verify/verify.component';
 import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
+import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.component';
+
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -27,7 +29,8 @@ const routes: Routes = [
   { path: 'verify', component: VerifyComponent },
   { path: 'result', component: ResultComponent },
   { path: 'listing', component: ListingComponent },
-  { path: 'sellerProfile/:id', component: SellerProfileComponent }
+  { path: 'sellerProfile/:id', component: SellerProfileComponent },
+  { path: 'sellerListings', component: SellerlistingsComponent }
 ];
 
 @NgModule({
