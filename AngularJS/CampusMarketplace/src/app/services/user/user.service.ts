@@ -77,7 +77,7 @@ export class UserService {
   }
 
   userListings(userId: number) {
-    const url = 'http://localhost:8080/getUserListings';
+    const url = 'https://uncgmarketplace.com:4443/getUserListings';
     const request = {
         "userId": userId
     };
