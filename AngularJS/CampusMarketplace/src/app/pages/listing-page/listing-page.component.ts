@@ -72,9 +72,13 @@ export class ListingPageComponent {
     const navigationExtras: NavigationExtras = {
       state: {
         user: this.user
+      },
+      queryParams: {
+        userId: this.user.user_id,
+        otherId: this.seller.user_id
       }
     };
-    this.router.navigate(['/inbox'], navigationExtras);
+    this.router.navigate(['/chat'], navigationExtras);
   }
 
 }

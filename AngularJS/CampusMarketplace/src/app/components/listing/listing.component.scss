@@ -3,13 +3,16 @@
     cursor: pointer;
     padding: 1em;
     display: flex;
-    width: 250px;
+    width: 360px;
     flex-direction: column;
     .image {
         margin: auto;
+        width: 100%;
         margin-bottom: 2em;
         img {
-            width: 10em;
+            display: flex;
+            margin: auto;
+            width: 50%;
         }
     }
     .info {
@@ -49,6 +52,7 @@
             p {
                 padding: 0;
                 margin: 0;
+                font-size: 17px;
                 color: gray;
             }
         }
