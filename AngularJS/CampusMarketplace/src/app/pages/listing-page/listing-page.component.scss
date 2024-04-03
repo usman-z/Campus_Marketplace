@@ -4,7 +4,7 @@
     margin-top: 3em;
     display: flex;
     flex-direction: column;
-    padding: 1%;
+    padding-bottom: 5em; 
     .header {
       border-bottom: 1px solid black;
       display: flex;
@@ -27,31 +27,36 @@
     .body {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 50%;
         margin: auto;
         .logo {
             border: 1px solid black;
             display: flex;
             margin: auto;
-            margin-bottom: 1em;
-            width: 40em;
+            margin-bottom: 3em;
+            width:  250px;
+            height: 250px;
             img {
-                width: 80%;
+                display: flex;
                 margin: auto;
+                width: 100%;
+                height: 100%;
             }
         }
         .info {
             display: flex;
-            flex-direction: row;
+            width: 90%;
+            margin: auto;
+            flex-direction: column;
             font-size: 18px;
             .infoleft {
-                border: 1px solid black;
                 display: flex;
                 flex-direction: column;
-                width: 50%;
+                width: 100%;
                 padding: 1em;
+                margin-bottom: 1em;
                 img {
-                    width: 5em;
+                    width: 1em;
                 }
                 .itemCondition {
 
@@ -64,43 +69,35 @@
                 }
             }
             .inforight {
-                border: 1px solid black;
+                border-top: 3px solid black;
                 display: flex;
                 flex-direction: column;
-                width: 50%;
+                width: 100%;
                 .inforighttop {
+                    margin-top: 2em;
+                    margin-bottom: .5em;
                     p {
                         text-align: center;
                     }
                 }
-                .inforightbottom {
+                .sellerImage {
                     display: flex;
-                    flex-direction: row;
-                    .left {
-                        margin: auto;
-                        display: flex;
-                        img {
-                            width: 5em;
-                            margin: auto;
-                        }
+                    margin: auto;
+                    img {
+                        width: 5em;
                     }
-                    .right {
-                        width: 70%;
-                        display: flex;
-                        flex-direction: column;
-                        .top {
-                            p {
-                                text-align: center;
-                                font-size: 22px;
-                            }
-                        }
-                        .bottom {
-                            display: flex;
-                            justify-content: center;
-                            p {
-                                text-align: center;
-                            }
-                        }
+                }
+                .top {
+                    margin-top: 2em;
+                    p {
+                        font-size: 20px;
+                        text-align: center;
+                    }
+                }
+                .bottom {
+                    p {
+                        font-size: 17px;
+                        text-align: center;
                     }
                 }
             }
@@ -108,7 +105,7 @@
         .messageButton {
             display: flex;
             justify-content: center;
-            margin-top: 1em;
+            margin-top: 2em;
 
             button {
                 font-size: 20px;
@@ -121,19 +118,19 @@
   
   @media only screen and (max-width: 768px) {
     .listing {
+        padding-bottom: 5em;
         width: 80%;
         margin: auto;
         margin-top: 4em;
         display: flex;
         flex-direction: column;
-        padding: 1%;
         .header {
           border-bottom: 1px solid black;
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 3em;
+          margin-bottom: 5em;
           .back-button {
               display: flex;
           }
@@ -156,24 +153,29 @@
                 display: flex;
                 margin: auto;
                 margin-bottom: 1em;
-                width: 100%;
+                width:  250px;
+                height: 250px;
                 img {
+                    display: flex;
                     margin: auto;
+                    width: 100%;
+                    height: 100%;
                 }
             }
             .info {
                 display: flex;
+                width: 90%;
+                margin: auto;
                 flex-direction: column;
                 font-size: 18px;
                 .infoleft {
-                    border: 1px solid black;
                     display: flex;
                     flex-direction: column;
                     width: 100%;
                     padding: 1em;
                     margin-bottom: 1em;
                     img {
-                        width: 5em;
+                        width: 1em;
                     }
                     .itemCondition {
     
@@ -186,43 +188,35 @@
                     }
                 }
                 .inforight {
-                    border: 1px solid black;
+                    border-top: 3px solid black;
                     display: flex;
                     flex-direction: column;
                     width: 100%;
                     .inforighttop {
+                        margin-top: 2.3em;
+                        margin-bottom: .5em;
                         p {
                             text-align: center;
                         }
                     }
-                    .inforightbottom {
+                    .sellerImage {
                         display: flex;
-                        flex-direction: row;
-                        .left {
-                            margin: auto;
-                            display: flex;
-                            img {
-                                width: 5em;
-                                margin: auto;
-                            }
+                        margin: auto;
+                        img {
+                            width: 5em;
                         }
-                        .right {
-                            width: 70%;
-                            display: flex;
-                            flex-direction: column;
-                            .top {
-                                p {
-                                    text-align: center;
-                                    font-size: 22px;
-                                }
-                            }
-                            .bottom {
-                                display: flex;
-                                justify-content: center;
-                                p {
-                                    text-align: center;
-                                }
-                            }
+                    }
+                    .top {
+                        margin-top: 2em;
+                        p {
+                            font-size: 20px;
+                            text-align: center;
+                        }
+                    }
+                    .bottom {
+                        p {
+                            font-size: 17px;
+                            text-align: center;
                         }
                     }
                 }
