@@ -205,6 +205,26 @@ app.post("/sendMessage", async(req, res) => {
   try { 
     await client.connect();
     await client.query('INSERT INTO Message(sender_id,receiver_id,message,message_time) VALUES($1,$2,$3,CURRENT_TIMESTAMP)', [sender_id, receiver_id, message]);
+    const receiver = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [receiver_id]);
+    const sender = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [sender_id]);
+    const mailOptions = {
+      from: process.env.EMAIL_AUTH_USER,
+      to: receiver.email,
+      subject: 'New Message | UNCG Marketplace',
+      text: "You have received a new message from "+sender.full_name+" regarding a product.\n\nHappy Selling,\nUNCG Marketplace"
+    };
+  
+    // Send mail
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Error sending email:', error);
+        res.status(500).send('Error sending email');
+      } else {
+        console.log('Email sent:', info.response);
+        res.status(200).send('Success');
+      }
+    });
+
     const result = await client.query('SELECT * FROM Message');
     res.json(result.rows);
   } catch (err) {
@@ -224,7 +244,28 @@ app.post("/verify", async (req, res) =>  {
       UPDATE Personnel
       SET email_verified = true
       WHERE user_id = $1`, [userId]);
+      
     const result = await client.query('SELECT * FROM Personnel');
+
+    const updatedUser = result.rows[0];
+
+    const mailOptions = {
+      from: process.env.EMAIL_AUTH_USER,
+      to: updatedUser.email,
+      subject: 'Verification Successful | Welcome to UNCG Marketplace',
+      text: "Thank you for successfully verifying your account, you can now log in and browse UNCG Marketplace.\n\nHappy Selling,\nUNCG Marketplace"
+    };
+  
+    // Send mail
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Error sending email:', error);
+        res.status(500).send('Error sending email');
+      } else {
+        console.log('Email sent:', info.response);
+        res.status(200).send('Success');
+      }
+    });
     res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
