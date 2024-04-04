@@ -82,8 +82,16 @@ export class ListingPageComponent {
   }
 
   markSold(listingId: number) {
-    this.UserService.markItemSold(listingId);
-    window.location.reload();
+    this.UserService.markItemSold(listingId).subscribe({
+      next: (response) => {
+        const navigationExtras: NavigationExtras = {
+          state: {
+            user: this.user
+          }
+        };
+        this.router.navigate(['/sellerListings'], navigationExtras);
+      }
+  });
   }
 
 }
