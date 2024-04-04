@@ -90,7 +90,18 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+const storage2 = multer.diskStorage({
+    destination: function (req, file, cb){
+        cb(null, 'assets/profile-pictures');
+    },
+    filename: function (req, file, cb){
+        cb(null, file.originalname);
+    },
+});
+
+const upload2 = multer({ storage: storage2 })
+
+app.post("/register", upload2.single('profile_img'), async (req, res) => {
   const { full_name, email, password, role } = req.body;
   let rating, total_ratings = 0;
 
@@ -118,6 +129,21 @@ app.post("/register", async (req, res) => {
     `, [full_name, email, password, role, rating, total_ratings]);
 
     const newUserId = await client.query(`SELECT user_id FROM Personnel WHERE email = $1`,[email]);
+    const userId = newUserId.rows[0].user_id;
+
+      // gets the file extension ie: .jpeg, .png, etc
+      const fileExtension = path.extname(req.file.originalname);
+      const oldFilePath = req.file.path;
+      const newFilePath = `assets/profile-pictures/${userId}${fileExtension}`;
+
+      fs.renameSync(oldFilePath, newFilePath);
+
+      await client.query(`
+      UPDATE Personnel
+      SET profile_image_path = $1
+      WHERE user_id = $2
+    `, [newFilePath, userId]);
+
     const mailOptions = {
       from: process.env.EMAIL_AUTH_USER,
       to: email,
@@ -135,6 +161,7 @@ app.post("/register", async (req, res) => {
     });
 
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [newUserId.rows[0].user_id]);
+    console.log("user:", result.rows[0]);
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Error adding user:', err);

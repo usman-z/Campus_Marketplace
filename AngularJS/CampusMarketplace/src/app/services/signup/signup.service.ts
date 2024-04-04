@@ -9,16 +9,16 @@ export class SignupService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(full_name: string, email: string, password: string, role: string){
-    const url = 'https://uncgmarketplace.com:4443/register';
-    const request = {
-      "full_name": full_name,
-      "email": email,
-      "password": password,
-      "role": role
-    };
+  createUser(full_name: string, email: string, password: string, role: string, profile_img: File){
+    const url = 'http://localhost:8080/register';
+    const formData = new FormData();
+    formData.append('full_name', full_name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('role', role);
+    formData.append('profile_img', profile_img);
 
-    return this.http.post<PersonnelData>(url, request);
+    return this.http.post<PersonnelData>(url, formData);
 
   };
 }

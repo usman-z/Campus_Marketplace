@@ -18,7 +18,7 @@ export class MainPageComponent {
   loading: boolean = false;
   isLoading: boolean = true
   userLoggingIn?: PersonnelData[]
-  profilePicture?: File;
+  profile_img: File | null = null;
 
   first_name: string = ''
   last_name: string = ''
@@ -28,13 +28,17 @@ export class MainPageComponent {
   errorMessage: string = ''
   successMessage: string = '';
 
-  constructor(private router: Router, private loginService: LoginService, private imageUploadService: ImageUploadService, private signUpService: SignupService) {}
+  constructor(private router: Router, private loginService: LoginService, private signUpService: SignupService) {}
+
+  onFileSelected(event: any) {
+    this.profile_img = event.target.files[0];
+  }
 
   register(){
     this.loading = true
-    if(this.first_name && this.last_name && this.email && this.password && this.role){
+    if(this.first_name && this.last_name && this.email && this.password && this.role && this.profile_img){
       let full_name = this.first_name+' '+this.last_name
-      this.signUpService.createUser(full_name, this.email, this.password, this.role)
+      this.signUpService.createUser(full_name, this.email, this.password, this.role, this.profile_img)
         .subscribe({
           next: (response) => {
             this.loading = false
@@ -42,20 +46,6 @@ export class MainPageComponent {
             setTimeout(() => {
               this.successMessage ='';
             }, 4000);
-            
-            let user: PersonnelData = response
-            if (this.profilePicture) {
-              console.log(this.profilePicture)
-              this.imageUploadService.uploadProfilePicture(this.profilePicture, user.user_id)
-              .subscribe({
-                next: (response) => {
-                  console.log('call success')
-                },
-                error: (error) => {
-                  // Handle error response if needed
-                }
-              });
-            }
           },
           error: (error) => {
             this.loading = false
