@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { UserData } from 'src/app/models/user/user.model';
-import { ListingData } from 'src/app/models/listing/listing.model';
-import { ChatData } from 'src/app/models/messages/chat.model';
-import { PersonnelData } from 'src/app/models/personnel/personnel.model';
-import { ChatService } from 'src/app/services/inbox/chat.service';
 import { MessageService } from 'src/app/services/inbox/message.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -31,19 +26,14 @@ export class ListingPageComponent {
     const listingId = +this.route.snapshot.params['id'];
     this.UserService.getListing(listingId).subscribe(listing => {
       this.listing = listing; 
-      console.log(this.listing.seller_id)
       this.UserService.getUserInfo(this.listing.seller_id).subscribe({
         next: (userInfo) => {
           this.seller = userInfo;
-          console.log(this.seller)
-  
         },
         error: (error) => {
           console.error('Error fetching seller information:', error);
         }
       });
-      console.log(this.listing.seller_id)
-
     });
 
   }
@@ -55,7 +45,6 @@ export class ListingPageComponent {
           user: this.user
       }
     };
-    console.log(this.user);
     this.router.navigate(['/sellerProfile', sellerId], navigationExtras);
   }
   
@@ -83,7 +72,7 @@ export class ListingPageComponent {
 
   markSold(listingId: number) {
     this.UserService.markItemSold(listingId).subscribe({
-      next: (response) => {
+      next: () => {
         const navigationExtras: NavigationExtras = {
           state: {
             user: this.user

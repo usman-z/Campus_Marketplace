@@ -492,8 +492,8 @@ app.post('/markItemSold', async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const results = await client.query("DELETE FROM listing WHERE listing_id = $1", [listingId]);
-    res.json(results.rows[0]);
+    const results = await client.query("DELETE FROM Listing WHERE listing_id = $1", [listingId]);
+    res.json(results.rows);
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
