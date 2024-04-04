@@ -41,6 +41,11 @@
           margin: auto;
           flex-direction: column;
   
+          app-loading {
+            display: flex;
+            margin: auto;
+          }
+
           .allListings {
             display: flex;
             margin: auto;

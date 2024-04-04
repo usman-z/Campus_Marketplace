@@ -19,7 +19,7 @@
             <div class="itemPrice"><p>Price: <strong>${{ listing.price }}</strong></p></div>
             <div class="itemDescription"><p>Description: <strong>{{ listing.description }}</strong></p></div>
         </div>
-        <div class="inforight">
+        <div *ngIf="user.user_id != seller.user_id"  class="inforight">
             <div class="inforighttop"><p>Seller Details</p></div>
             <div class="sellerImage"><img src="../../../assets/profile.png" alt=""></div>
             <div class="top"  style="cursor: pointer;" (click)="goToSellerProfile(seller.user_id)"><p><strong>{{ seller.full_name }}</strong></p></div>
@@ -27,7 +27,8 @@
         </div>
       </div>
       <div class="messageButton">
-        <button class="message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is the '+ listing.title + ' still available?')">Send Message</button>
+        <button *ngIf="user.user_id != seller.user_id" class="message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is the '+ listing.title + ' still available?')">Send Message</button>
+        <button *ngIf="user.user_id == seller.user_id" class="message" (click)="markSold(listing.id)">Mark as Sold</button>
       </div>
     </div>
   </div>

@@ -94,4 +94,13 @@ export class UserService {
     return this.http.post<ListingData[]>(url, request);
   }
 
+  markItemSold(listingId: number) {
+    const url = 'https://uncgmarketplace.com:4443/markItemSold';
+    const request = {
+        "listingId": listingId
+    };
+
+    return this.http.post(url, request);
+  }
+
 }
