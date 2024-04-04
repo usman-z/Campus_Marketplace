@@ -81,4 +81,9 @@ export class ListingPageComponent {
     this.router.navigate(['/chat'], navigationExtras);
   }
 
+  markSold(listingId: number) {
+    this.UserService.markItemSold(listingId);
+    window.location.reload();
+  }
+
 }
