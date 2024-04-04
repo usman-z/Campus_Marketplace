@@ -122,7 +122,7 @@ app.post("/register", async (req, res) => {
       from: process.env.EMAIL_AUTH_USER,
       to: email,
       subject: 'Action Required | Verify your Marketplace account',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nBest regards,\nUNCG Marketplace Team"
+      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, http://173.230.140.95:4200/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nGo Spartans,\nUNCG Marketplace Team"
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -207,11 +207,12 @@ app.post("/sendMessage", async(req, res) => {
     await client.query('INSERT INTO Message(sender_id,receiver_id,message,message_time) VALUES($1,$2,$3,CURRENT_TIMESTAMP)', [sender_id, receiver_id, message]);
     const receiver = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [receiver_id]);
     const sender = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [sender_id]);
+
     const mailOptions = {
       from: process.env.EMAIL_AUTH_USER,
-      to: receiver.email,
+      to: receiver.rows[0].email,
       subject: 'New Message | UNCG Marketplace',
-      text: "You have received a new message from "+sender.full_name+" regarding a product.\n\nHappy Selling,\nUNCG Marketplace"
+      text: "Dear "+receiver.rows[0].full_name+",\n\nYou have received a new message from "+sender.rows[0].full_name+" regarding one of your listed products on UNCG Marketplace. Please log in to your account to view and respond to the message promptly. Thank you for your attention to this matter.\n\nGo Spartans,\nUNCG Marketplace Team"
     };
   
     // Send mail
@@ -245,15 +246,17 @@ app.post("/verify", async (req, res) =>  {
       SET email_verified = true
       WHERE user_id = $1`, [userId]);
       
-    const result = await client.query('SELECT * FROM Personnel');
+    const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
 
     const updatedUser = result.rows[0];
+
+    console.log(updatedUser.email)
 
     const mailOptions = {
       from: process.env.EMAIL_AUTH_USER,
       to: updatedUser.email,
-      subject: 'Verification Successful | Welcome to UNCG Marketplace',
-      text: "Thank you for successfully verifying your account, you can now log in and browse UNCG Marketplace.\n\nHappy Selling,\nUNCG Marketplace"
+      subject: 'Welcome to UNCG Marketplace',
+      text: "Dear "+updatedUser.full_name+",\n\nWe are pleased to inform you that your account has been successfully verified. You can now log in to your account and browse UNCG's Marketplace.\n\nThank you for choosing UNCG Marketplace, and we look forward to seeing you succeed on our platform.\n\nGo Spartans,\nUNCG Marketplace Team"
     };
   
     // Send mail
