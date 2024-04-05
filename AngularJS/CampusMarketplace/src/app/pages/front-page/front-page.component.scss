@@ -1,5 +1,4 @@
 .bodydiv {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     padding-bottom: 5em;
@@ -80,7 +79,6 @@
 
 @media only screen and (min-width: 768px) {
     .bodydiv {
-        border: 1px solid green;
         display: flex;
         flex-direction: column;
         padding-bottom: 5em;
