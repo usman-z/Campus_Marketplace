@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from '@coreui/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ReviewPageComponent } from './pages/review-page/review-page.component';
 import { ListingPageComponent } from './pages/listing-page/listing-page.component';
@@ -58,7 +59,8 @@ import { FrontPageComponent } from './pages/front-page/front-page.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CarouselModule
+    CarouselModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
