@@ -55,9 +55,9 @@
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="file" class="form-style" name="profilePicture" [(ngModel)]="profilePicture" [ngModelOptions]="{standalone: true}" required>
+                          <input type="file" class="form-style" accept="image/*" (change)="onFileSelected($event)"  [name]="profile_img" required>
                           <i class="input-icon uil uil-image"></i>
-                      </div>
+                        </div>
                         <div class ="form-group mt-4">
                           <label class="role"><input type="radio" name="role" [(ngModel)]="role" value="Student" required>Student</label>
                           <label style="margin-left: 10px;" class="role"><input type="radio" name="role" [(ngModel)]="role" value="Faculty" required>Faculty</label>

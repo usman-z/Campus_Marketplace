@@ -14,10 +14,13 @@ import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.component';
+import { FrontPageComponent } from './pages/front-page/front-page.component';
+
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: '', component: FrontPageComponent },
+  { path: 'main', component: MainPageComponent },
   { path: 'review/:id', component: ReviewPageComponent },
   { path: 'listing/:id', component: ListingPageComponent },
   { path: 'home', component: HomePageComponent },
