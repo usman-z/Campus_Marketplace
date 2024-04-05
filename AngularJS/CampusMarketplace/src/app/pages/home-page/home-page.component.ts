@@ -12,7 +12,7 @@ export class HomePageComponent {
   user?: UserData 
   itemSearched: string = ''
 
-  slides: any[] = new Array(2).fill({id: -1, src: '', title: '', subtitle: ''});
+  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -23,11 +23,14 @@ export class HomePageComponent {
     this.user = history.state.user[0]
 
     this.slides[0] = {
-      src: '../../assets/uncg_building.jpeg',
+      src: 'https://www.uncg.edu/wp-content/uploads/2022/10/PIC30643_Summer-2021-Campus-Aerial-11.jpg'
     };
     this.slides[1] = {
+      src: '../../assets/uncg_building.jpeg',
+    };
+    this.slides[2] = {
       src: '../../assets/uncg_img4.jpeg'
-    }
+    };
   }
 
   search() {
