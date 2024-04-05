@@ -144,21 +144,7 @@ app.post("/register", upload2.single('profile_img'), async (req, res) => {
       WHERE user_id = $2
     `, [newFilePath, userId]);
 
-    const mailOptions = {
-      from: process.env.EMAIL_AUTH_USER,
-      to: email,
-      subject: 'Action Required | Verify your Marketplace account',
-      text: "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, https://uncgmarketplace.com/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nGo Spartans,\nUNCG Marketplace Team"
-    }
-
-    transporter.sendMail(mailOptions, (error, info) => {
-     if (error) {
-         console.log('Error sending email:', error);
-
-     } else {
-         console.log('Email sent:', info.response);
-     }
-    });
+    sendEmail(email, 'Action Required | Verify your Marketplace account', "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, https://uncgmarketplace.com/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nGo Spartans,\nUNCG Marketplace Team")
 
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [newUserId.rows[0].user_id]);
     console.log("user:", result.rows[0]);
@@ -232,27 +218,6 @@ app.post("/sendMessage", async(req, res) => {
   try { 
     await client.connect();
     await client.query('INSERT INTO Message(sender_id,receiver_id,message,message_time) VALUES($1,$2,$3,CURRENT_TIMESTAMP)', [sender_id, receiver_id, message]);
-    const receiver = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [receiver_id]);
-    const sender = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [sender_id]);
-
-    const mailOptions = {
-      from: process.env.EMAIL_AUTH_USER,
-      to: receiver.rows[0].email,
-      subject: 'New Message | UNCG Marketplace',
-      text: "Dear "+receiver.rows[0].full_name+",\n\nYou have received a new message from "+sender.rows[0].full_name+" regarding one of your listed products on UNCG Marketplace. Please log in to your account to view and respond to the message promptly. Thank you for your attention to this matter.\n\nGo Spartans,\nUNCG Marketplace Team"
-    };
-  
-    // Send mail
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error sending email:', error);
-        res.status(500).send('Error sending email');
-      } else {
-        console.log('Email sent:', info.response);
-        res.status(200).send('Success');
-      }
-    });
-
     const result = await client.query('SELECT * FROM Message');
     res.json(result.rows);
   } catch (err) {
@@ -276,26 +241,9 @@ app.post("/verify", async (req, res) =>  {
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [userId]);
 
     const updatedUser = result.rows[0];
-
-    console.log(updatedUser.email)
-
-    const mailOptions = {
-      from: process.env.EMAIL_AUTH_USER,
-      to: updatedUser.email,
-      subject: 'Welcome to UNCG Marketplace',
-      text: "Dear "+updatedUser.full_name+",\n\nWe are pleased to inform you that your account has been successfully verified. You can now log in to your account and browse UNCG's Marketplace.\n\nThank you for choosing UNCG Marketplace, and we look forward to seeing you succeed on our platform.\n\nGo Spartans,\nUNCG Marketplace Team"
-    };
   
-    // Send mail
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error sending email:', error);
-        res.status(500).send('Error sending email');
-      } else {
-        console.log('Email sent:', info.response);
-        res.status(200).send('Success');
-      }
-    });
+    sendEmail(updatedUser.email, 'Welcome to UNCG Marketplace', "Dear "+updatedUser.full_name+",\n\nWe are pleased to inform you that your account has been successfully verified. You can now log in to your account and browse UNCG's Marketplace.\n\nThank you for choosing UNCG Marketplace, and we look forward to seeing you succeed on our platform.\n\nGo Spartans,\nUNCG Marketplace Team")
+
     res.json(result.rows);
   } catch (err) {
     console.error('Error executing query:', err);
@@ -342,23 +290,8 @@ app.post("/rate", async (req, res) =>  {
 }); 
 
 app.get("/send", (req, res) => {
-  const mailOptions = {
-    from: process.env.EMAIL_AUTH_USER,
-    to: 'd_patel5@uncg.edu',
-    subject: 'UNCG Marketplace debug',
-    text: "UNCG Marketplace!"
-  };
-
-  // Send mail
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log('Error sending email:', error);
-      res.status(500).send('Error sending email');
-    } else {
-      console.log('Email sent:', info.response);
-      res.status(200).send('Success');
-    }
-  });
+  sendEmail('u_zia@uncg.edu', 'UNCG Marketplace debug', "UNCG Marketplace!")
+  res.status(200).send('Email Sent');
 });
 
 const storage = multer.diskStorage({
@@ -384,8 +317,8 @@ app.post('/addListing', upload.array('images'), async (req, res) => {
   try {
       await client.connect();
       const insertResult = await client.query(`
-          INSERT INTO Listing (title, condition, price, description, seller_id)
-          VALUES ($1, $2, $3, $4, $5)
+          INSERT INTO Listing (title, condition, price, description, seller_id, listing_time, sold)
+          VALUES ($1, $2, $3, $4, $5,CURRENT_TIMESTAMP,false)
           RETURNING listing_id`,
           [title, condition, price, description, seller_id]);
 
@@ -519,7 +452,7 @@ app.post('/markItemSold', async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const results = await client.query("DELETE FROM Listing WHERE listing_id = $1", [listingId]);
+    const results = await client.query("UPDATE Listing SET sold = true WHERE listing_id = $1", [listingId]);
     res.json(results.rows);
   } catch (err) {
     console.error('Error executing query:', err);
@@ -528,3 +461,38 @@ app.post('/markItemSold', async (req, res) => {
     await client.end();
   }
  });
+
+ app.post('/newMessageEmail', async (req, res) => {
+  const { sender_id, receiver_id} = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const receiver = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [receiver_id]);
+    const sender = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [sender_id]);
+    sendEmail(receiver.rows[0].email, 'New Message | UNCG Marketplace', "Dear "+receiver.rows[0].full_name+",\n\nYou have received a new message from "+sender.rows[0].full_name+" regarding one of your listed products on UNCG Marketplace. Please log in to your account to view and respond to the message promptly. Thank you for your attention to this matter.\n\nGo Spartans,\nUNCG Marketplace Team")
+    res.status(200).send('Email Sent');
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+ });
+
+function sendEmail(emailTo, emailSubject, emailContent) {
+  const mailOptions = {
+    from: process.env.EMAIL_AUTH_USER,
+    to: emailTo,
+    subject: emailSubject,
+    text: emailContent
+  }
+
+  transporter.sendMail(mailOptions, (error, info) => {
+   if (error) {
+       console.log('Error sending email:', error);
+
+   } else {
+       console.log('Email sent:', info.response);
+   }
+  });
+}
