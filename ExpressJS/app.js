@@ -437,7 +437,7 @@ app.post('/getUserListings', async (req, res) => {
   const client = new Client(dbConfig);
   try {
     await client.connect();
-    const results = await client.query("SELECT * FROM listing WHERE seller_id = $1", [userId]);
+    const results = await client.query("SELECT * FROM listing WHERE seller_id = $1 ORDER BY listing_time", [userId]);
     res.json(results.rows);
   } catch (err) {
     console.error('Error executing query:', err);

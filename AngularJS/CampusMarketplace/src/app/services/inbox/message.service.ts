@@ -18,4 +18,14 @@ export class MessageService {
 
     return this.http.post(url, request);
   };
+
+  sendMessageEmail(sender_id: number, receiver_id: number){
+    const url = 'https://uncgmarketplace.com:4443/newMessageEmail';
+    const request ={
+      "sender_id": sender_id,
+      "receiver_id": receiver_id,
+    }
+
+    return this.http.post(url, request);
+  };
 }
