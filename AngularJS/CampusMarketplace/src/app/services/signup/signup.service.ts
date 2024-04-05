@@ -10,7 +10,7 @@ export class SignupService {
   constructor(private http: HttpClient) { }
 
   createUser(full_name: string, email: string, password: string, role: string, profile_img: File){
-    const url = 'http://localhost:8080/register';
+    const url = 'https://uncgmarketplace.com:4443/register';
     const formData = new FormData();
     formData.append('full_name', full_name);
     formData.append('email', email);
