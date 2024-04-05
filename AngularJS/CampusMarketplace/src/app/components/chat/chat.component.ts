@@ -20,6 +20,7 @@ export class ChatComponent {
   activeUser?: PersonnelData
   otherUser?: PersonnelData
   newMessage: string = ''
+  messageEmailSent: boolean = false
 
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService, private messageService: MessageService) {}
 
@@ -67,6 +68,11 @@ export class ChatComponent {
       this.messageService.sendMessage(this.activeUser.user_id, this.otherUser.user_id, this.newMessage).subscribe(() => {
         this.scrollToBottom();
         this.newMessage = '';
+        if(this.activeUser && this.otherUser && this.messageEmailSent == false) {
+          this.messageService.sendMessageEmail(this.activeUser.user_id, this.otherUser.user_id).subscribe(() => {
+            this.messageEmailSent = true
+          })
+        }
       });
     }
   }
