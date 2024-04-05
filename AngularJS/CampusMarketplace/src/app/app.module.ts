@@ -26,6 +26,7 @@ import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.component';
+import { FrontPageComponent } from './pages/front-page/front-page.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.c
     ResultComponent,
     ListingComponent,
     SellerProfileComponent,
-    SellerlistingsComponent
+    SellerlistingsComponent,
+    FrontPageComponent
   ],
   imports: [
     BrowserModule,
