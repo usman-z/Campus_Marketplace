@@ -11,6 +11,9 @@ export class SellerProfileComponent {
 
   user: any
   seller: any
+  load: boolean = true
+  listings?: any[] 
+  listing: any = {};
 
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute) {}
 
@@ -21,12 +24,17 @@ export class SellerProfileComponent {
     this.UserService.getUserInfo(sellerId).subscribe({
         next: (userInfo) => {
           this.seller = userInfo;
+          this.UserService.userListings(this.seller.user_id).subscribe({
+            next: (response) => { 
+              this.load = false;
+              this.listings = response;
+            }
+          })
         },
         error: (error) => {
           console.error('Error fetching seller information:', error);
         }
       });
-    
   }
 
   goToRate(sellerId: number): void {
@@ -37,5 +45,14 @@ export class SellerProfileComponent {
     };
     this.router.navigate(['/review', sellerId], navigationExtras);
   }
+
+  goToListingDetail(listingId: number): void {
+    const navigationExtras: NavigationExtras = {
+        state: {
+            user: this.user
+        }
+    };
+    this.router.navigate(['/listing', listingId], navigationExtras);
+}
 
 }

@@ -76,6 +76,11 @@ export class UserService {
     return this.http.post<ListingData[]>(url, request);
   }
 
+  getAllListings() {
+    const url = 'https://uncgmarketplace.com:4443/allListings';
+    return this.http.get<any[]>(url);
+  }
+
   userListings(userId: number) {
     const url = 'https://uncgmarketplace.com:4443/getUserListings';
     const request = {

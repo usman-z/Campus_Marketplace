@@ -69,6 +69,20 @@ app.get("/all", async (req, res) => {
   }
 });
 
+app.get("/allListings", async (req, res) => {
+  const client = new Client(dbConfig);
+  try {
+    await client.connect(); // Connect to the PostgreSQL database
+    const result = await client.query('SELECT * FROM Listing');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const client = new Client(dbConfig);

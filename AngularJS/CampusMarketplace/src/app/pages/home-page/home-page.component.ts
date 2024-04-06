@@ -98,4 +98,16 @@ export class HomePageComponent {
     this.router.navigate(['/profile'], navigationExtras);
   }
 
+  allListings() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        user: this.user
+      },
+      queryParams: {
+        search: 'all'
+      }
+    };
+    this.router.navigate(['/result'], navigationExtras);
+  }
+
 }

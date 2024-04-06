@@ -16,14 +16,19 @@
           <img class="profileImage" *ngIf="!seller?.profile_image_path" src="../../../assets/profile.png" alt="">
         </div>
         <div class="review">
-          <div class="top"><p>{{ seller?.full_name }}</p></div>
+          <div class="top" style="text-align: center;"><p>{{ seller?.full_name }}</p></div>
           <div class="bottom">
             <div class="bottomtop"><div class="rating">★★★★★</div></div>
             <div class="bottombottom"><p><strong>{{ seller?.rating?.toFixed(1) }}</strong> ({{ seller?.total_ratings || 0 }} reviews)</p></div>
           </div>
         </div>
-        <div class="buttons">
+        <div class="buttons" style="margin-bottom: 5em;">
           <div class="buttonOne" (click)="goToRate(seller.user_id)"><app-custom-button buttonName="Rate Seller"></app-custom-button></div>
         </div>
+        <app-loading *ngIf="load"></app-loading>
+        <h1 *ngIf="!load" style="text-align: center; margin-bottom: 1.5em;">Seller's Listings</h1>
+        <div class="allListings" *ngFor="let listing of listings">
+          <app-listing *ngIf="!listing.sold" (click)="goToListingDetail(listing.listing_id)" [listing_id]="listing.listing_id" [title]="listing.title" [condition]="listing.condition" [price]="listing.price" [description]="listing.description" [seller_id]="listing.seller_id" [images_folder_path]="'https://uncgmarketplace.com:4443/' + listing.images_folder" [listing_time]="listing.listing_time" [sold]="listing.sold"></app-listing>
+      </div>
     </div>
   </div>

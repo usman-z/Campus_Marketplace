@@ -27,12 +27,22 @@ export class ResultComponent {
       const searchTerm = params['search'];
       this.itemSearched = searchTerm
 
-      this.UserService.searchListings(searchTerm).subscribe({
-        next: (response) => { 
-          this.load = false;
-          this.listings = response;
-        }
-    })
+      if(searchTerm == 'all') {
+        this.UserService.getAllListings().subscribe({
+          next: (response) => { 
+            this.load = false;
+            this.listings = response;
+          }
+        })
+      }
+      else {
+        this.UserService.searchListings(searchTerm).subscribe({
+          next: (response) => { 
+            this.load = false;
+            this.listings = response;
+          }
+        })
+      }
     });
   }
 
