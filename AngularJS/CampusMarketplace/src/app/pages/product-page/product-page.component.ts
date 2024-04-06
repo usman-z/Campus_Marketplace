@@ -46,7 +46,6 @@ export class ProductPageComponent {
                 user: this.user
             }
           };
-          console.log(this.user);
           this.router.navigate(['/profile'], navigationExtras);
         });
     }else{
