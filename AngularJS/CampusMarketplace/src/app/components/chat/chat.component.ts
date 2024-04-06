@@ -21,6 +21,7 @@ export class ChatComponent {
   otherUser?: PersonnelData
   newMessage: string = ''
   messageEmailSent: boolean = false
+  intervalId: any
 
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService, private messageService: MessageService) {}
 
@@ -32,9 +33,9 @@ export class ChatComponent {
       this.loadMessages(activeUserId, otherUserId);
       this.load = false;
 
-      setInterval(() => {
+      this.intervalId = setInterval(() => {
         this.loadMessages(activeUserId, otherUserId);
-      }, 500);
+      }, 1000);
 
       this.userService.getUserInfo(activeUserId).subscribe({
         next: (response) => {
@@ -48,6 +49,12 @@ export class ChatComponent {
         }
       })
     });
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   ngAfterViewInit() {

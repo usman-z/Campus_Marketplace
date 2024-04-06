@@ -13,6 +13,7 @@ export class InboxComponent {
   user?: UserData
   messages?: MessageData[]
   load: boolean = true;
+  intervalId: any
 
   constructor(private router: Router, private route: ActivatedRoute, private inboxService: InboxService) {}
 
@@ -31,10 +32,16 @@ export class InboxComponent {
           }
         });
   
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
           this.loadInbox(user_id);
-        }, 100);
+        }, 1000);
       }
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 
