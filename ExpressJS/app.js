@@ -470,7 +470,7 @@ app.post('/markItemSold', async (req, res) => {
     const receiver = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [receiver_id]);
     const sender = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [sender_id]);
     sendEmail(receiver.rows[0].email, 'New Message | UNCG Marketplace', "Dear "+receiver.rows[0].full_name+",\n\nYou have received a new message from "+sender.rows[0].full_name+" regarding one of your listed products on UNCG Marketplace. Please log in to your account to view and respond to the message promptly. Thank you for your attention to this matter.\n\nGo Spartans,\nUNCG Marketplace Team")
-    res.status(200).send('Email Sent');
+    res.status(200).json({ message: 'Email Sent' })
   } catch (err) {
     console.error('Error executing query:', err);
     res.status(500).send('Error executing query');
