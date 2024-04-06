@@ -496,3 +496,18 @@ function sendEmail(emailTo, emailSubject, emailContent) {
    }
   });
 }
+
+app.post("/getMessageCount", async (req, res) => {
+  const { userId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const result = await client.query('SELECT count(*) FROM Message WHERE sender_id = $1 OR receiver_id = $1', [userId]);
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});
