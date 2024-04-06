@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
-import { ImageUploadService } from 'src/app/services/images/image-upload.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({

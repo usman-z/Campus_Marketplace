@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { UserData } from 'src/app/models/user/user.model';
-import { ListingData } from 'src/app/models/listing/listing.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { HttpClient } from '@angular/common/http';
 

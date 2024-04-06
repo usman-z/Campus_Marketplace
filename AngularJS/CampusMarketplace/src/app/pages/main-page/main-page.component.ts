@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-
 import { NavigationExtras, Router } from '@angular/router';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
-import { UserData } from 'src/app/models/user/user.model';
-import { ImageUploadService } from 'src/app/services/images/image-upload.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
-import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-main-page',

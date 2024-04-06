@@ -289,11 +289,6 @@ app.post("/rate", async (req, res) =>  {
     }
 }); 
 
-app.get("/send", (req, res) => {
-  sendEmail('u_zia@uncg.edu', 'UNCG Marketplace debug', "UNCG Marketplace!")
-  res.status(200).send('Email Sent');
-});
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const sellerImagePath = path.join('assets/listing-pictures', req.body.seller_id);

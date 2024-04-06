@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { PersonnelData } from 'src/app/models/personnel/personnel.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/models/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-review-page',

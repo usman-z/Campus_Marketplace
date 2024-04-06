@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { PersonnelData } from 'src/app/models/personnel/personnel.model';
-import { UserData } from 'src/app/models/user/user.model';
 import { UserService } from 'src/app/services/user/user.service';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-seller-profile',
