@@ -147,7 +147,6 @@ app.post("/register", upload2.single('profile_img'), async (req, res) => {
     sendEmail(email, 'Action Required | Verify your Marketplace account', "Dear "+full_name+",\n\nWelcome to UNCG Marketplace! We are thrilled to have you as a new member of our community.\nPlease using this given link, https://uncgmarketplace.com/verify?userId="+newUserId.rows[0].user_id+", verify your account.\n\nGo Spartans,\nUNCG Marketplace Team")
 
     const result = await client.query('SELECT * FROM Personnel WHERE user_id = $1', [newUserId.rows[0].user_id]);
-    console.log("user:", result.rows[0]);
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Error adding user:', err);

@@ -15,11 +15,11 @@
       <div class="results">
         <app-loading *ngIf="load"></app-loading>
         <p *ngIf="!listings?.length && !load">0 results found</p>
-        <p>Active Listings</p>
+        <p *ngIf="listings?.length && !load">Active Listings</p>
         <div class="allListings" *ngFor="let listing of listings">
             <app-listing *ngIf="!listing.sold" (click)="goToListingDetail(listing.listing_id)" [listing_id]="listing.listing_id" [title]="listing.title" [condition]="listing.condition" [price]="listing.price" [description]="listing.description" [seller_id]="listing.seller_id" [images_folder_path]="'https://uncgmarketplace.com:4443/' + listing.images_folder" [listing_time]="listing.listing_time" [sold]="listing.sold"></app-listing>
         </div>
-        <p style="margin-top: 3em;">Sold Listings</p>
+        <p *ngIf="listings?.length && !load" style="margin-top: 3em;">Sold Listings</p>
         <div class="allListings" *ngFor="let listing of listings">
           <app-listing *ngIf="listing.sold" (click)="goToListingDetail(listing.listing_id)" [listing_id]="listing.listing_id" [title]="listing.title" [condition]="listing.condition" [price]="listing.price" [description]="listing.description" [seller_id]="listing.seller_id" [images_folder_path]="'https://uncgmarketplace.com:4443/' + listing.images_folder" [listing_time]="listing.listing_time" [sold]="listing.sold"></app-listing>
       </div>
