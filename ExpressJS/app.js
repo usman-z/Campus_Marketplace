@@ -23,7 +23,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
 
-
 const dbConfig = {
   host: process.env.POSTGRESQL_HOST,
   user: process.env.POSTGRESQL_USER,
@@ -355,7 +354,6 @@ app.post('/addListing', upload.array('images'), async (req, res) => {
       await client.end();
   }
 });
-
 
 app.post('/removeUser', async (req, res) => {
   const { userId } = req.body;
