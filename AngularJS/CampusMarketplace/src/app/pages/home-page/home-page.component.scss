@@ -34,11 +34,14 @@
                 margin-left: 1em;
                 display: flex;
                 cursor: pointer;
-                img {
-                    width: 5em;
+                .profileImage {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 50%;
                 }
                 &:hover {
-                    img {
+                    .profileImage {
                         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
                     }
                 }
@@ -123,11 +126,14 @@
                     margin-left: 1em;
                     display: flex;
                     cursor: pointer;
-                    img {
-                        width: 5em;
+                    .profileImage {
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        border-radius: 50%;
                     }
                     &:hover {
-                        img {
+                        .profileImage {
                             box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
                         }
                     }

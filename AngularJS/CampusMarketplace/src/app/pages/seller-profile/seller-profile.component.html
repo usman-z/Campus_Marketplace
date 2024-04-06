@@ -12,7 +12,8 @@
     </div>
     <div class="body">
         <div class="logo">
-            <img src="../../../assets/profile.png" alt="profile image"/>
+          <img class="profileImage" *ngIf="seller?.profile_image_path" [src]="'https://uncgmarketplace.com:4443/' + seller?.profile_image_path" alt="profile image"/>
+          <img class="profileImage" *ngIf="!seller?.profile_image_path" src="../../../assets/profile.png" alt="">
         </div>
         <div class="review">
           <div class="top"><p>{{ seller?.full_name }}</p></div>

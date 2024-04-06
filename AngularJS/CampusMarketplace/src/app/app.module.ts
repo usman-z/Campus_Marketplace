@@ -21,7 +21,6 @@ import { InboxComponent } from './pages/inbox/inbox.component';
 import { MessageComponent } from './components/message/message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { SellComponent } from './pages/sell/sell.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { ResultComponent } from './pages/result/result.component';
 import { ListingComponent } from './components/listing/listing.component';
@@ -46,7 +45,6 @@ import { FrontPageComponent } from './pages/front-page/front-page.component';
     MessageComponent,
     ChatComponent,
     LoadingComponent,
-    SellComponent,
     VerifyComponent,
     ResultComponent,
     ListingComponent,

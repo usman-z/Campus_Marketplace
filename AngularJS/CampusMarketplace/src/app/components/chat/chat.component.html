@@ -16,7 +16,8 @@
         </div>
         <div class="chat">
             <div class="info">
-                <img src="../../../assets/profile.png" alt="">
+                <img class="profileImage" *ngIf="otherUser?.profile_image_path" [src]="'https://uncgmarketplace.com:4443/' + otherUser?.profile_image_path" alt="profile image"/>
+                <img class="profileImage" *ngIf="!otherUser?.profile_image_path" src="../../../assets/profile.png" alt="">
                 <p><strong>{{ otherUser?.full_name }}</strong></p>
             </div>
             <div class="messages" id="messagesContainer">
