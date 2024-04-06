@@ -1,56 +1,65 @@
-.content {
+.review {
+    width: 80vw;
     margin: auto;
-    width: 50vw;
     display: flex;
     flex-direction: column;
-
-    .rate {
-        margin-bottom: 3em;
-        margin-top: 5em;
-
-        p {
-            text-align: center;
-            font-size: x-large;
-        }
-    }
-    .collaborate {
+    padding: 1%;
+    margin-top: 5em;
+    .header {
         border-bottom: 1px solid black;
-        padding-bottom: 4em;
-        p {
-            text-align: center;
-            font-size: x-large;
-        }
-        .labelYes {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3em;
+        .back-button {
             display: flex;
-            width: fit-content;
-            margin-left: 30%;
-            font-size: x-large;
-            margin-bottom: .3em;
         }
-        .labelNo {
+        .title {
+            vertical-align: middle;
             display: flex;
-            width: fit-content;
-            margin-left: 30%;
-            font-size: x-large;
-            margin-bottom: .3em;
+            font-size: 30px;
         }
     }
-    button {
+    .body {
         display: flex;
-        margin-left: 45%;
-        font-size: large;
-        width: fit-content;
-        margin-top: 2.5em;
-        padding: .5em;
-        background-color: #4caf50; /* Green */
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-    
-      button:hover {
-        background-color: #45a049; /* Darker green on hover */
-      }
+        flex-direction: column;
+        .logo {
+            display: flex;
+            margin: auto;
+            margin-bottom: 5em;
+        }
+        .rate{
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            p {
+                display: flex;
+                width: 90%;
+                justify-content: center;
+                font-size: 20px;
+                margin: auto;
+            }
+            app-star-rating {
+                margin-top: 2em;
+                margin-bottom: 4em;
+                display: flex;
+                justify-content: center;
+            }
+        }
+        app-custom-button {
+            display: flex;
+            margin: auto;
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
+    .review {
+        width: 50vw;
+        .body {
+            .rate{
+
+            }
+        }
+    }
 }
