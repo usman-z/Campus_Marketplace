@@ -21,8 +21,6 @@ export class SellerProfileComponent {
     this.UserService.getUserInfo(sellerId).subscribe({
         next: (userInfo) => {
           this.seller = userInfo;
-          console.log(this.seller)
-  
         },
         error: (error) => {
           console.error('Error fetching seller information:', error);
@@ -37,7 +35,6 @@ export class SellerProfileComponent {
           user: this.user
       }
     };
-    console.log(this.user);
     this.router.navigate(['/review', sellerId], navigationExtras);
   }
 

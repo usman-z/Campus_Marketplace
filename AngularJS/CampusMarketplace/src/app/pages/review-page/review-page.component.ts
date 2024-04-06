@@ -25,10 +25,6 @@ export class ReviewPageComponent {
         next: (userInfo) => {
           this.userBeingRated = userInfo;
           this.rateUser = this.userBeingRated.user_id
-          console.log(this.userBeingRated)
-          console.log(this.userBeingRated.rating)
-
-  
         },
         error: (error) => {
           console.error('Error fetching seller information:', error);
@@ -39,8 +35,6 @@ export class ReviewPageComponent {
 
 
   submitRating() {
-    console.log(this.rateUser)
-    console.log(this.userRating)
     this.UserService.rateUser(this.rateUser, this.userRating).subscribe(
       response => {
         this.router.navigate(['/feedback'], {

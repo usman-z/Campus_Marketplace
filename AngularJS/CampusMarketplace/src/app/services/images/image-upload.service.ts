@@ -11,8 +11,6 @@ export class ImageUploadService {
   uploadProfilePicture(file: File, userId: number) {
     const url = 'https://uncgmarketplace.com:4443/uploadProfilePicture';
 
-    console.log(file)
-
     const formData = new FormData();
     // const renamedFile = new File([file], `${userId}_${file.name}`);
     // formData.append('image', renamedFile);

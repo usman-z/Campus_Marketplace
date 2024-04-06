@@ -107,21 +107,58 @@
                 margin-bottom: 4em;
             }
             .product{
-                width: 80%;
+                width: 80vw;
                 display: flex;
                 padding: 1em;
                 flex-direction: column;
                 margin: auto;
     
-                .productTitle,
-                .productCondition,
-                .productPrice,
-                .productDescription,
                 .productPictures {
                     font-size: 17px;
                     display: flex;
                     align-items: center; /* Vertically center elements */
+                    margin-bottom: 2.4em; /* Add some space between inputs */
+                    width: 300px;
+                    
+                    label {
+                        margin-right: 1em;
+                        width: 100px; /* Fixed width for labels */
+                    }
+    
+                    input {
+                        flex: 1; /* Take up remaining space */
+                        padding-left: 10px;
+                        box-sizing: border-box; /* Include padding in width calculation */
+                        font-size: 11.9px;
+                    }
+                }
+    
+                .productTitle {
+                    font-size: 17px;
+                    display: flex;
+                    align-items: center; /* Vertically center elements */
                     margin-bottom: 1em; /* Add some space between inputs */
+                    width: 300px;
+                    
+                    label {
+                        margin-right: 1em;
+                        width: 100px; /* Fixed width for labels */
+                    }
+    
+                    input {
+                        flex: 1; /* Take up remaining space */
+                        padding-left: 10px;
+                        box-sizing: border-box; /* Include padding in width calculation */
+                        font-size: 15px;
+                    }
+                }
+
+                .productCondition {
+                    font-size: 17px;
+                    display: flex;
+                    align-items: center; /* Vertically center elements */
+                    margin-bottom: 1em; /* Add some space between inputs */
+                    width: 300px;
                     
                     label {
                         margin-right: 1em;
@@ -134,15 +171,43 @@
                         box-sizing: border-box; /* Include padding in width calculation */
                     }
                 }
-    
                 .productPrice {
+                    font-size: 17px;
+                    display: flex;
+                    align-items: center; /* Vertically center elements */
+                    margin-bottom: 1em; /* Add some space between inputs */
+                    width: 320px;
+                    
+                    label {
+                        margin-right: 1em;
+                        width: 100px; /* Fixed width for labels */
+                    }
+    
                     input {
-                        width: 55%;
+                        flex: 1; /* Take up remaining space */
+                        padding-left: 10px;
+                        box-sizing: border-box; /* Include padding in width calculation */
+                        font-size: 15px;
                     }
                 }
+                .productDescription {
+                    font-size: 17px;
+                    display: flex;
+                    align-items: center; /* Vertically center elements */
+                    margin-bottom: 1em; /* Add some space between inputs */
+                    width: 300px;
+                    
+                    label {
+                        margin-right: 1em;
+                        width: 100px; /* Fixed width for labels */
+                    }
     
-                .productPictures {
-                    margin-bottom: 2em;
+                    input {
+                        flex: 1; /* Take up remaining space */
+                        padding-left: 10px;
+                        box-sizing: border-box; /* Include padding in width calculation */
+                        font-size: 15px;
+                    }
                 }
     
                 .submitProduct {

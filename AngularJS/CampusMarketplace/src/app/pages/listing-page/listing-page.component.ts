@@ -52,7 +52,7 @@ export class ListingPageComponent {
   sendMessage(sender_id: number, receiver_id: number, message: string): void {
     this.MessageService.sendMessage(sender_id, receiver_id, message).subscribe({
         next: (response) => {
-            console.log('Message sent:', response);
+            
         },
         error: (error) => {
             console.error('Error sending message:', error);
