@@ -68,7 +68,7 @@
     .listings {
         width: 80vw;
         margin: auto;
-        margin-top: 8em;
+        margin-top: 6em;
         display: flex;
         flex-direction: column;
         padding: 1%;
@@ -78,14 +78,14 @@
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 7em;
+          margin-bottom: 4em;
           .back-button {
               display: flex;
           }
           .title {
               vertical-align: middle;
               display: flex;
-              font-size: 30px;
+              font-size: 24px;
           }
         }
         .body {
@@ -94,7 +94,7 @@
           .logo {
               display: flex;
               margin: auto;
-              margin-bottom: 10em;
+              margin-bottom: 5em;
           }
           .results {
               display: flex;
@@ -108,7 +108,7 @@
                 display: flex;
                 width: fit-content;
                 margin: auto;
-                margin-bottom: 10em;
+                margin-bottom: 3em;
                 app-listing {
                   display: flex;
                   cursor: pointer; 
@@ -117,8 +117,9 @@
       
               p {
                   color: gray;
-                  font-size: 30px;
+                  font-size: 25px;
                   text-align: center;
+                  margin-bottom: 1em;
                   width: 100%; 
               }
           }

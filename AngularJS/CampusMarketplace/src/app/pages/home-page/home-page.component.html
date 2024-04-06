@@ -1,18 +1,20 @@
 <div class="mainContainer">
-  <div class="header">
-    <div class="title">
-      <p>Marketplace</p>
+  <div class="navheader">
+    <div class="left">
+        <img src="../../../assets/uncg_emblem.png" alt="">
     </div>
-    <div class="buttons">
-        <div class="chat" (click)="chat()" id="chatnotification">
-            <img src="../../../assets/chat.png" alt="chat">
+    <div class="right">
+        <div class="chat" (click)="chat()">
+            <img src="../../../assets/message.png" alt="">
+            <p>Inbox</p>
         </div>
         <div class="profile" (click)="profile()">
           <img class="profileImage" *ngIf="user?.profile_image_path" [src]="'https://uncgmarketplace.com:4443/' + user?.profile_image_path" alt="profile image"/>
           <img class="profileImage" *ngIf="!user?.profile_image_path" src="../../../assets/profile.png" alt="">
-        </div>
+          <p>Profile</p>
+      </div>
     </div>
-  </div>
+</div>
   <div class="body">
       <div class="logo">
           <img src="../../../assets/logo.png" alt="UNCG logo"/>

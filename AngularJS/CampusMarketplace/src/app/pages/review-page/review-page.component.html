@@ -1,8 +1,23 @@
-<div class="content">
-    <div class="backButton"><app-back-button></app-back-button></div>
-    <div class="rate">
-        <p>How would you rate your experience with {{ userBeingRated?.full_name }}</p>
-        <app-star-rating [(rating)]="userRating"></app-star-rating>
+<div class="review">
+    <div class="header">
+        <div class="back-button">
+            <app-back-button></app-back-button>
+        </div>
+      <div class="title">
+        <p>Review </p>
+      </div>
+      <div class="empty">
+
+      </div>
     </div>
-    <button (click)="submitRating()">Submit</button>
-</div>
+    <div class="body">
+        <div class="logo">
+            <img src="../../../assets/logo.png" alt="UNCG logo"/>
+        </div>
+        <div class="rate">
+            <p>How would you rate your experience with {{ userBeingRated?.full_name }}?</p>
+            <app-star-rating [(rating)]="userRating"></app-star-rating>
+        </div>
+        <app-custom-button (click)="submitRating()"  buttonName="Submit"></app-custom-button>
+    </div>
+  </div>
