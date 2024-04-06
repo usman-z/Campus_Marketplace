@@ -138,20 +138,32 @@
             }
         }
         .info {
-            display: flex;
+            display: center;
             width: 400px;
             margin: auto;
             p {
                 text-align: center;
-                font-size: 16px;
+                font-size: 17px;
                 font-weight: 500;
+            }
+        }
+        .disclaimer {
+            display: center;
+            width: 400px;
+            margin: auto;
+            p {
+                text-align: center;
+                font-size: 15px;
+                font-weight: 300;
             }
         }
         .uncg_image {
             margin: auto;
-            width: 400px;
+            width: 600px;
             margin-top: 2em;
+            margin-bottom: 2em;
             img {
+                aspect-ratio: 3/2;
                 width: 100%;
             }
         }
