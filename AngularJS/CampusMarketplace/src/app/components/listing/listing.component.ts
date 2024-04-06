@@ -13,6 +13,8 @@ export class ListingComponent {
   @Input() description: string = ''
   @Input() seller_id: number = 0
   @Input() images_folder_path: string = ''
+  @Input() listing_time: string = ''
+  @Input() sold: boolean = false
   
 
   constructor() {}

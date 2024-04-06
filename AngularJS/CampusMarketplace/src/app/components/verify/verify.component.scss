@@ -1,5 +1,5 @@
 .mainContainer {
-    width: 80%;
+    width: 80vw;
     margin: auto;
     margin-top: 8em;
     display: flex;
@@ -74,6 +74,6 @@
 
 @media only screen and (min-width: 768px) {
     .mainContainer {
-        width: 50%;
+        width: 50vw;
     }
 }

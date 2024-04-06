@@ -1,7 +1,8 @@
 .bodydiv {
     display: flex;
     flex-direction: column;
-    padding-bottom: 5em;
+    padding-bottom: 2em;
+    width: 100vw;
     .navheader {
         background-color: #0f2044;
         padding-top: 1em;
@@ -51,7 +52,7 @@
         margin: auto;
         margin-bottom: 4em;
         width: 300px;
-        margin-top: 5em;
+        margin-top: 4em;
         img {
             width: 100%;
             height: 100%;

@@ -8,7 +8,8 @@
             <img src="../../../assets/chat.png" alt="chat">
         </div>
         <div class="profile" (click)="profile()">
-          <img src="../../../assets/profile.png" alt="profile">
+          <img class="profileImage" *ngIf="user?.profile_image_path" [src]="'https://uncgmarketplace.com:4443/' + user?.profile_image_path" alt="profile image"/>
+          <img class="profileImage" *ngIf="!user?.profile_image_path" src="../../../assets/profile.png" alt="">
         </div>
     </div>
   </div>

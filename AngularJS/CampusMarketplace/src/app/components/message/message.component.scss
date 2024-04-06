@@ -9,8 +9,11 @@
     width: 90%;
     .profile_image {
         width: 25%;
-        img {
-            width: 5em;
+        .profileImage {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
     }
     .user_info {

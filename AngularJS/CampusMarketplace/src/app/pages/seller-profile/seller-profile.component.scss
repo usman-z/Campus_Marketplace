@@ -1,5 +1,5 @@
 .inbox {
-    width: 50%;
+    width: 50vw;
     margin: auto;
     margin-top: 8em;
     display: flex;
@@ -28,8 +28,11 @@
             display: flex;
             margin: auto;
             margin-bottom: 1em;
-            img {
-                width: 15em;
+            .profileImage {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                object-fit: cover;
             }
         }
         .review{
@@ -91,7 +94,7 @@
 }
 @media only screen and (max-width: 767px) {
     .inbox {
-        width: 80%;
+        width: 80vw;
         margin: auto;
         margin-top: 8em;
         display: flex;

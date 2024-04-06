@@ -6,4 +6,6 @@ export interface ListingData {
     description: string
     seller_id: number
     images_folder_path: string
+    listing_time: string
+    sold: boolean
 }

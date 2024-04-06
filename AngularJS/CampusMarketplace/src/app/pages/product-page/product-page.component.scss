@@ -1,5 +1,5 @@
 .productPage {
-    width: 50%;
+    width: 50vw;
     margin: auto;
     margin-top: 3em;
     display: flex;
@@ -76,7 +76,7 @@
 }
 @media only screen and (max-width: 768px) {
     .productPage {
-        width: 80%;
+        width: 80vw;
         margin: auto;
         margin-top: 3em;
         display: flex;
