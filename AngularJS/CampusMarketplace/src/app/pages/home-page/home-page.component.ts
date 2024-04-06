@@ -13,6 +13,7 @@ export class HomePageComponent {
   user?: UserData 
   itemSearched: string = ''
   initialMessageCount: number = 0
+  private intervalId: any;
 
   slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
@@ -32,7 +33,7 @@ export class HomePageComponent {
       )
     }
 
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       if(this.user) {
         this.inboxService.getMessageCount(this.user.user_id).subscribe(
           (response) => {
@@ -46,7 +47,7 @@ export class HomePageComponent {
           }
         )
       }
-    }, 500);
+    }, 1000);
 
     this.slides[0] = {
       src: 'https://www.uncg.edu/wp-content/uploads/2022/10/PIC30643_Summer-2021-Campus-Aerial-11.jpg'
@@ -57,6 +58,12 @@ export class HomePageComponent {
     this.slides[2] = {
       src: '../../assets/uncg_img4.jpeg'
     };
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   search() {
