@@ -55,4 +55,17 @@ export class SellerProfileComponent {
     this.router.navigate(['/listing', listingId], navigationExtras);
 }
 
+  getStars(rating: number): string[] {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    const stars = Array(fullStars).fill('★');
+
+    if (hasHalfStar) {
+      stars.push('★');
+    }
+
+    const emptyStars = Array(5 - stars.length).fill('☆');
+    return stars.concat(emptyStars);
+  }
+
 }

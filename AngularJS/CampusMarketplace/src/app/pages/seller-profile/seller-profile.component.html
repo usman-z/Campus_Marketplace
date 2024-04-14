@@ -18,8 +18,14 @@
         <div class="review">
           <div class="top" style="text-align: center;"><p>{{ seller?.full_name }}</p></div>
           <div class="bottom">
-            <div class="bottomtop"><div class="rating">★★★★★</div></div>
-            <div class="bottombottom"><p><strong>{{ seller?.rating?.toFixed(1) }}</strong> ({{ seller?.total_ratings || 0 }} reviews)</p></div>
+            <div class="bottomtop">
+              <div class="rating">
+                <span *ngFor="let star of getStars(seller?.rating)" [innerHTML]="star"></span>
+              </div>
+            </div>
+            <div class="bottombottom">
+              <p><strong>{{ seller?.rating?.toFixed(1) }}</strong> ({{ seller?.total_ratings || 0 }} reviews)</p>
+            </div>
           </div>
         </div>
         <div class="buttons" style="margin-bottom: 5em;">
