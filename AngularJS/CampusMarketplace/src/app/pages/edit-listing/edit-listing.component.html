@@ -10,9 +10,9 @@
     </div>
     <div class="body">
       <div class="logo">
-        <img src="../../../assets/logo.png" alt="UNCG logo"/>
+        <img [src]="'https://uncgmarketplace.com:4443/' + listing.images_folder" alt="UNCG logo"/>
       </div>
-      <div class="listing">
+      <div class="listing"> 
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         <div class="listingTitle">
           <label for="title">Title:</label>

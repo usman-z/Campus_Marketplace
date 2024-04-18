@@ -109,7 +109,7 @@ export class UserService {
   }
 
   updateListing(ListingData : ListingData) {
-    const url = 'http://localhost:8080/updateListing';
+    const url = 'https://uncgmarketplace.com:4443/updateListing';
     const request = {
       "listing_id" : ListingData.listing_id, 
       "title" :  ListingData.title , 
