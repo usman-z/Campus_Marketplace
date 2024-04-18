@@ -83,12 +83,30 @@
     .edit-listing-page {
         width: 80vw;
 
-        .body .listing {
-            width: 100%; /* Adjust width for smaller screens */
-            .listingTitle, .listingCondition, .listingPrice, .listingDescription {
-                input, select {
-                    font-size: 15px; /* Adjust font size for smaller screens */
+        .body {
+            .logo {
+                border: 1px solid black;
+                display: flex;
+                margin: auto;
+                margin-bottom: 1em;
+                width:  250px;
+                height: 250px;
+                img {
+                    object-fit: contain;
+                    display: flex;
+                    margin: auto;
+                    width: 100%;
+                    height: 100%;
                 }
+            }
+            .listing {
+                width: 100%; /* Adjust width for smaller screens */
+                .listingTitle, .listingCondition, .listingPrice, .listingDescription {
+                    input, select {
+                        font-size: 15px; /* Adjust font size for smaller screens */
+                    }
+                }
+                
             }
         }
     }
