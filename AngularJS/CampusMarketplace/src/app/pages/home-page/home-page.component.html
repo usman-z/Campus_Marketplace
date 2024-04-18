@@ -4,6 +4,7 @@
         <img src="../../../assets/uncg_emblem.png" alt="">
     </div>
     <div class="right">
+        <p *ngIf="messageCount != 0" style="font-size: 16px; color: red; position: absolute;">{{ messageCount }}</p>
         <div class="chat" (click)="chat()">
             <img src="../../../assets/message.png" alt="">
             <p>Inbox</p>
