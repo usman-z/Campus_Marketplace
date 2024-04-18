@@ -83,4 +83,13 @@ export class ListingPageComponent {
   });
   }
 
+  
+  editListing(listingId: number): void {
+    const navigationExtras: NavigationExtras = {
+        state: {
+            user: this.user
+        }
+    };
+    this.router.navigate(['/editListing', listingId], navigationExtras);
+  }
 }

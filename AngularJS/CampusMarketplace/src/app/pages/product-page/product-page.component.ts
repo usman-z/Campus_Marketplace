@@ -37,6 +37,7 @@ export class ProductPageComponent {
   }
 
   addProduct() {
+    console.log(this.productTitle)
     if(this.productTitle && this.productCondition && this.productPrice && this.productDescription && this.user?.user_id && this.selectedImages){
 
       this.userService.addListing(this.productTitle, this.productCondition, this.productPrice, this.productDescription, this.user?.user_id, this.selectedImages)

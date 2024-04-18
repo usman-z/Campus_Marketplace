@@ -33,6 +33,7 @@
       <div class="messageButton">
         <button *ngIf="user.user_id != seller.user_id" class="message" (click)="sendMessage(user.user_id, seller.user_id, 'Hi, is the '+ listing.title + ' still available?')">Send Message</button>
         <button *ngIf="user.user_id == seller.user_id && listing.sold != true" class="message" (click)="markSold(listing.listing_id)">Mark as Sold</button>
+        <button *ngIf="user.user_id == seller.user_id && listing.sold != true" class="edit" (click)="editListing(listing.listing_id)">Edit</button>
       </div>
     </div>
   </div>
