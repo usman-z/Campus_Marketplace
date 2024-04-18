@@ -14,6 +14,7 @@ import { ListingComponent } from './components/listing/listing.component';
 import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.component';
 import { FrontPageComponent } from './pages/front-page/front-page.component';
+import { EditListingComponent } from './pages/edit-listing/edit-listing.component';
 
 
 
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'result', component: ResultComponent },
   { path: 'listing', component: ListingComponent },
   { path: 'sellerProfile/:id', component: SellerProfileComponent },
-  { path: 'sellerListings', component: SellerlistingsComponent }
+  { path: 'sellerListings', component: SellerlistingsComponent },
+  { path: 'editListing/:id', component: EditListingComponent }
 ];
 
 @NgModule({

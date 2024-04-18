@@ -27,6 +27,7 @@ import { ListingComponent } from './components/listing/listing.component';
 import { SellerProfileComponent } from './pages/seller-profile/seller-profile.component';
 import { SellerlistingsComponent } from './pages/sellerlistings/sellerlistings.component';
 import { FrontPageComponent } from './pages/front-page/front-page.component';
+import { EditListingComponent } from './pages/edit-listing/edit-listing.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FrontPageComponent } from './pages/front-page/front-page.component';
     ListingComponent,
     SellerProfileComponent,
     SellerlistingsComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    EditListingComponent
   ],
   imports: [
     BrowserModule,

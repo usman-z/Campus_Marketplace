@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ChatData } from 'src/app/models/messages/chat.model';
 import { PersonnelData } from 'src/app/models/personnel/personnel.model';
 import { ChatService } from 'src/app/services/inbox/chat.service';
@@ -23,7 +23,7 @@ export class ChatComponent {
   messageEmailSent: boolean = false
   intervalId: any
 
-  constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService, private messageService: MessageService) {}
+  constructor(private router: Router,private route: ActivatedRoute, private chatService: ChatService, private userService: UserService, private messageService: MessageService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -135,5 +135,14 @@ export class ChatComponent {
         }
       });
     }
+  }
+
+  goToSellerProfile(sellerId?: number): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+          user: this.activeUser
+      }
+    };
+    this.router.navigate(['/sellerProfile', sellerId], navigationExtras);
   }
 }

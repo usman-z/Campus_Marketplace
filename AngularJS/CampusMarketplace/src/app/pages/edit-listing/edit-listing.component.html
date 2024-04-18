@@ -1,0 +1,43 @@
+<div class="edit-listing-page">
+    <div class="header">
+      <div class="back-button">
+        <app-back-button></app-back-button>
+      </div>
+      <div class="title">
+        <p>Edit Listing</p>
+      </div>
+      <div class="empty"></div>
+    </div>
+    <div class="body">
+      <div class="logo">
+        <img [src]="'https://uncgmarketplace.com:4443/' + listing.images_folder" alt="UNCG logo"/>
+      </div>
+      <div class="listing"> 
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        <div class="listingTitle">
+          <label for="title">Title:</label>
+          <input type="text" [(ngModel)]="listing.title" placeholder="Product Title" required>
+        </div>
+        <div class="listingCondition">
+          <label for="condition">Condition:</label>
+          <select [(ngModel)]="listing.condition" required>
+            <option value="Brand New">Brand New</option>
+            <option value="Fairly New">Fairly New</option>
+            <option value="Used">Used</option>
+          </select>
+        </div>
+        <div class="listingPrice">
+          <label for="price">Price:</label>
+          <input type="number" [(ngModel)]="listing.price" name="price" placeholder="Enter Price" required min="0">
+        </div>
+        <div class="listingDescription">
+          <label for="description">Description:</label>
+          <input type="text" [(ngModel)]="listing.description" placeholder="Describe your product" required>
+        </div>
+        <div class="submitListing">
+          <app-custom-button buttonName="Update" (click)="updateListing()"></app-custom-button>
+        </div>  
+      </div>
+    </div>
+  </div>
+  

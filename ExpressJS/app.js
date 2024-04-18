@@ -517,3 +517,24 @@ app.post("/getMessageCount", async (req, res) => {
     await client.end();
   }
 });
+
+
+app.post('/updateListing', async (req, res) => {
+  const { listing_id, title, condition, price, description } = req.body;
+  const client = new Client(dbConfig);
+
+  try {
+    await client.connect();
+    await client.query(`
+      UPDATE Listing
+      SET title = $2, condition = $3, price = $4, description = $5
+      WHERE listing_id = $1
+    `, [listing_id, title, condition, price, description]);
+    res.send({ message: 'Listing updated successfully' });
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+});

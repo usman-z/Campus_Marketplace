@@ -1,0 +1,95 @@
+.edit-listing-page {
+    width: 50vw;
+    margin: auto;
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    .header {
+        border-bottom: 1px solid black;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4em;
+        .back-button {
+            display: flex;
+        }
+        .title {
+            vertical-align: middle;
+            display: flex;
+            font-size: 30px;
+        }
+    }
+    .body {
+        display: flex;
+        flex-direction: column;
+        .logo {
+            border: 1px solid black;
+            display: flex;
+            margin: auto;
+            margin-bottom: 3em;
+            width:  400px;
+            height: 250px;
+            img{
+                width:  100%;
+                height: 100%;
+            }
+        }
+        .listing{
+            width: 80%;
+            display: flex;
+            padding: 1em;
+            flex-direction: column;
+            margin: auto;
+            width:  400px;
+            height: 250px;
+
+            .listingTitle,
+            .listingCondition,
+            .listingPrice,
+            .listingDescription {
+                font-size: 17px;
+                display: flex;
+                align-items: center; /* Vertically center elements */
+                margin-bottom: 1em; /* Add some space between inputs */
+                
+                label {
+                    margin-right: 1em;
+                    width: 100px; /* Fixed width for labels */
+                }
+
+                input, select {
+                    flex: 1; /* Take up remaining space */
+                    padding-left: 10px;
+                    box-sizing: border-box; /* Include padding in width calculation */
+                }
+            }
+
+            .listingPrice {
+                input {
+                    width: 55%;
+                }
+            }
+
+            .submitListing {
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .edit-listing-page {
+        width: 80vw;
+
+        .body .listing {
+            width: 100%; /* Adjust width for smaller screens */
+            .listingTitle, .listingCondition, .listingPrice, .listingDescription {
+                input, select {
+                    font-size: 15px; /* Adjust font size for smaller screens */
+                }
+            }
+        }
+    }
+}
