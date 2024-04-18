@@ -13,9 +13,11 @@ export class HomePageComponent {
   user?: UserData 
   itemSearched: string = ''
   initialMessageCount: number = 0
+  messageCount: number = 0
+  startingCount: number = 0
   private intervalId: any;
 
-  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+  slides: any[] = new Array(2).fill({id: -1, src: '', title: '', subtitle: ''});
 
   constructor(private router: Router, private route: ActivatedRoute, private inboxService: InboxService) {}
 
@@ -29,6 +31,7 @@ export class HomePageComponent {
       this.inboxService.getMessageCount(this.user.user_id).subscribe(
         (response) => {
           this.initialMessageCount = response.count;
+          this.startingCount = response.count;
         }
       )
     }
@@ -38,10 +41,7 @@ export class HomePageComponent {
         this.inboxService.getMessageCount(this.user.user_id).subscribe(
           (response) => {
             if(response.count > this.initialMessageCount){
-              const prop = document.getElementById('chatnotification');
-              if(prop) {
-                prop.style.border = '2px solid red';
-              }
+              this.messageCount = this.initialMessageCount - this.startingCount + (response.count - this.initialMessageCount);
             }
             this.initialMessageCount = response.count;
           }
@@ -54,9 +54,6 @@ export class HomePageComponent {
     };
     this.slides[1] = {
       src: '../../assets/uncg_building.jpeg',
-    };
-    this.slides[2] = {
-      src: '../../assets/uncg_img4.jpeg'
     };
   }
 
