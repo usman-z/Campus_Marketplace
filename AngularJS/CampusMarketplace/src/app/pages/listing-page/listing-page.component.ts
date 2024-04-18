@@ -83,6 +83,19 @@ export class ListingPageComponent {
   });
   }
 
+  markActive(listingId: number) {
+    this.UserService.markItemActive(listingId).subscribe({
+      next: () => {
+        const navigationExtras: NavigationExtras = {
+          state: {
+            user: this.user
+          }
+        };
+        this.router.navigate(['/sellerListings'], navigationExtras);
+      }
+  });
+  }
+
   
   editListing(listingId: number): void {
     const navigationExtras: NavigationExtras = {

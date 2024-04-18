@@ -108,6 +108,15 @@ export class UserService {
     return this.http.post(url, request);
   }
 
+  markItemActive(listingId: number) {
+    const url = 'https://uncgmarketplace.com:4443/markItemActive';
+    const request = {
+        "listingId": listingId
+    };
+
+    return this.http.post(url, request);
+  }
+
   updateListing(ListingData : ListingData) {
     const url = 'https://uncgmarketplace.com:4443/updateListing';
     const request = {

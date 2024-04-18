@@ -468,6 +468,21 @@ app.post('/markItemSold', async (req, res) => {
   }
  });
 
+ app.post('/markItemActive', async (req, res) => {
+  const { listingId } = req.body;
+  const client = new Client(dbConfig);
+  try {
+    await client.connect();
+    const results = await client.query("UPDATE Listing SET sold = false WHERE listing_id = $1", [listingId]);
+    res.json(results.rows);
+  } catch (err) {
+    console.error('Error executing query:', err);
+    res.status(500).send('Error executing query');
+  } finally {
+    await client.end();
+  }
+ });
+
  app.post('/newMessageEmail', async (req, res) => {
   const { sender_id, receiver_id} = req.body;
   const client = new Client(dbConfig);
