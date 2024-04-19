@@ -5,9 +5,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { SignupService } from 'src/app/services/signup/signup.service';
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss']
 })
 export class MainPageComponent {
 

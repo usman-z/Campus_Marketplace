@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReviewPageComponent } from './pages/review-page/review-page.component';
 import { ListingPageComponent } from './pages/listing-page/listing-page.component';
-import { MainPageComponent } from './pages/main-page/main-page.component';
+import { MainPageComponent } from './pages/login-page/login-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { InboxComponent } from './pages/inbox/inbox.component';
