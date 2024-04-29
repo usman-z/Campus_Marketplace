@@ -42,12 +42,7 @@ export class ProductPageComponent {
 
       this.userService.addListing(this.productTitle, this.productCondition, this.productPrice, this.productDescription, this.user?.user_id, this.selectedImages)
         .subscribe(()=>{
-          const navigationExtras: NavigationExtras = {
-            state: {
-                user: this.user
-            }
-          };
-          this.router.navigate(['/profile'], navigationExtras);
+          history.back();
         });
     }else{
       this.errorMessage = 'All information is needed';

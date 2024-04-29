@@ -31,12 +31,7 @@ export class EditListingComponent {
   updateListing() {
     this.UserService.updateListing(this.listing).subscribe({
       next: () => {
-        const navigationExtras: NavigationExtras = {
-          state: {
-            user: this.user
-          }
-        };
-        this.router.navigate(['/sellerListings'], navigationExtras);
+        history.back();
       },
       error: () => this.errorMessage = 'Failed to update listing.'
     });
