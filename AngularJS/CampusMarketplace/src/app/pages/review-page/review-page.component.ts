@@ -42,8 +42,8 @@ export class ReviewPageComponent {
         }).catch(error => {
           console.error('Navigation error:', error);
         });
+        this.location.back();
       }
     );
-    this.location.back();
   }
 }

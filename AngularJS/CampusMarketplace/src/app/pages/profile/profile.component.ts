@@ -11,7 +11,6 @@ import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-
   user?: PersonnelData 
 
   constructor(private router: Router, private UserService: UserService, private route: ActivatedRoute, private http: HttpClient) {}
@@ -83,5 +82,19 @@ export class ProfileComponent {
     this.router.navigate(['/sellerListings'], navigationExtras);
   }
 
+  getStars(rating: number | undefined): string[] {
+    const ratingValue = rating || 0;
+  
+    const fullStars = Math.floor(ratingValue);
+    const hasHalfStar = ratingValue % 1 >= 0.5;
+    const stars = Array(fullStars).fill('★');
+  
+    if (hasHalfStar) {
+      stars.push('&#9733;'); // Unicode character entity for half star
+    }
+  
+    const emptyStars = Array(5 - stars.length).fill('☆');
+    return stars.concat(emptyStars);
+  }
   
 }
