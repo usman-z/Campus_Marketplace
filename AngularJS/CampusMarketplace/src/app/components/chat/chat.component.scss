@@ -142,7 +142,7 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2em;
+            margin-bottom: 4em;
             .back-button {
                 display: flex;
             }
@@ -159,10 +159,11 @@
             .logo {
                 display: flex;
                 margin: auto;
-                margin-bottom: 4em;
+                margin-bottom: 6em;
             }
             .chat{
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+                height: 330px;
                 display: flex;
                 padding: 1em;
                 flex-direction: column;
@@ -170,6 +171,7 @@
                 margin: auto;
                 overflow-y: auto;
                 .info {
+                    margin-bottom: 5px;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
@@ -185,10 +187,10 @@
                 }
                 .messages {
                     min-height: 10em;
-                    max-height: 20em; // Adjust the maximum height as needed
+                    margin-bottom: 5px;
+                    height: 100%;
                     padding: 10px; 
                     overflow-y: auto; // Add scrollbar when content exceeds container height
-                    
                     p {
                         margin: 5px 0;
                         font-size: 15px;
